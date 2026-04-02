@@ -79,30 +79,11 @@
       z-index: 201;
     }
 
-    .nav-logo-icon {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .nav-logo-icon span {
-      display: block;
-      height: 2px;
-      background: #fff;
-      border-radius: 1px;
-      transition: width 0.2s;
-    }
-
-    .nav-logo-icon span:nth-child(1) {
-      width: 18px;
-    }
-
-    .nav-logo-icon span:nth-child(2) {
-      width: 14px;
-    }
-
-    .nav-logo-icon span:nth-child(3) {
-      width: 18px;
+    .nav-logo-img {
+      height: 30px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
     }
 
     .nav-cta {
@@ -494,6 +475,62 @@
       margin-inline: auto;
     }
 
+    /* ── Mobile Marquee Rows ── */
+    @media (max-width: 640px) {
+      .protocol-grid {
+        display: none; /* hide desktop grid on mobile */
+      }
+
+      .protocol-marquee-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+        margin-bottom: 3rem;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .protocol-marquee-row {
+        display: flex;
+        gap: 0.75rem;
+        width: max-content;
+      }
+
+      .protocol-marquee-row.row-ltr {
+        animation: marquee-ltr 22s linear infinite;
+      }
+
+      .protocol-marquee-row.row-rtl {
+        animation: marquee-rtl 22s linear infinite;
+      }
+
+      .protocol-marquee-row:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes marquee-ltr {
+        0%   { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      @keyframes marquee-rtl {
+        0%   { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
+      }
+
+      .protocol-marquee-row .protocol-card {
+        flex-shrink: 0;
+        width: 210px;
+        max-width: 210px;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .protocol-marquee-wrap {
+        display: none; /* hide mobile marquee on desktop */
+      }
+    }
+
     .protocol-card {
       background: #fff;
       border-radius: 12px;
@@ -619,13 +656,20 @@
     /* ─── HOW IT WORKS (sandy section) ─── */
     .how-section {
       position: relative;
-      overflow: hidden;
+      height: 350vh;
     }
 
     .how-bg {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background:
         radial-gradient(ellipse 100% 80% at 50% 100%, #b89a78 0%, #a07850 40%, #7a5830 70%, #4a3018 100%);
       padding: 5rem 8vw 5rem;
+      overflow: hidden;
     }
 
     .how-v-connector {
@@ -1601,32 +1645,24 @@
       50%      { box-shadow:0 0 0 8px rgba(255,255,255,0); }
     }
 
-    /* ─ STEP CASCADE ENTER (1→2→3→4) ─ */
+    /* ─ STEP CASCADE — scroll-driven ─ */
+    /* Steps start hidden; JS will set inline opacity/transform based on scroll progress */
     .step-col[data-step] {
-      opacity:0; transform:translateY(48px) scale(0.96);
-      transition: opacity .65s cubic-bezier(0.22,1,0.36,1), transform .65s cubic-bezier(0.22,1,0.36,1);
+      opacity: 0;
+      transform: translateY(44px) scale(0.96);
+      transition: opacity .5s cubic-bezier(0.22,1,0.36,1), transform .5s cubic-bezier(0.22,1,0.36,1);
+      will-change: opacity, transform;
     }
-    .step-col[data-step="1"] { transition-delay:0s; }
-    .step-col[data-step="2"] { transition-delay:.35s; }
-    .step-col[data-step="3"] { transition-delay:.7s; }
-    .step-col[data-step="4"] { transition-delay:1.05s; }
-    .steps-timeline.steps-active .step-col[data-step] { opacity:1; transform:none; }
+    .step-col[data-step].step-visible {
+      opacity: 1;
+      transform: none;
+    }
 
-    /* connector line draws L→R */
+    /* connector line — driven by a CSS custom property --line-progress set via JS */
     .step-track {
-      transform-origin:left; transform:scaleX(0);
-      transition:transform 1.6s .2s cubic-bezier(0.22,1,0.36,1);
-    }
-    .steps-timeline.steps-active .step-track { transform:scaleX(1); }
-
-    /* ─ STEP CASCADE EXIT REVERSE (4→3→2→1) ─ */
-    .steps-timeline.steps-exiting .step-col[data-step="1"] { transition-delay:1.05s; }
-    .steps-timeline.steps-exiting .step-col[data-step="2"] { transition-delay:.7s; }
-    .steps-timeline.steps-exiting .step-col[data-step="3"] { transition-delay:.35s; }
-    .steps-timeline.steps-exiting .step-col[data-step="4"] { transition-delay:0s; }
-    .steps-timeline.steps-exiting .step-track {
-      transform-origin:right; transform:scaleX(0);
-      transition:transform 1.4s 0s cubic-bezier(0.22,1,0.36,1);
+      transform-origin: left;
+      transform: scaleX(var(--line-progress, 0));
+      transition: none; /* JS drives it smoothly */
     }
 
     /* ─ PROTOCOL CARD: 3D TILT + IMAGE ZOOM ─ */
@@ -1679,10 +1715,7 @@
       box-shadow:0 8px 24px rgba(0,0,0,.3);
     }
 
-    /* ─ NAV LOGO BARS ANIMATE ─ */
-    .nav-logo-icon span { transition:width .3s ease, background .2s; }
-    .nav-logo:hover .nav-logo-icon span:nth-child(2) { width:18px; }
-    .nav-logo:hover .nav-logo-icon span { background:rgba(255,255,255,.7); }
+    /* ─ NAV LOGO ANIMATE (removed) ─ */
 
     /* ─ SECTION CONNECTOR DRAW ─ */
     .v-line,.how-v-line,.loc-v-line,.diag-v-line-top {
@@ -1709,9 +1742,7 @@
   <!-- NAV -->
   <nav id="mainNav">
     <a href="#" class="nav-logo">
-      <div class="nav-logo-icon">
-        <span></span><span></span><span></span>
-      </div>
+      <img src="assets/fitflix_logo.png" alt="Fitflix Logo" class="nav-logo-img">
       Fitflix
     </a>
     <button class="nav-cta">Take the Health Quiz</button>
@@ -1836,6 +1867,49 @@
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy & Genomic Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span>
       </div>
+    </div>
+
+    <!-- Mobile marquee rows (hidden on desktop via CSS) -->
+    <div class="protocol-marquee-wrap" aria-hidden="true">
+
+      <!-- Row 1: scrolls Left (right → left) -->
+      <div class="protocol-marquee-row row-ltr">
+        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
+      </div>
+
+      <!-- Row 2: scrolls Right (left → right) -->
+      <div class="protocol-marquee-row row-rtl">
+        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Diets" /><span class="protocol-name">Customised Diets</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Diets" /><span class="protocol-name">Customised Diets</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
+      </div>
+
     </div>
 
     <button class="build-plan-btn">Build your health plan</button>
@@ -2233,7 +2307,8 @@
           </svg>
         </a>
         <div class="footer-logo-right">
-          <span class="footer-logo-icon-sm">≡</span> Fitflix
+          <img src="assets/fitflix_logo.png" alt="Fitflix Logo" class="footer-logo-img">
+          Fitflix
         </div>
       </div>
     </div>
@@ -2707,10 +2782,19 @@
       font-size: 0.9rem;
       font-weight: 400;
       letter-spacing: -0.01em;
+      opacity: 0.8;
+      transition: opacity 0.2s;
     }
 
-    .footer-logo-icon-sm {
-      font-size: 1rem;
+    .footer-logo-right:hover {
+      opacity: 1;
+    }
+
+    .footer-logo-img {
+      height: 24px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
     }
 
     @media (max-width: 900px) {
@@ -2868,28 +2952,63 @@
     });
 
 
-    /* ── Steps cascade: direction-aware (boundingClientRect) ──
-       Scroll DOWN: Step 1→2→3→4, line draws L→R
-       Scroll UP  : Step 4→3→2→1, line shrinks R→L              */
-    const stepsTimeline = document.getElementById('stepsTimeline');
-    if (stepsTimeline) {
-      new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          stepsTimeline.classList.remove('steps-exiting');
-          requestAnimationFrame(() => stepsTimeline.classList.add('steps-active'));
-        } else {
-          const exitedBelowViewport = entry.boundingClientRect.top > 0;
-          if (exitedBelowViewport) {
-            /* Scrolled UP: reverse cascade 4→3→2→1 */
-            stepsTimeline.classList.add('steps-exiting');
-            stepsTimeline.classList.remove('steps-active');
-          } else {
-            /* Scrolled DOWN past: keep visible, clean up */
-            stepsTimeline.classList.remove('steps-exiting');
-          }
+    /* ── Steps: scroll-progress driven ──────────────────────────────────────
+       As the user scrolls through the how-section, the connector line draws
+       and each step card fades up in sequence, all tied to scroll position.
+       Scrolling back reverses the animation.                              */
+    (function () {
+      const timeline  = document.getElementById('stepsTimeline');
+      const howBg     = document.querySelector('.how-bg');
+      const howSection = document.querySelector('.how-section');
+      if (!timeline || !howBg || !howSection) return;
+
+      const track     = timeline.querySelector('.step-track');
+      const stepCols  = [...timeline.querySelectorAll('.step-col[data-step]')]
+                          .sort((a, b) => +a.dataset.step - +b.dataset.step);
+      const N         = stepCols.length; // 4
+
+      // Thresholds at which each step fully appears (0–1 of section scroll)
+      // Step 1 at 15%, step 2 at 35%, step 3 at 55%, step 4 at 75%
+      const stepThresholds = [0.15, 0.35, 0.55, 0.75];
+
+      function getProgress() {
+        const rect    = howSection.getBoundingClientRect();
+        const winH    = window.innerHeight;
+        
+        const totalScrollable = rect.height - winH;
+        let progress = 0;
+        if (totalScrollable > 0) {
+          progress = -rect.top / totalScrollable;
         }
-      }, {threshold:0.15}).observe(stepsTimeline);
-    }
+        return Math.min(1, Math.max(0, progress));
+      }
+
+      let lastRaf = null;
+      function onScroll() {
+        if (lastRaf) return;
+        lastRaf = requestAnimationFrame(() => {
+          lastRaf = null;
+          const p = getProgress();
+
+          // Line: draw from 0 to 1 as progress goes from 0.10 to 0.80
+          const lineP = Math.min(1, Math.max(0, (p - 0.10) / 0.70));
+          track.style.setProperty('--line-progress', lineP);
+
+          // Steps: reveal each one when progress crosses its threshold
+          stepCols.forEach((col, i) => {
+            const stepP = Math.min(1, Math.max(0, (p - stepThresholds[i]) / 0.12));
+            if (stepP > 0.5) {
+              col.classList.add('step-visible');
+            } else {
+              col.classList.remove('step-visible');
+            }
+          });
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll(); // run once on load
+    })();
   </script>
 </body>
 
