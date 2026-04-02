@@ -76,6 +76,7 @@
       font-weight: 400;
       letter-spacing: -0.01em;
       text-decoration: none;
+      z-index: 201;
     }
 
     .nav-logo-icon {
@@ -121,6 +122,75 @@
     .nav-cta:hover {
       opacity: 0.85;
     }
+
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 201;
+      overflow: visible;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 1px;
+      transition: transform 0.3s, opacity 0.3s, width 0.3s;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile Menu Drawer ── */
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(10,10,8,0.97);
+      backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .nav-mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .nav-mobile-cta {
+      background: #fff;
+      color: var(--dark);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+    .nav-mobile-link {
+      color: rgba(255,255,255,0.7);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-mobile-link:hover { color: #fff; }
 
     /* ─── HERO ─── */
     .hero {
@@ -248,6 +318,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
+      width: 100%;
     }
 
     .btn-hero-primary {
@@ -262,6 +333,7 @@
       cursor: pointer;
       letter-spacing: 0.01em;
       min-width: 260px;
+      max-width: 100%;
       transition: all 0.2s;
       backdrop-filter: blur(8px);
     }
@@ -435,7 +507,7 @@
       min-height: 72px;
       transition: all 0.2s;
       width: max-content;
-      max-width: 100%;
+      max-width: min(100%, 320px);
     }
 
     .protocol-card:hover {
@@ -926,10 +998,12 @@
 
     .app-card-label {
       font-size: 0.72rem;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.8);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
     }
 
     .app-card-title {
@@ -938,6 +1012,9 @@
       font-size: 1.4rem;
       color: #fff;
       line-height: 1.3;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
 
     /* mock phone UI */
@@ -952,6 +1029,7 @@
       padding: 1rem 0.75rem;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 1;
     }
 
     .mock-notch {
@@ -1235,6 +1313,8 @@
     }
 
     /* ─── RESPONSIVE ─── */
+
+    /* ── 900px: tablets & small laptops ── */
     @media (max-width: 900px) {
       .steps-timeline {
         grid-template-columns: 1fr 1fr;
@@ -1246,7 +1326,8 @@
       }
 
       .test-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
       }
 
       .app-cards {
@@ -1262,6 +1343,18 @@
         padding: 1rem 1.5rem;
       }
 
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-mobile-menu {
+        display: flex;
+      }
+
       section,
       .how-bg,
       .diag-bg,
@@ -1269,10 +1362,172 @@
         padding-left: 5vw;
         padding-right: 5vw;
       }
+
+      .hero-content {
+        padding: 0 1.5rem;
+      }
+
+      .how-bg {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .testimonials-section {
+        padding: 4rem 5vw;
+      }
+
+      .app-section {
+        padding: 4rem 5vw;
+      }
+
+      .app-section > p {
+        margin-top: 0;
+        margin-bottom: 2.5rem;
+      }
+
+      .app-card {
+        min-height: 300px;
+      }
+
+      .diag-bg {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .loc-bg {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .stop-waiting {
+        padding-left: 5vw;
+        padding-right: 5vw;
+      }
+
+      /* Protocol cards: ensure they don't overflow */
+      .protocol-card {
+        max-width: min(100%, 280px);
+      }
+    }
+
+    /* ── 768px: portrait tablets ── */
+    @media (max-width: 768px) {
+      .test-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-timeline {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .app-cards {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .app-section > p {
+        font-size: 0.9rem;
+        margin-top: 0;
+        margin-bottom: 2rem;
+      }
+
+      /* floating pill: constrain width on smaller screens */
+      .floating-pill {
+        max-width: calc(100vw - 2rem);
+      }
+
+      .floating-text {
+        font-size: 0.78rem;
+        padding: 0.6rem 0.8rem;
+      }
+
+      /* Loc section: stack fully */
+      .loc-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      /* How section: 2 cols still fine */
     }
 
     @media (max-width: 600px) {
       .steps-timeline { grid-template-columns: 1fr; }
+
+      .how-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 0.5rem;
+      }
+
+      .how-actions button { width: 100%; }
+    }
+
+    /* ── 480px: small phones ── */
+    @media (max-width: 480px) {
+      nav {
+        padding: 0.85rem 1.25rem;
+      }
+
+      .hero-content { padding: 0 1rem; }
+      .hero-sub { font-size: 0.88rem; }
+
+      .btn-hero-primary {
+        min-width: 0;
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+      }
+
+      /* Protocol cards wrap to full-width on tiny screens */
+      .protocol-grid { gap: 0.6rem; }
+      .protocol-card {
+        padding: 0 1rem;
+        min-height: 60px;
+        max-width: 100%;
+        width: 100%;
+      }
+      .protocol-img  { width: 44px; height: 44px; }
+      .protocol-name { font-size: 0.8rem; }
+
+      .how-h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+      .step-title { font-size: 1.2rem; }
+      .step-desc  { font-size: 0.74rem; padding: 0 0.75rem; }
+
+      .test-h2 { font-size: clamp(1.6rem, 6vw, 2rem); }
+      .test-card { padding: 1.5rem; }
+
+      .app-h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); margin-bottom: 2rem; }
+      .app-card { min-height: 260px; }
+      .mock-phone { width: 120px; bottom: 4rem; }
+
+      .diag-h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+
+      .loc-h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); margin-bottom: 2rem; }
+      .loc-actions { flex-direction: column; gap: 0.75rem; }
+      .loc-actions button { width: 100%; }
+
+      .how-actions { flex-direction: column; gap: 0.75rem; padding: 0 1rem; }
+      .how-actions button { width: 100%; }
+
+      .build-plan-btn { width: 100%; max-width: 360px; }
+
+      .floating-pill { bottom: 1rem; max-width: calc(100vw - 1.5rem); }
+      .floating-text { display: block; font-size: 0.78rem; padding: 0.6rem 1rem; }
+      .floating-btn  { margin: 0.3rem; padding: 0.75rem 1.1rem; font-size: 0.8rem; }
+
+      .diag-pills-wrap { gap: 0.5rem; }
+      .diag-pill-tag {
+        font-size: 0.76rem;
+        padding: 0.5rem 1rem;
+      }
+
+      /* app section sub-text: fix negative margin on mobile */
+      .app-section > p {
+        margin-top: 0 !important;
+        margin-bottom: 2rem;
+        font-size: 0.88rem;
+      }
     }
   </style>
 
@@ -1460,11 +1715,22 @@
       Fitflix
     </a>
     <button class="nav-cta">Take the Health Quiz</button>
+    <!-- Hamburger -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Menu Drawer -->
+  <div class="nav-mobile-menu" id="navMobileMenu">
+    <a href="#" class="nav-mobile-link">How it works</a>
+    <a href="#" class="nav-mobile-link">Diagnostics</a>
+    <a href="#" class="nav-mobile-link">Locations</a>
+    <button class="nav-mobile-cta">Take the Health Quiz</button>
+  </div>
 
   <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
   <section class="hero">
-    <canvas id="hero-canvas"></canvas>
     <div class="hero-bg">
       <div class="hero-shape"></div>
       <div class="hero-shape"></div>
@@ -2451,6 +2717,11 @@
       .footer-app-band {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+        padding: 3rem 5vw 2.5rem;
+      }
+
+      .footer-app-card {
+        min-height: 320px;
       }
 
       .footer-nav-cols {
@@ -2471,6 +2742,30 @@
       .footer-app-img-placeholder {
         display: none;
       }
+
+      .footer-app-heading {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-app-band {
+        padding: 2.5rem 5vw 2rem;
+      }
+
+      .footer-nav-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-bottom-left {
+        flex-direction: column;
+        gap: 0.4rem;
+        align-items: center;
+      }
+
+      .footer-sep {
+        display: none;
+      }
     }
 
     @media (max-width: 500px) {
@@ -2481,10 +2776,38 @@
       .footer-email-form {
         flex-direction: column;
       }
+
+      .footer-store-btns {
+        flex-direction: column;
+      }
+
+      .store-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 
   <script>
+    /* ── Hamburger / Mobile Menu ── */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('navMobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      // Close on link or CTA tap
+      mobileMenu.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
     /* ── Nav scroll + auto-hide ── */
     const nav = document.getElementById('mainNav');
     let _lastY = window.scrollY;
@@ -2544,28 +2867,6 @@
       ripple.addEventListener('animationend', () => ripple.remove());
     });
 
-    /* ── Hero Canvas Particles ── */
-    (function(){
-      const canvas = document.getElementById('hero-canvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let W, H, pts;
-      const rand = (a,b) => Math.random()*(b-a)+a;
-      const mkP = () => ({x:rand(0,W),y:rand(0,H),r:rand(1,3.5),vx:rand(-0.25,0.25),vy:rand(-0.5,-0.12),alpha:rand(0.2,0.7),decay:rand(0.002,0.006)});
-      function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        pts.forEach(p=>{
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle=`rgba(255,180,150,${p.alpha})`; ctx.fill();
-          p.x+=p.vx; p.y+=p.vy; p.alpha-=p.decay;
-          if(p.alpha<=0||p.y<-10) Object.assign(p,mkP(),{y:H+5});
-        });
-        requestAnimationFrame(draw);
-      }
-      resize(); pts=Array.from({length:80},mkP); draw();
-      window.addEventListener('resize', resize);
-    })();
 
     /* ── Steps cascade: direction-aware (boundingClientRect) ──
        Scroll DOWN: Step 1→2→3→4, line draws L→R
