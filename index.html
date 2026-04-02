@@ -3081,9 +3081,9 @@
     function renderQuizStep(stepIndex) {
       if (stepIndex >= quizQuestions.length) {
         // Quiz completed
-        quizPill.textContent = "Complete";
-        quizTitle.textContent = "Thank you.";
-        quizQuestionEl.textContent = "Our longevity team will review your baseline and reach out to you shortly.";
+        quizPill.textContent = "Assessment Complete";
+        quizTitle.textContent = "Your Health Score";
+        quizQuestionEl.innerHTML = `Your Full Body Score is <span style="display: block; font-size: 4rem; font-family: var(--serif); color: #4caf82; margin: 1.5rem 0; line-height: 1; font-weight: 400;">79%</span> Our experts are analyzing your profile and will reach out with tailored recommendations soon.`;
         quizInputEl.style.display = 'none';
         quizNextBtn.textContent = "Close";
         quizNextBtn.onclick = () => {
