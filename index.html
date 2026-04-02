@@ -1644,10 +1644,11 @@
     .floating-pill:not(.hidden) { animation:pillSlideIn .5s cubic-bezier(0.22,1,0.36,1) both; }
 
     /* ─ STEP NODE PULSE ─ */
-    .step-node { animation:nodePulse 2.8s ease-in-out infinite; }
+    .step-node { animation:nodePulse 3.5s ease-in-out infinite; }
     .step-col:nth-child(2) .step-node { animation-delay:.7s; }
     .step-col:nth-child(3) .step-node { animation-delay:1.4s; }
     .step-col:nth-child(4) .step-node { animation-delay:2.1s; }
+    .step-col:nth-child(5) .step-node { animation-delay:2.8s; }
     @keyframes nodePulse {
       0%,100% { box-shadow:0 0 0 0 rgba(255,255,255,.4); }
       50%      { box-shadow:0 0 0 8px rgba(255,255,255,0); }
@@ -2327,6 +2328,24 @@
     </div>
   </footer>
 
+  <!-- ═══════════════════════════════════════ QUIZ MODAL ═══════════════════════════════════════ -->
+  <div class="quiz-modal-overlay" id="quizModalOverlay">
+    <div class="quiz-modal-container">
+      <button class="quiz-close-btn" id="quizCloseBtn">&times;</button>
+      <div class="quiz-header">
+        <span class="quiz-pill">Health Quiz</span>
+        <h3 class="quiz-title">Let's understand your baseline.</h3>
+      </div>
+      <div class="quiz-content">
+        <p class="quiz-question">What is your primary health or longevity goal?</p>
+        <textarea class="quiz-reply-input" placeholder="Type your answer here..."></textarea>
+      </div>
+      <div class="quiz-footer">
+        <button class="btn-quiz-primary">Submit Answer</button>
+      </div>
+    </div>
+  </div>
+
   <style>
     /* ─── FOOTER STYLES ─── */
     footer {
@@ -2883,9 +2902,274 @@
         justify-content: center;
       }
     }
+
+    /* ─── QUIZ MODAL ─── */
+    .quiz-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .quiz-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .quiz-modal-container {
+      background: linear-gradient(150deg, #2a201a 0%, #1a1614 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 540px;
+      position: relative;
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .quiz-modal-overlay.active .quiz-modal-container {
+      transform: none;
+    }
+
+    .quiz-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 2.5rem;
+      font-weight: 300;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .quiz-close-btn:hover {
+      color: #fff;
+    }
+
+    .quiz-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .quiz-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-question {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .quiz-reply-input {
+      width: 100%;
+      min-height: 120px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 1rem;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 2rem;
+    }
+    
+    .quiz-reply-input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .quiz-reply-input:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-quiz-primary {
+      background: #fff;
+      color: #111;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+
+    .btn-quiz-primary:hover {
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 600px) {
+      .quiz-modal-container {
+        padding: 2.5rem 1.75rem;
+      }
+      .quiz-title {
+        font-size: 1.8rem;
+      }
+    }
   </style>
 
   <script>
+    /* ── Quiz Modal Logic ── */
+    const quizOverlay = document.getElementById('quizModalOverlay');
+    const quizCloseBtn = document.getElementById('quizCloseBtn');
+    const quizBtns = document.querySelectorAll('.nav-cta, .nav-mobile-cta');
+
+    // Multi-step questionnaire configuration
+    // You can easily add or remove questions here in the future
+    const quizQuestions = [
+      {
+        question: "What is your primary health or longevity goal?",
+        placeholder: "E.g., Improve energy, live longer without disease..."
+      },
+      {
+        question: "How would you describe your current physical activity level?",
+        placeholder: "E.g., Sedentary, light exercise twice a week, professional athlete..."
+      },
+      {
+        question: "Do you have any known family health history we should be aware of?",
+        placeholder: "List any relevant predispositions here..."
+      }
+    ];
+
+    let currentQuizStep = 0;
+    const quizAnswers = [];
+
+    const quizQuestionEl = document.querySelector('.quiz-question');
+    const quizInputEl = document.querySelector('.quiz-reply-input');
+    const quizNextBtn = document.querySelector('.btn-quiz-primary');
+    const quizPill = document.querySelector('.quiz-pill');
+    const quizTitle = document.querySelector('.quiz-title');
+    const quizHeader = document.querySelector('.quiz-header');
+    const quizContent = document.querySelector('.quiz-content');
+
+    function renderQuizStep(stepIndex) {
+      if (stepIndex >= quizQuestions.length) {
+        // Quiz completed
+        quizPill.textContent = "Complete";
+        quizTitle.textContent = "Thank you.";
+        quizQuestionEl.textContent = "Our longevity team will review your baseline and reach out to you shortly.";
+        quizInputEl.style.display = 'none';
+        quizNextBtn.textContent = "Close";
+        quizNextBtn.onclick = () => {
+          quizOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        };
+        return;
+      }
+
+      // Display the current step
+      const qData = quizQuestions[stepIndex];
+      quizPill.textContent = `Question ${stepIndex + 1} of ${quizQuestions.length}`;
+      quizTitle.textContent = "Let's understand your baseline.";
+      quizQuestionEl.textContent = qData.question;
+      
+      quizInputEl.style.display = 'block';
+      quizInputEl.value = quizAnswers[stepIndex] || "";
+      quizInputEl.placeholder = qData.placeholder || "Type your answer here...";
+
+      if (stepIndex === quizQuestions.length - 1) {
+        quizNextBtn.textContent = "Submit Answers";
+      } else {
+        quizNextBtn.textContent = "Next Question";
+      }
+
+      quizNextBtn.onclick = () => {
+        // Save current answer
+        quizAnswers[stepIndex] = quizInputEl.value;
+        
+        // Simple fade out
+        quizHeader.style.opacity = 0;
+        quizContent.style.opacity = 0;
+        
+        setTimeout(() => {
+          currentQuizStep++;
+          renderQuizStep(currentQuizStep);
+          // Fade back in
+          quizHeader.style.opacity = 1;
+          quizContent.style.opacity = 1;
+        }, 200);
+      };
+    }
+
+    quizBtns.forEach(btn => {
+      if(btn.textContent.includes('Health Quiz')) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Reset and start quiz
+          currentQuizStep = 0;
+          quizAnswers.length = 0;
+          quizHeader.style.transition = "opacity 0.2s";
+          quizContent.style.transition = "opacity 0.2s";
+          quizHeader.style.opacity = 1;
+          quizContent.style.opacity = 1;
+          renderQuizStep(0);
+
+          quizOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+            
+          const hamburger = document.getElementById('navHamburger');
+          const mobileMenu = document.getElementById('navMobileMenu');
+          if(mobileMenu && mobileMenu.classList.contains('open')) {
+              hamburger.classList.remove('open');
+              mobileMenu.classList.remove('open');
+          }
+        });
+      }
+    });
+
+    if (quizCloseBtn) {
+      quizCloseBtn.addEventListener('click', () => {
+        quizOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    if (quizOverlay) {
+      quizOverlay.addEventListener('click', (e) => {
+        if (e.target === quizOverlay) {
+          quizOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+
     /* ── Hamburger / Mobile Menu ── */
     const hamburger = document.getElementById('navHamburger');
     const mobileMenu = document.getElementById('navMobileMenu');
@@ -2978,11 +3262,10 @@
       const track     = timeline.querySelector('.step-track');
       const stepCols  = [...timeline.querySelectorAll('.step-col[data-step]')]
                           .sort((a, b) => +a.dataset.step - +b.dataset.step);
-      const N         = stepCols.length; // 4
+      const N         = stepCols.length;
 
       // Thresholds at which each step fully appears (0–1 of section scroll)
-      // Step 1 at 15%, step 2 at 35%, step 3 at 55%, step 4 at 75%
-      const stepThresholds = [0.15, 0.35, 0.55, 0.75];
+      const stepThresholds = [0.15, 0.30, 0.45, 0.60, 0.75];
 
       function getProgress() {
         const rect    = howSection.getBoundingClientRect();
