@@ -1272,14 +1272,178 @@
     }
 
     @media (max-width: 600px) {
-      .steps-timeline {
-        grid-template-columns: 1fr;
-      }
+      .steps-timeline { grid-template-columns: 1fr; }
     }
+  </style>
+
+  <!-- ═══ ANIMATION SYSTEM ═══ -->
+  <style>
+    /* ─ SCROLL REVEAL ─ */
+    [data-reveal] {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+    }
+    [data-reveal].revealed { opacity:1; transform:none; }
+    [data-reveal][data-delay="1"] { transition-delay:.1s; }
+    [data-reveal][data-delay="2"] { transition-delay:.2s; }
+    [data-reveal][data-delay="3"] { transition-delay:.3s; }
+    [data-reveal][data-delay="4"] { transition-delay:.4s; }
+    [data-reveal][data-delay="5"] { transition-delay:.5s; }
+
+    /* ─ SCROLL PROGRESS BAR ─ */
+    #scroll-progress {
+      position:fixed; top:0; left:0; z-index:9999;
+      height:2px; width:0%;
+      background:linear-gradient(90deg,#c0362a,#e8614a,#ff8c7a);
+      transition:width .1s; pointer-events:none;
+    }
+
+    /* ─ CURSOR SPOTLIGHT ─ */
+    #spotlight {
+      position:fixed; inset:0; z-index:999; pointer-events:none;
+      background:radial-gradient(circle 320px at var(--mx,50%) var(--my,50%),rgba(192,54,42,.09) 0%,transparent 70%);
+    }
+
+    /* ─ HERO CANVAS ─ */
+    #hero-canvas { position:absolute; inset:0; z-index:1; pointer-events:none; }
+
+    /* ─ HERO ENTRANCE STAGGER ─ */
+    .hero-stars   { animation:heroFadeUp .9s .3s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero h1      { animation:heroFadeUp .9s .5s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero-sub     { animation:heroFadeUp .9s .7s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero-actions { animation:heroFadeUp .9s .9s cubic-bezier(0.22,1,0.36,1) both; }
+    @keyframes heroFadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:none; }
+    }
+
+    /* ─ BUTTON RIPPLE ─ */
+    button { position:relative; overflow:hidden; }
+    .ripple {
+      position:absolute; border-radius:50%;
+      background:rgba(255,255,255,.35); pointer-events:none;
+      transform:scale(0); animation:rippleAnim .6s ease-out;
+    }
+    @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+
+    /* ─ FLOATING PILL SINGLE-LINE ─ */
+    .floating-pill { white-space:nowrap; width:max-content; max-width:calc(100vw - 2rem); }
+    .floating-text { white-space:nowrap; flex-shrink:0; }
+    .floating-btn  { white-space:nowrap; flex-shrink:0; }
+    @keyframes pillSlideIn {
+      from { opacity:0; transform:translateX(-50%) translateY(20px); }
+      to   { opacity:1; transform:translateX(-50%) translateY(0); }
+    }
+    .floating-pill:not(.hidden) { animation:pillSlideIn .5s cubic-bezier(0.22,1,0.36,1) both; }
+
+    /* ─ STEP NODE PULSE ─ */
+    .step-node { animation:nodePulse 2.8s ease-in-out infinite; }
+    .step-col:nth-child(2) .step-node { animation-delay:.7s; }
+    .step-col:nth-child(3) .step-node { animation-delay:1.4s; }
+    .step-col:nth-child(4) .step-node { animation-delay:2.1s; }
+    @keyframes nodePulse {
+      0%,100% { box-shadow:0 0 0 0 rgba(255,255,255,.4); }
+      50%      { box-shadow:0 0 0 8px rgba(255,255,255,0); }
+    }
+
+    /* ─ STEP CASCADE ENTER (1→2→3→4) ─ */
+    .step-col[data-step] {
+      opacity:0; transform:translateY(48px) scale(0.96);
+      transition: opacity .65s cubic-bezier(0.22,1,0.36,1), transform .65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .step-col[data-step="1"] { transition-delay:0s; }
+    .step-col[data-step="2"] { transition-delay:.35s; }
+    .step-col[data-step="3"] { transition-delay:.7s; }
+    .step-col[data-step="4"] { transition-delay:1.05s; }
+    .steps-timeline.steps-active .step-col[data-step] { opacity:1; transform:none; }
+
+    /* connector line draws L→R */
+    .step-track {
+      transform-origin:left; transform:scaleX(0);
+      transition:transform 1.6s .2s cubic-bezier(0.22,1,0.36,1);
+    }
+    .steps-timeline.steps-active .step-track { transform:scaleX(1); }
+
+    /* ─ STEP CASCADE EXIT REVERSE (4→3→2→1) ─ */
+    .steps-timeline.steps-exiting .step-col[data-step="1"] { transition-delay:1.05s; }
+    .steps-timeline.steps-exiting .step-col[data-step="2"] { transition-delay:.7s; }
+    .steps-timeline.steps-exiting .step-col[data-step="3"] { transition-delay:.35s; }
+    .steps-timeline.steps-exiting .step-col[data-step="4"] { transition-delay:0s; }
+    .steps-timeline.steps-exiting .step-track {
+      transform-origin:right; transform:scaleX(0);
+      transition:transform 1.4s 0s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* ─ PROTOCOL CARD: 3D TILT + IMAGE ZOOM ─ */
+    .protocol-card { transform-style:preserve-3d; will-change:transform; }
+    .protocol-img {
+      transition:transform .4s cubic-bezier(0.22,1,0.36,1), box-shadow .4s;
+    }
+    .protocol-card:hover .protocol-img {
+      transform:scale(1.1);
+      box-shadow:0 8px 24px rgba(0,0,0,.28);
+    }
+
+    /* ─ TESTIMONIAL SHIMMER ─ */
+    .test-card { position:relative; overflow:hidden; transition:transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s; }
+    .test-card::before {
+      content:''; position:absolute; top:0; left:-75%;
+      width:50%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+      transform:skewX(-15deg); transition:left .7s ease; pointer-events:none;
+    }
+    .test-card:hover::before { left:140%; }
+    .test-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(0,0,0,.12); }
+
+    /* ─ APP CARD HOVER LIFT ─ */
+    .app-card {
+      transition:transform .4s cubic-bezier(0.22,1,0.36,1), box-shadow .4s;
+      cursor:pointer;
+    }
+    .app-card:hover { transform:translateY(-8px) scale(1.015); box-shadow:0 28px 64px rgba(0,0,0,.35); }
+
+    /* ─ MOCK PHONE FLOAT ─ */
+    .mock-phone { animation:phoneBob 4s ease-in-out infinite; }
+    @keyframes phoneBob {
+      0%,100% { transform:translateX(-50%) translateY(0); }
+      50%      { transform:translateX(-50%) translateY(-10px); }
+    }
+
+    /* ─ LOCATION FEATURE SLIDE ─ */
+    .loc-feature { transition:transform .3s cubic-bezier(0.22,1,0.36,1); }
+    .loc-feature:hover { transform:translateX(6px); }
+    .loc-icon { transition:color .2s, transform .3s; }
+    .loc-feature:hover .loc-icon { color:#fff; transform:scale(1.3); }
+
+    /* ─ DIAGNOSTIC PILL HOVER ─ */
+    .diag-pill-tag { transition:all .25s cubic-bezier(0.22,1,0.36,1) !important; }
+    .diag-pill-tag:hover {
+      background:rgba(255,255,255,.22) !important;
+      border-color:rgba(255,255,255,.6) !important;
+      transform:translateY(-3px) scale(1.04);
+      box-shadow:0 8px 24px rgba(0,0,0,.3);
+    }
+
+    /* ─ NAV LOGO BARS ANIMATE ─ */
+    .nav-logo-icon span { transition:width .3s ease, background .2s; }
+    .nav-logo:hover .nav-logo-icon span:nth-child(2) { width:18px; }
+    .nav-logo:hover .nav-logo-icon span { background:rgba(255,255,255,.7); }
+
+    /* ─ SECTION CONNECTOR DRAW ─ */
+    .v-line,.how-v-line,.loc-v-line,.diag-v-line-top {
+      transform-origin:top;
+      animation:drawLine 1.2s ease-in-out both;
+    }
+    @keyframes drawLine { from { transform:scaleY(0); } to { transform:scaleY(1); } }
   </style>
 </head>
 
 <body>
+
+  <!-- SCROLL PROGRESS BAR -->
+  <div id="scroll-progress"></div>
+  <!-- CURSOR SPOTLIGHT -->
+  <div id="spotlight"></div>
 
   <!-- FLOATING PILL -->
   <div class="floating-pill" id="floatingPill">
@@ -1300,6 +1464,7 @@
 
   <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
   <section class="hero">
+    <canvas id="hero-canvas"></canvas>
     <div class="hero-bg">
       <div class="hero-shape"></div>
       <div class="hero-shape"></div>
@@ -1359,50 +1524,50 @@
   </div>
 
   <section class="stop-waiting">
-    <h2>Stop waiting.<br><span class="line2">Start knowing.</span></h2>
-    <p>We go beyond standard check-ups to build plans that uncover risks early and optimise your long-term health.</p>
+    <h2 data-reveal>Stop waiting.<br><span class="line2">Start knowing.</span></h2>
+    <p data-reveal data-delay="2">We go beyond standard check-ups to build plans that uncover risks early and optimise your long-term health.</p>
 
     <div class="protocol-grid">
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna Room" /><span class="protocol-name">IR Sauna &amp; Steam Room</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga & Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength & Conditioning" /><span class="protocol-name">Strength &amp; Conditioning</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Full Body Analysis" /><span class="protocol-name">Full Body Analysis</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="Saliva DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor Consultations" /><span class="protocol-name">Doctor Consultations</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Coaching</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Customised Diets" /><span class="protocol-name">Customised Diets</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Bespoke Workouts" /><span class="protocol-name">Bespoke Workouts</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span>
       </div>
-      <div class="protocol-card">
+      <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy & Genomic Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span>
       </div>
     </div>
@@ -1424,45 +1589,33 @@
       <div style="text-align:center; margin-bottom: 1.5rem;">
         <span class="section-pill how-pill">How it works</span>
       </div>
-      <h2 class="how-h2">Your roadmap to better health.</h2>
+      <h2 class="how-h2" data-reveal>Your roadmap to better health.</h2>
 
-      <div class="steps-timeline">
+      <div class="steps-timeline" id="stepsTimeline">
         <div class="step-track"></div>
-        <div class="step-col">
-          <div class="step-node">
-            <div class="step-node-dot"></div>
-          </div>
+        <div class="step-col" data-step="1">
+          <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 1</div>
           <h3 class="step-title">Complete Body Analysis.</h3>
-          <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a
-            complete ECG.</p>
+          <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a complete ECG.</p>
         </div>
-        <div class="step-col">
-          <div class="step-node">
-            <div class="step-node-dot"></div>
-          </div>
+        <div class="step-col" data-step="2">
+          <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 2</div>
           <h3 class="step-title">Saliva DNA Analysis.</h3>
-          <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any
-            underlying allergies.</p>
+          <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
         </div>
-        <div class="step-col">
-          <div class="step-node">
-            <div class="step-node-dot"></div>
-          </div>
+        <div class="step-col" data-step="3">
+          <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 3</div>
           <h3 class="step-title">Doctor Consultation.</h3>
-          <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you
-            to discuss health markers.</p>
+          <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
         </div>
-        <div class="step-col">
-          <div class="step-node">
-            <div class="step-node-dot"></div>
-          </div>
+        <div class="step-col" data-step="4">
+          <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 4</div>
           <h3 class="step-title">Sports Scientist Handover.</h3>
-          <p class="step-desc">Your doctor and scientist work closely to build your bespoke schedule, workouts,
-            therapies, and diets.</p>
+          <p class="step-desc">Your doctor and scientist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
         </div>
       </div>
 
@@ -1475,40 +1628,28 @@
 
   <!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
   <section class="testimonials-section">
-    <div class="test-stars">★★★★★</div>
-    <h2 class="test-h2">Our members have seen meaningful<br>health improvements within just six months</h2>
+    <div class="test-stars" data-reveal>★★★★★</div>
+    <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just six months</h2>
     <div class="test-grid">
-      <div class="test-card">
-        <p class="test-quote">"If you are serious about your health, Fitflix is a no-brainer. I now have a clear game
-          plan of best-practice for my body moving forward."</p>
+      <div class="test-card" data-reveal data-delay="1">
+        <p class="test-quote">"If you are serious about your health, Fitflix is a no-brainer. I now have a clear game plan of best-practice for my body moving forward."</p>
         <div class="test-author">
           <div class="test-avatar av1"></div>
-          <div>
-            <div class="test-name">Paul W.</div>
-            <div class="test-age">55 years</div>
-          </div>
+          <div><div class="test-name">Paul W.</div><div class="test-age">55 years</div></div>
         </div>
       </div>
-      <div class="test-card">
-        <p class="test-quote">"If you want a long, happy, healthy life, join Fitflix. I now know exactly what needs
-          fixing and have a team of experts guiding me every step of the way."</p>
+      <div class="test-card" data-reveal data-delay="3">
+        <p class="test-quote">"If you want a long, happy, healthy life, join Fitflix. I now know exactly what needs fixing and have a team of experts guiding me every step of the way."</p>
         <div class="test-author">
           <div class="test-avatar av2"></div>
-          <div>
-            <div class="test-name">Sarita H.</div>
-            <div class="test-age">43 years</div>
-          </div>
+          <div><div class="test-name">Sarita H.</div><div class="test-age">43 years</div></div>
         </div>
       </div>
-      <div class="test-card">
-        <p class="test-quote">"I am beyond impressed. The data provided, the way it was explained to me, and the support
-          I received along the way was all of the highest standard."</p>
+      <div class="test-card" data-reveal data-delay="5">
+        <p class="test-quote">"I am beyond impressed. The data provided, the way it was explained to me, and the support I received along the way was all of the highest standard."</p>
         <div class="test-author">
           <div class="test-avatar av3"></div>
-          <div>
-            <div class="test-name">Katy P.</div>
-            <div class="test-age">39 years</div>
-          </div>
+          <div><div class="test-name">Katy P.</div><div class="test-age">39 years</div></div>
         </div>
       </div>
     </div>
@@ -1524,10 +1665,9 @@
 
   <section class="diag-section">
     <div class="diag-bg">
-      <span class="section-pill diag-pill">Our diagnostics</span>
-      <h2 class="diag-h2">Choose your path<br>to better health</h2>
-      <p class="diag-sub">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health
-        is heading and how to improve it.</p>
+      <span class="section-pill diag-pill" data-reveal>Our diagnostics</span>
+      <h2 class="diag-h2" data-reveal data-delay="2">Choose your path<br>to better health</h2>
+      <p class="diag-sub" data-reveal data-delay="3">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health is heading and how to improve it.</p>
 
       <div class="diag-pills-wrap">
         <div class="diag-pill-tag">Body Fat Analysis</div>
@@ -1631,7 +1771,7 @@
       </div>
       <div class="loc-grid">
         <div>
-          <h2 class="loc-h2">Find us in <span>Sainikpuri, Hyderabad</span></h2>
+          <h2 class="loc-h2" data-reveal>Find us in <span>Sainikpuri, Hyderabad</span></h2>
           <div class="loc-actions">
             <button class="btn-white-solid">Get Started Today</button>
             <button class="btn-white-outline">Book Free Discovery Call</button>
@@ -2345,30 +2485,110 @@
   </style>
 
   <script>
-    // Nav scroll effect
+    /* ── Nav scroll + auto-hide ── */
     const nav = document.getElementById('mainNav');
-    let lastScrollY = window.scrollY;
-
+    let _lastY = window.scrollY;
     window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      nav.classList.toggle('scrolled', currentScrollY > 80);
-
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        nav.classList.add('hidden');
-      } else {
-        nav.classList.remove('hidden');
-      }
-
-      lastScrollY = currentScrollY;
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 80);
+      nav.classList.toggle('hidden', y > _lastY && y > 100);
+      _lastY = y;
     });
 
-    // Floating pill hide at hero, show after
+    /* ── Floating pill ── */
     const pill = document.getElementById('floatingPill');
     const hero = document.querySelector('.hero');
-    const obs = new IntersectionObserver(([e]) => {
-      pill.classList.toggle('hidden', e.isIntersecting);
-    }, { threshold: 0.1 });
-    obs.observe(hero);
+    new IntersectionObserver(([e]) => pill.classList.toggle('hidden', e.isIntersecting), {threshold:.1}).observe(hero);
+
+    /* ── Scroll progress ── */
+    const _prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const t = document.documentElement.scrollTop;
+      const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      _prog.style.width = (t / h * 100) + '%';
+    }, {passive:true});
+
+    /* ── Cursor spotlight ── */
+    const _spot = document.getElementById('spotlight');
+    document.addEventListener('mousemove', e => {
+      _spot.style.setProperty('--mx', e.clientX + 'px');
+      _spot.style.setProperty('--my', e.clientY + 'px');
+    });
+
+    /* ── Scroll Reveal (bidirectional toggle) ── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => e.target.classList.toggle('revealed', e.isIntersecting));
+    }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+    /* ── 3D Card Tilt ── */
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX - r.left - r.width/2)  / (r.width/2);
+        const dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
+        card.style.transform = `translateY(-4px) rotateX(${-dy*6}deg) rotateY(${dx*6}deg) scale(1.03)`;
+      });
+      card.addEventListener('mouseleave', () => card.style.transform = '');
+    });
+
+    /* ── Button Ripple ── */
+    document.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      const r = btn.getBoundingClientRect(), size = Math.max(r.width, r.height);
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+
+    /* ── Hero Canvas Particles ── */
+    (function(){
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, pts;
+      const rand = (a,b) => Math.random()*(b-a)+a;
+      const mkP = () => ({x:rand(0,W),y:rand(0,H),r:rand(1,3.5),vx:rand(-0.25,0.25),vy:rand(-0.5,-0.12),alpha:rand(0.2,0.7),decay:rand(0.002,0.006)});
+      function resize(){ W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        pts.forEach(p=>{
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=`rgba(255,180,150,${p.alpha})`; ctx.fill();
+          p.x+=p.vx; p.y+=p.vy; p.alpha-=p.decay;
+          if(p.alpha<=0||p.y<-10) Object.assign(p,mkP(),{y:H+5});
+        });
+        requestAnimationFrame(draw);
+      }
+      resize(); pts=Array.from({length:80},mkP); draw();
+      window.addEventListener('resize', resize);
+    })();
+
+    /* ── Steps cascade: direction-aware (boundingClientRect) ──
+       Scroll DOWN: Step 1→2→3→4, line draws L→R
+       Scroll UP  : Step 4→3→2→1, line shrinks R→L              */
+    const stepsTimeline = document.getElementById('stepsTimeline');
+    if (stepsTimeline) {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          stepsTimeline.classList.remove('steps-exiting');
+          requestAnimationFrame(() => stepsTimeline.classList.add('steps-active'));
+        } else {
+          const exitedBelowViewport = entry.boundingClientRect.top > 0;
+          if (exitedBelowViewport) {
+            /* Scrolled UP: reverse cascade 4→3→2→1 */
+            stepsTimeline.classList.add('steps-exiting');
+            stepsTimeline.classList.remove('steps-active');
+          } else {
+            /* Scrolled DOWN past: keep visible, clean up */
+            stepsTimeline.classList.remove('steps-exiting');
+          }
+        }
+      }, {threshold:0.15}).observe(stepsTimeline);
+    }
   </script>
 </body>
 
