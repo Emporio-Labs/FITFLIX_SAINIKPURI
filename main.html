@@ -31,9 +31,10 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.5rem 2.5rem;
     background: transparent;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   nav.scrolled { background: rgba(10,10,8,0.92); backdrop-filter: blur(12px); }
+  nav.hidden { transform: translateY(-100%); }
   .nav-logo {
     display: flex; align-items: center; gap: 0.6rem;
     color: #fff; font-family: var(--sans); font-size: 1.1rem; font-weight: 400; letter-spacing: -0.01em;
@@ -187,15 +188,15 @@
 
   /* protocol grid */
   .protocol-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1rem; margin-bottom: 3rem;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 1rem; margin-bottom: 3rem; max-width: 1000px; margin-inline: auto;
   }
   .protocol-card {
     background: #fff; border-radius: 12px;
     display: flex; align-items: center; gap: 1rem;
     padding: 0 1.25rem; overflow: hidden; cursor: pointer;
     border: 1px solid rgba(0,0,0,0.06); min-height: 72px;
-    transition: all 0.2s;
+    transition: all 0.2s; width: max-content; max-width: 100%;
   }
   .protocol-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
   .protocol-img {
@@ -488,9 +489,10 @@
   .floating-pill {
     position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
     z-index: 300; display: flex; align-items: center; gap: 0;
-    background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 100px; overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.3) inset;
     transition: opacity 0.3s, transform 0.3s;
   }
   .floating-pill.hidden { opacity: 0; transform: translateX(-50%) translateY(8px); pointer-events: none; }
@@ -507,7 +509,6 @@
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
-    .protocol-grid { grid-template-columns: repeat(2, 1fr); }
     .steps-timeline { grid-template-columns: 1fr 1fr; gap: 2rem; }
     .step-track { display: none; }
     .test-grid { grid-template-columns: 1fr; }
@@ -517,7 +518,6 @@
     section, .how-bg, .diag-bg, .loc-bg { padding-left: 5vw; padding-right: 5vw; }
   }
   @media (max-width: 600px) {
-    .protocol-grid { grid-template-columns: 1fr; }
     .steps-timeline { grid-template-columns: 1fr; }
   }
 </style>
@@ -536,7 +536,7 @@
     <div class="nav-logo-icon">
       <span></span><span></span><span></span>
     </div>
-    everlab
+    Fitflix
   </a>
   <button class="nav-cta">Take the Health Quiz</button>
 </nav>
@@ -552,14 +552,14 @@
   <div class="hero-content">
     <div class="hero-stars">
       <span class="stars">★★★★★</span>
-      <span>Trusted by 30,000+ Australians</span>
+      <span>The Ultimate Longevity & Wellness Club</span>
     </div>
     <h1>
       Prevent disease.<br>
       Optimise health.<br>
       Feel your best.
     </h1>
-    <p class="hero-sub">Next-generation diagnostics across your full body, with a personalised health plan built for the future.</p>
+    <p class="hero-sub">Next-generation diagnostics, DNA analysis, therapies, and world-class training under one roof.</p>
     <div class="hero-actions">
       <button class="btn-hero-primary">Check my eligibility</button>
       <button class="btn-hero-link">Book Free Discovery Call</button>
@@ -569,25 +569,25 @@
   <!-- press marquee -->
   <div class="hero-press">
     <div class="press-track">
-      <span class="press-item">Sydney Morning Herald</span>
-      <span class="press-item">The Australian ◆</span>
-      <span class="press-item">Channel 7</span>
-      <span class="press-item">The Age</span>
+      <span class="press-item">The Times of India</span>
+      <span class="press-item">The Hindu ◆</span>
+      <span class="press-item">Vogue India</span>
+      <span class="press-item">GQ</span>
       <span class="press-item">WellToDo</span>
-      <span class="press-item">SmartCompany</span>
-      <span class="press-item">Capital Brief</span>
-      <span class="press-item">Forbes</span>
-      <span class="press-item">Financial Review</span>
+      <span class="press-item">Forbes India</span>
+      <span class="press-item">Men's Health</span>
+      <span class="press-item">Women's Health</span>
+      <span class="press-item">Financial Express</span>
       <!-- duplicate for seamless loop -->
-      <span class="press-item">Sydney Morning Herald</span>
-      <span class="press-item">The Australian ◆</span>
-      <span class="press-item">Channel 7</span>
-      <span class="press-item">The Age</span>
+      <span class="press-item">The Times of India</span>
+      <span class="press-item">The Hindu ◆</span>
+      <span class="press-item">Vogue India</span>
+      <span class="press-item">GQ</span>
       <span class="press-item">WellToDo</span>
-      <span class="press-item">SmartCompany</span>
-      <span class="press-item">Capital Brief</span>
-      <span class="press-item">Forbes</span>
-      <span class="press-item">Financial Review</span>
+      <span class="press-item">Forbes India</span>
+      <span class="press-item">Men's Health</span>
+      <span class="press-item">Women's Health</span>
+      <span class="press-item">Financial Express</span>
     </div>
   </div>
 </section>
@@ -603,20 +603,20 @@
   <p>We go beyond standard check-ups to build plans that uncover risks early and optimise your long-term health.</p>
 
   <div class="protocol-grid">
-    <div class="protocol-card"><div class="protocol-img pi-1"></div><span class="protocol-name">Longevity &amp; Optimisation</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-2"></div><span class="protocol-name">Female Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-3"></div><span class="protocol-name">Male Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-4"></div><span class="protocol-name">Cancer Screening</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-5"></div><span class="protocol-name">Gut &amp; Digestive Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-6"></div><span class="protocol-name">Metabolic Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-7"></div><span class="protocol-name">Heart Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-8"></div><span class="protocol-name">Weight Loss &amp; Nutrition</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-9"></div><span class="protocol-name">Hormone Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-10"></div><span class="protocol-name">Genetic Testing</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-11"></div><span class="protocol-name">Autoimmune Health</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-12"></div><span class="protocol-name">Full Body Health Checks</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-1"></div><span class="protocol-name">HBOT Therapy</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-2"></div><span class="protocol-name">CRYO Therapy</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-3"></div><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-4"></div><span class="protocol-name">Cold Plunge</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-5"></div><span class="protocol-name">Yoga &amp; Pilates</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-6"></div><span class="protocol-name">Strength &amp; Conditioning</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-7"></div><span class="protocol-name">Full Body Analysis</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-8"></div><span class="protocol-name">Saliva DNA Analysis</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-9"></div><span class="protocol-name">Doctor Consultations</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-10"></div><span class="protocol-name">Sports Scientist Coaching</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-11"></div><span class="protocol-name">Customised Diets</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-12"></div><span class="protocol-name">Bespoke Workouts</span></div>
     <div class="protocol-card"><div class="protocol-img pi-13"></div><span class="protocol-name">Disease Prevention</span></div>
-    <div class="protocol-card"><div class="protocol-img pi-14"></div><span class="protocol-name">Muscle &amp; Bone Health</span></div>
+    <div class="protocol-card"><div class="protocol-img pi-14"></div><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
   </div>
 
   <button class="build-plan-btn">Build your health plan</button>
@@ -641,26 +641,26 @@
       <div class="step-col">
         <div class="step-node"><div class="step-node-dot"></div></div>
         <div class="step-label">Step 1</div>
-        <h3 class="step-title">Meet your personal doctor.</h3>
-        <p class="step-desc">Review your health history and build a plan tailored to your goals and risks.</p>
+        <h3 class="step-title">Complete Body Analysis.</h3>
+        <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a complete ECG.</p>
       </div>
       <div class="step-col">
         <div class="step-node"><div class="step-node-dot"></div></div>
         <div class="step-label">Step 2</div>
-        <h3 class="step-title">Get tested head to toe.</h3>
-        <p class="step-desc">Complete your prescribed testing at Everlab partner facilities.</p>
+        <h3 class="step-title">Saliva DNA Analysis.</h3>
+        <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
       </div>
       <div class="step-col">
         <div class="step-node"><div class="step-node-dot"></div></div>
         <div class="step-label">Step 3</div>
-        <h3 class="step-title">Receive insights and actions.</h3>
-        <p class="step-desc">Unlock expert guidance and clear next steps from your clinical team.</p>
+        <h3 class="step-title">Doctor Consultation.</h3>
+        <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
       </div>
       <div class="step-col">
         <div class="step-node"><div class="step-node-dot"></div></div>
         <div class="step-label">Step 4</div>
-        <h3 class="step-title">Take action, retest and refine.</h3>
-        <p class="step-desc">Improve your health with tailored action plans across all areas of health.</p>
+        <h3 class="step-title">Sports Scientist Handover.</h3>
+        <p class="step-desc">Your doctor and scientist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
       </div>
     </div>
 
@@ -674,17 +674,17 @@
 <!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
 <section class="testimonials-section">
   <div class="test-stars">★★★★★</div>
-  <h2 class="test-h2">30,000+ Australians have seen meaningful<br>health improvements within just six months</h2>
+  <h2 class="test-h2">Our members have seen meaningful<br>health improvements within just six months</h2>
   <div class="test-grid">
     <div class="test-card">
-      <p class="test-quote">"If you are serious about your health, Everlab is a no-brainer. I now have a clear game plan of best-practice for my body moving forward."</p>
+      <p class="test-quote">"If you are serious about your health, Fitflix is a no-brainer. I now have a clear game plan of best-practice for my body moving forward."</p>
       <div class="test-author">
         <div class="test-avatar av1"></div>
         <div><div class="test-name">Paul W.</div><div class="test-age">55 years</div></div>
       </div>
     </div>
     <div class="test-card">
-      <p class="test-quote">"If you want a long, happy, healthy life, call Everlab. I now know exactly what needs fixing and have a team of experts guiding me every step of the way."</p>
+      <p class="test-quote">"If you want a long, happy, healthy life, join Fitflix. I now know exactly what needs fixing and have a team of experts guiding me every step of the way."</p>
       <div class="test-author">
         <div class="test-avatar av2"></div>
         <div><div class="test-name">Sarita H.</div><div class="test-age">43 years</div></div>
@@ -713,23 +713,21 @@
     <p class="diag-sub">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health is heading and how to improve it.</p>
 
     <div class="diag-pills-wrap">
-      <div class="diag-pill-tag">Gut Microbiome</div>
-      <div class="diag-pill-tag">ApoE Genetic Test</div>
-      <div class="diag-pill-tag">DEXA Scan</div>
-      <div class="diag-pill-tag">Full Body MRI</div>
-      <div class="diag-pill-tag">CTCA</div>
-      <div class="diag-pill-tag">Calcium Score</div>
-      <div class="diag-pill-tag">Heavy Metals</div>
-      <div class="diag-pill-tag">VO2 Max</div>
-      <div class="diag-pill-tag">Skin Check</div>
-      <div class="diag-pill-tag">Hormone Panels</div>
-      <div class="diag-pill-tag">DNA Methylation</div>
-      <div class="diag-pill-tag">Nutrition Review</div>
-      <div class="diag-pill-tag">Biological Age</div>
-      <div class="diag-pill-tag">CT Chest</div>
-      <div class="diag-pill-tag">Physical Assessment</div>
-      <div class="diag-pill-tag">Advanced Bloods</div>
-      <div class="diag-pill-tag">Genetic Health Test</div>
+      <div class="diag-pill-tag">Body Fat Analysis</div>
+      <div class="diag-pill-tag">Hemoglobin Test</div>
+      <div class="diag-pill-tag">ECG & Heart Health</div>
+      <div class="diag-pill-tag">Genome Data</div>
+      <div class="diag-pill-tag">Allergy Testing</div>
+      <div class="diag-pill-tag">HBOT Setup</div>
+      <div class="diag-pill-tag">CRYO Therapy</div>
+      <div class="diag-pill-tag">IR Sauna</div>
+      <div class="diag-pill-tag">Cold Plunge</div>
+      <div class="diag-pill-tag">Steam Room</div>
+      <div class="diag-pill-tag">Yoga Classes</div>
+      <div class="diag-pill-tag">Pilates Studio</div>
+      <div class="diag-pill-tag">Strength & Conditioning</div>
+      <div class="diag-pill-tag">Custom Diets</div>
+      <div class="diag-pill-tag">Personal Workouts</div>
     </div>
 
     <button class="btn-white-solid">Get Your Recommended Plan</button>
@@ -739,7 +737,8 @@
 
 <!-- ═══════════════════════════════════════ APP SECTION ═══════════════════════════════════════ -->
 <section class="app-section">
-  <h2 class="app-h2">All your health needs,<br><span class="line2">all in one place.</span></h2>
+  <h2 class="app-h2">The first longevity club of its kind.<br><span class="line2">Everything in one place.</span></h2>
+  <p style="max-width: 650px; margin: -2rem auto 4rem; color: #6b6560; font-size: 1rem; line-height: 1.6;">Usually, people have to take multiple memberships for therapies, gyms, and labs for testing. Fitflix brings them all together at one place in Sainikpuri, Hyderabad.</p>
 
   <div class="app-cards">
     <!-- Phone card -->
@@ -811,7 +810,7 @@
     </div>
     <div class="loc-grid">
       <div>
-        <h2 class="loc-h2">Find us across <span>Australia</span></h2>
+        <h2 class="loc-h2">Find us in <span>Sainikpuri, Hyderabad</span></h2>
         <div class="loc-actions">
           <button class="btn-white-solid">Get Started Today</button>
           <button class="btn-white-outline">Book Free Discovery Call</button>
@@ -820,27 +819,27 @@
       <div class="loc-features">
         <div class="loc-feature">
           <div class="loc-icon">✓</div>
-          <div class="loc-text">All bookings completed in app</div>
+          <div class="loc-text">All wellness services brought together under one roof</div>
         </div>
         <div class="loc-divider"></div>
         <div class="loc-feature">
           <div class="loc-icon">◉</div>
-          <div class="loc-text">200+ conveniently located diagnostic facilities across all states</div>
+          <div class="loc-text">First ever longevity club in India incorporating state-of-the-art therapies</div>
         </div>
         <div class="loc-divider"></div>
         <div class="loc-feature">
           <div class="loc-icon">◎</div>
-          <div class="loc-text">Access to Everlab's concierge team for support and assistance</div>
+          <div class="loc-text">Huge space completely dedicated to strength and conditioning</div>
         </div>
         <div class="loc-divider"></div>
         <div class="loc-feature">
           <div class="loc-icon">⊡</div>
-          <div class="loc-text">Priority booking reservations to reduce wait times</div>
+          <div class="loc-text">In-house labs and expert sports scientists to formulate your recovery</div>
         </div>
         <div class="loc-divider"></div>
         <div class="loc-feature">
           <div class="loc-icon">✦</div>
-          <div class="loc-text">Exclusive access to treatments and specialist referrals</div>
+          <div class="loc-text">Say goodbye to multiple memberships for gym, therapies, and diagnostics</div>
         </div>
       </div>
     </div>
@@ -858,7 +857,7 @@
         <div class="footer-app-phone-mock">
           <div class="fap-notch"></div>
           <div class="fap-header">
-            <span class="fap-logo-icon">≡ everlab</span>
+            <span class="fap-logo-icon">≡ Fitflix</span>
             <div class="fap-avatar"></div>
           </div>
           <div class="fap-welcome">Welcome, Sarah!</div>
@@ -894,7 +893,7 @@
         </div>
       </div>
       <div class="footer-app-copy">
-        <h3 class="footer-app-heading">Things are better<br><span>in the Everlab app</span></h3>
+        <h3 class="footer-app-heading">Things are better<br><span>in the Fitflix app</span></h3>
         <!-- QR placeholder -->
         <div class="footer-qr-placeholder">
           <div class="qr-grid">
@@ -930,7 +929,7 @@
         <div class="footer-nav-col">
           <div class="footer-nav-heading">About</div>
           <a href="#" class="footer-nav-link">Our Biomarkers</a>
-          <a href="#" class="footer-nav-link">Everlab Doctors</a>
+          <a href="#" class="footer-nav-link">Fitflix Doctors</a>
           <a href="#" class="footer-nav-link">Our Locations</a>
           <a href="#" class="footer-nav-link">For Business</a>
           <a href="#" class="footer-nav-link">Customer Stories</a>
@@ -941,12 +940,12 @@
           <a href="#" class="footer-nav-link">Gifting</a>
           <a href="#" class="footer-nav-link">Blog &nbsp;|&nbsp; Press Centre</a>
           <a href="#" class="footer-nav-link">Careers</a>
-          <a href="#" class="footer-nav-link">Share Everlab</a>
+          <a href="#" class="footer-nav-link">Share Fitflix</a>
         </div>
       </div>
 
       <div class="footer-email-row">
-        <p class="footer-signup-label"><strong>Sign up</strong> to discover better health with Everlab</p>
+        <p class="footer-signup-label"><strong>Sign up</strong> to discover better health with Fitflix</p>
         <div class="footer-email-form">
           <input type="email" placeholder="Email address" class="footer-email-input" />
           <button class="footer-submit-btn">Submit</button>
@@ -959,9 +958,9 @@
   <!-- Bottom bar -->
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <span>© 2026 everlab</span>
+      <span>© 2026 Fitflix</span>
       <span class="footer-sep">|</span>
-      <a href="mailto:support@everlab.com.au" class="footer-bottom-link">support@everlab.com.au</a>
+      <a href="mailto:support@fitflix.in" class="footer-bottom-link">support@fitflix.in</a>
       <span class="footer-sep">|</span>
       <a href="#" class="footer-bottom-link">Terms &amp; Conditions</a>
       <span class="footer-sep">|</span>
@@ -981,7 +980,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
       <div class="footer-logo-right">
-        <span class="footer-logo-icon-sm">≡</span> everlab
+        <span class="footer-logo-icon-sm">≡</span> Fitflix
       </div>
     </div>
   </div>
@@ -1190,8 +1189,19 @@
 <script>
   // Nav scroll effect
   const nav = document.getElementById('mainNav');
+  let lastScrollY = window.scrollY;
+  
   window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
+    const currentScrollY = window.scrollY;
+    nav.classList.toggle('scrolled', currentScrollY > 80);
+    
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      nav.classList.add('hidden');
+    } else {
+      nav.classList.remove('hidden');
+    }
+    
+    lastScrollY = currentScrollY;
   });
 
   // Floating pill hide at hero, show after
