@@ -273,7 +273,7 @@
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 760px;
+      max-width: 1000px;
       padding: 0 2rem;
     }
 
@@ -296,12 +296,20 @@
 
     .hero h1 {
       font-family: var(--serif);
-      font-weight: 300;
-      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
       line-height: 1.08;
       color: #fff;
       letter-spacing: -0.01em;
       margin-bottom: 1.5rem;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        white-space: normal;
+        font-size: clamp(2.5rem, 8vw, 3.8rem);
+      }
     }
 
     .hero-sub {
@@ -663,7 +671,7 @@
     /* step timeline */
     .steps-timeline {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       position: relative;
       margin-bottom: 3rem;
     }
@@ -671,8 +679,8 @@
     .step-track {
       position: absolute;
       top: 14px;
-      left: 8%;
-      right: 8%;
+      left: 10%;
+      right: 10%;
       height: 1px;
       background: rgba(255, 255, 255, 0.3);
     }
@@ -725,12 +733,12 @@
     .step-title {
       font-family: var(--serif);
       font-weight: 300;
-      font-size: 1.55rem;
+      font-size: 1.35rem;
       color: #fff;
       line-height: 1.2;
       margin-bottom: 0.75rem;
       letter-spacing: -0.01em;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
 
     .step-desc {
@@ -1317,7 +1325,7 @@
     /* ── 900px: tablets & small laptops ── */
     @media (max-width: 900px) {
       .steps-timeline {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 2rem;
       }
 
@@ -1743,9 +1751,8 @@
         <span>The Ultimate Longevity & Wellness Club</span>
       </div>
       <h1>
-        Prevent disease.<br>
-        Optimise health.<br>
-        Feel your best.
+        <!-- Your DNA, Your Wellness, Your Way -->
+         Train-Heal-Grow
       </h1>
       <p class="hero-sub">Next-generation diagnostics, DNA analysis, therapies, and world-class training under one roof.
       </p>
@@ -1816,13 +1823,13 @@
         <img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Full Body Analysis" /><span class="protocol-name">Full Body Analysis</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="Saliva DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span>
+        <img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="Genetic Analysis" /><span class="protocol-name">Genetic Analysis</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor Consultations" /><span class="protocol-name">Doctor Consultations</span>
+        <img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor Consultations" /><span class="protocol-name">Healt coach Consultation</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Coaching</span>
+        <img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Programming</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
         <img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Customised Diets" /><span class="protocol-name">Customised Diets</span>
@@ -1868,20 +1875,26 @@
         <div class="step-col" data-step="2">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 2</div>
-          <h3 class="step-title">Saliva DNA Analysis.</h3>
+          <h3 class="step-title">Genetic Analysis.</h3>
           <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
         </div>
         <div class="step-col" data-step="3">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 3</div>
-          <h3 class="step-title">Doctor Consultation.</h3>
+          <h3 class="step-title">Health Coach Consultation.</h3>
           <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
         </div>
         <div class="step-col" data-step="4">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 4</div>
-          <h3 class="step-title">Sports Scientist Handover.</h3>
-          <p class="step-desc">Your doctor and scientist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
+          <h3 class="step-title">Sports Scientist Programming.</h3>
+          <p class="step-desc">Your Health coach, scientist and nutritionist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
+        </div>
+        <div class="step-col" data-step="5">
+          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-label">Step 5</div>
+          <h3 class="step-title">Coach Handover.</h3>
+          <p class="step-desc">Your journey continues with ongoing support from your dedicated longevity coach to execute your plan.</p>
         </div>
       </div>
 
