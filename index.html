@@ -3165,7 +3165,7 @@
       flex-direction: column;
       gap: 1rem;
     }
-    
+
     .chat-msg {
       max-width: 85%;
       padding: 1rem 1.25rem;
@@ -3525,7 +3525,7 @@
       <button class="chatbot-close" onclick="toggleChat()">×</button>
     </div>
     <div class="chatbot-messages" id="chat-messages">
-      <div class="chat-msg bot">Hello! I'm your Fitflix AI concierge powered by TenantRAG. What can I tell you about our longevity protocols?</div>
+      <div class="chat-msg bot">Hello. I can answer Fitflix questions from our knowledge base. Ask me anything about Fitflix programs and services.</div>
     </div>
     <div class="chatbot-input-area">
       <input type="text" id="chat-input-text" placeholder="Message..." onkeypress="handleChatEnter(event)" />
@@ -3534,7 +3534,18 @@
   </div>
 
   <script>
-    let chatHistory = [];
+    const CHATPLUG_CONFIG = {
+      endpoint: '/api/chat'
+    };
+
+    function appendBotMessage(text) {
+      const messagesEl = document.getElementById('chat-messages');
+      const botDiv = document.createElement('div');
+      botDiv.className = 'chat-msg bot';
+      botDiv.textContent = text;
+      messagesEl.appendChild(botDiv);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
 
     function toggleChat() {
       const widget = document.getElementById('chatbot-widget');
@@ -3572,17 +3583,12 @@
 
       try {
         const payload = {
-          message: msg,
-          collection_id: "fitflix-docs",
-          history: chatHistory
+          message: msg
         };
-        console.group("🤖 Chatbot API Debug");
-        console.log("📤 Sending Payload:", payload);
 
-        const response = await fetch("http://127.0.0.1:8000/v1/chat", {
+        const response = await fetch(CHATPLUG_CONFIG.endpoint, {
           method: "POST",
           headers: {
-            "Authorization": "Bearer sk-Iw7X5nvENfePNjPEIdGKPWJS3H0Rdyan77luusnH",
             "Content-Type": "application/json"
           },
           body: JSON.stringify(payload)
@@ -3591,20 +3597,21 @@
         // 3. Remove loader DOM
         messagesEl.removeChild(loaderDiv);
 
-        console.log(`📥 Response Status: ${response.status} ${response.statusText}`);
-
-        if(!response.ok) {
-           throw new Error("HTTP error " + response.status);
+        if (!response.ok) {
+          let errorDetail = `HTTP ${response.status}`;
+          try {
+            const errPayload = await response.json();
+            errorDetail = errPayload.error || errPayload.message || errorDetail;
+          } catch (_ignore) {
+            // Keep default status text if response is not JSON.
+          }
+          throw new Error(errorDetail);
         }
 
         const data = await response.json();
-        console.log("📄 Response JSON:", data);
-        console.groupEnd();
-        
-        const replyText = data.reply || data.response || data.answer || "I received a response, but it was empty.";
-        
-        chatHistory.push({ role: "user", content: msg });
-        chatHistory.push({ role: "assistant", content: replyText });
+        const replyText = (typeof data.answer === 'string' && data.answer.trim())
+          ? data.answer
+          : 'No answer was returned by the chatbot API.';
 
         // 4. Add Bot Msg DOM
         const botDiv = document.createElement('div');
@@ -3616,12 +3623,10 @@
         if(messagesEl.contains(loaderDiv)) {
            messagesEl.removeChild(loaderDiv);
         }
-        console.error("❌ Chatbot Error Caught:", err);
-        console.groupEnd();
-        
+
         const errDiv = document.createElement('div');
         errDiv.className = 'chat-msg bot';
-        errDiv.textContent = `Error connecting to Chatbot backend: ${err.message}. Ensure TenantRAG is running at localhost:8000.`;
+        errDiv.textContent = `Error connecting to Fitflix assistant: ${err.message}`;
         messagesEl.appendChild(errDiv);
       }
 
