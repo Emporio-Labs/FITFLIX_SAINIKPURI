@@ -5,6 +5,25 @@ const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 60_000);
 const MAX_MESSAGE_LENGTH = Number(process.env.MAX_MESSAGE_LENGTH || 1200);
 const UPSTREAM_TIMEOUT_MS = Number(process.env.UPSTREAM_TIMEOUT_MS || 15_000);
 const ipBuckets = new Map();
+let hasLoggedDevConfig = false;
+
+function isDevRuntime() {
+  return process.env.NODE_ENV !== 'production' || process.env.VERCEL_ENV === 'development';
+}
+
+function sanitizeApiUrl(rawUrl) {
+  if (typeof rawUrl !== 'string' || !rawUrl.trim()) {
+    return 'not_set';
+  }
+
+  try {
+    const parsed = new URL(rawUrl);
+    const port = parsed.port ? `:${parsed.port}` : '';
+    return `${parsed.protocol}//${parsed.hostname}${port}${parsed.pathname}`;
+  } catch (_error) {
+    return 'invalid_url';
+  }
+}
 
 function getRequestId() {
   if (typeof crypto.randomUUID === 'function') {
@@ -67,6 +86,22 @@ function logEvent(level, requestId, message, extra) {
   }));
 }
 
+function maybeLogDevRuntimeConfig(requestId, apiUrl, collectionId, apiKey) {
+  if (hasLoggedDevConfig || !isDevRuntime()) {
+    return;
+  }
+
+  hasLoggedDevConfig = true;
+  logEvent('info', requestId, 'dev_runtime_config', {
+    nodeEnv: process.env.NODE_ENV || 'unset',
+    vercelEnv: process.env.VERCEL_ENV || 'unset',
+    apiUrl: sanitizeApiUrl(apiUrl),
+    collectionId,
+    hasApiKey: Boolean(apiKey),
+    timeoutMs: UPSTREAM_TIMEOUT_MS
+  });
+}
+
 module.exports = async function handler(req, res) {
   const requestId = getRequestId();
   const startedAt = Date.now();
@@ -87,6 +122,8 @@ module.exports = async function handler(req, res) {
   const apiKey = process.env.CHATPLUG_API_KEY;
   const collectionId = process.env.CHATPLUG_COLLECTION_ID || 'fitflix-collection';
   const clientIp = getClientIp(req);
+
+  maybeLogDevRuntimeConfig(requestId, apiUrl, collectionId, apiKey);
 
   if (isRateLimited(clientIp)) {
     logEvent('warn', requestId, 'rate_limited', { clientIp });
