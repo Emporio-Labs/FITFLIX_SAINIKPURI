@@ -505,7 +505,7 @@
     
     .stop-waiting {
       background: var(--cream-light);
-      padding: 0 5vw 5rem;
+      padding: 0 5vw 1rem; /* Padding reduced to eliminate excessive white space */
       text-align: center;
     }
 
@@ -744,7 +744,7 @@
       flex-direction: column;
       align-items: center;
       background: var(--cream-light);
-      padding: 2rem 0;
+      padding: 0 0 2rem 0; /* Removed the 2rem top padding, kept the bottom padding */
     }
 
     .how-v-line {
@@ -979,6 +979,29 @@
     .test-age {
       font-size: 0.75rem;
       color: var(--muted);
+    }
+
+    /* Styling for the new step buttons */
+    .step-link-btn {
+        display: inline-block;
+        margin-top: 15px; /* Adds space between the paragraph and the button */
+        padding: 8px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
+        border-radius: 20px; /* Gives it the pill shape */
+        background-color: transparent;
+        color: #ffffff;
+        text-decoration: none; /* Removes the default link underline */
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        text-align: center;
+    }
+
+    /* Hover effect to make it interactive */
+    .step-link-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
+        border-color: #ffffff; /* Brighter border on hover */
+        color: #ffffff;
     }
 
     /* ─── DIAGNOSTICS (dark brown) ─── */
@@ -1511,9 +1534,10 @@
       }
 
       .stop-waiting {
-        padding-left: 5vw;
-        padding-right: 5vw;
-      }
+      background: var(--cream-light);
+      padding: 0 5vw 0; /* Changed bottom padding to 0 */
+      text-align: center;
+    }
 
       /* Protocol cards: ensure they don't overflow */
       .protocol-card {
@@ -1642,7 +1666,6 @@
     }
   </style>
 
-  <!-- ═══ ANIMATION SYSTEM ═══ -->
   <style>
     /* ─ SCROLL REVEAL ─ */
     [data-reveal] {
@@ -1797,18 +1820,14 @@
 
 <body>
 
-  <!-- SCROLL PROGRESS BAR -->
   <div id="scroll-progress"></div>
-  <!-- CURSOR SPOTLIGHT -->
   <div id="spotlight"></div>
 
-  <!-- FLOATING PILL -->
   <div class="floating-pill" id="floatingPill">
     <span class="floating-text">Need more info?</span>
     <button class="floating-btn">Book a call</button>
   </div>
 
-  <!-- NAV -->
   <nav id="mainNav">
     <a href="#" class="nav-logo">
       <img src="assets/fitflix_logo.png" alt="Fitflix wellness logo" class="nav-logo-img" width="34" height="30"
@@ -1816,13 +1835,11 @@
       Fitflix
     </a>
     <button class="nav-cta">Take the Health Quiz</button>
-    <!-- Hamburger -->
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Mobile Menu Drawer -->
   <div class="nav-mobile-menu" id="navMobileMenu">
     <a href="#" class="nav-mobile-link">How it works</a>
     <a href="#" class="nav-mobile-link">Diagnostics</a>
@@ -1830,7 +1847,6 @@
     <button class="nav-mobile-cta">Take the Health Quiz</button>
   </div>
 
-  <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg">
       <div class="hero-shape"></div>
@@ -1840,9 +1856,30 @@
 
     <div class="hero-content">
       <div class="hero-stars">
-        <span class="stars">★★★★★</span>
-        <span>The Ultimate Longevity & Wellness Club</span>
-      </div>
+  <div style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 95, 0.55);
+    background: rgba(212, 175, 95, 0.08);
+  ">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
+    </svg>
+    <span style="
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #D4AF5F;
+    ">Fitflix Wellness Club</span>
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
+    </svg>
+  </div>
+</div>
       <h1>
         Prevent Disease<br>
         Optimise Health
@@ -1852,11 +1889,10 @@
       </p>
       <div class="hero-actions">
         <button class="btn-hero-primary">Check my eligibility</button>
-        <button class="btn-hero-link">Book Free Discovery Call</button>
+        <button class="btn-hero-link">Book Your Free Consultancy    </button>
       </div>
     </div>
 
-    <!-- press marquee -->
     <div class="hero-press">
       <div class="press-track">
         <span class="press-item">The Times of India</span>
@@ -1868,7 +1904,6 @@
         <span class="press-item">Men's Health</span>
         <span class="press-item">Women's Health</span>
         <span class="press-item">Financial Express</span>
-        <!-- duplicate for seamless loop -->
         <span class="press-item">The Times of India</span>
         <span class="press-item">The Hindu ◆</span>
         <span class="press-item">Vogue India</span>
@@ -1878,11 +1913,10 @@
         <span class="press-item">Men's Health</span>
         <span class="press-item">Women's Health</span>
         <span class="press-item">Financial Express</span>
-      </div>
+      </div>`
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ STOP WAITING ═══════════════════════════════════════ -->
   <div class="v-connector">
     <div class="v-line"></div>
     <div class="v-dot">
@@ -1939,10 +1973,8 @@
       </div>
     </div>
 
-    <!-- Mobile marquee rows (hidden on desktop via CSS) -->
     <div class="protocol-marquee-wrap" aria-hidden="true">
 
-      <!-- Row 1: scrolls Left (right → left) -->
       <div class="protocol-marquee-row row-ltr">
         <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
@@ -1951,7 +1983,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
-        <!-- duplicate for seamless loop -->
         <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
@@ -1961,7 +1992,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
       </div>
 
-      <!-- Row 2: scrolls Right (left → right) -->
       <div class="protocol-marquee-row row-rtl">
         <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
@@ -1970,7 +2000,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
-        <!-- duplicate for seamless loop -->
         <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
@@ -1986,7 +2015,6 @@
     <p class="takes-txt">Takes 2 minutes</p>
   </section>
 
-  <!-- ═══════════════════════════════════════ HOW IT WORKS ═══════════════════════════════════════ -->
   <div class="how-v-connector">
     <div class="how-v-line"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2008,30 +2036,35 @@
           <div class="step-label">Step 1</div>
           <h3 class="step-title">Complete Body Analysis.</h3>
           <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a complete ECG.</p>
+          <a href="./pages/step1.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="2">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 2</div>
           <h3 class="step-title">Genetic Analysis.</h3>
           <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
+          <a href="./pages/step2.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="3">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 3</div>
           <h3 class="step-title">Health Coach Consultation.</h3>
           <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
+          <a href="./pages/step3.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="4">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 4</div>
           <h3 class="step-title">Sports Scientist Programming.</h3>
           <p class="step-desc">Your Health coach, scientist and nutritionist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
+          <a href="./pages/step4.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="5">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 5</div>
           <h3 class="step-title">Coach Handover.</h3>
           <p class="step-desc">Your journey continues with ongoing support from your dedicated longevity coach to execute your plan.</p>
+          <a href="./pages/step5.html" class="step-link-btn">View Details</a>
         </div>
       </div>
 
@@ -2042,7 +2075,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
   <section class="testimonials-section">
     <div class="test-stars" data-reveal>★★★★★</div>
     <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just three months</h2>
@@ -2071,7 +2103,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ DIAGNOSTICS ═══════════════════════════════════════ -->
   <div class="diag-v-connector">
     <div class="diag-v-line-top"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2081,7 +2112,7 @@
 
   <section class="diag-section">
     <div class="diag-bg">
-      <span class="section-pill diag-pill" data-reveal>Our diagnostics</span>
+      <span class="section-pill diag-pill" data-reveal>Our Services</span>
       <h2 class="diag-h2" data-reveal data-delay="2">Choose your path<br>to better health</h2>
       <p class="diag-sub" data-reveal data-delay="3">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health is heading and how to improve it.</p>
 
@@ -2108,7 +2139,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ APP SECTION ═══════════════════════════════════════ -->
   <section class="app-section">
     <h2 class="app-h2">The first longevity club of its kind.<br><span class="line2">Everything in one place.</span></h2>
     <p style="max-width: 650px; margin: -2rem auto 4rem; color: #6b6560; font-size: 1rem; line-height: 1.6;">Usually,
@@ -2116,7 +2146,6 @@
       together at one place in Sainikpuri, Hyderabad.</p>
 
     <div class="app-cards">
-      <!-- Phone card -->
       <div class="app-card app-card-phone">
         <div class="mock-phone">
           <div class="mock-notch"></div>
@@ -2138,7 +2167,6 @@
         <div class="app-card-title">Track every<br>biomarker, in one app.</div>
       </div>
 
-      <!-- Data card -->
       <div class="app-card app-card-data">
         <div class="mock-data">
           <div class="mock-data-row">
@@ -2172,7 +2200,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ LOCATIONS ═══════════════════════════════════════ -->
   <div class="loc-v-connect">
     <div class="loc-v-line"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2223,13 +2250,10 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
   <footer>
 
-    <!-- App promo band -->
     <div class="footer-app-band">
       <div class="footer-app-card">
-        <!-- Replace with actual app screenshot image -->
         <div class="footer-app-img-placeholder">
           <div class="footer-app-phone-mock">
             <div class="fap-notch"></div>
@@ -2260,7 +2284,6 @@
             </div>
             <div class="fap-action-label">Your action plan</div>
             <div class="fap-action-row">
-              <!-- image placeholder -->
               <div class="fap-action-img"></div>
               <div>
                 <div class="fap-action-title">Physical Assessment</div>
@@ -2271,7 +2294,6 @@
         </div>
         <div class="footer-app-copy">
           <h3 class="footer-app-heading">Things are better<br><span>in the Fitflix app</span></h3>
-          <!-- QR placeholder -->
           <div class="footer-qr-placeholder">
             <div class="qr-grid">
               <div class="qr-block"></div>
@@ -2304,7 +2326,6 @@
         </div>
       </div>
 
-      <!-- Nav columns + email signup -->
       <div class="footer-nav-block">
         <div class="footer-nav-cols">
           <div class="footer-nav-col">
@@ -2345,7 +2366,6 @@
       </div>
     </div>
 
-    <!-- Bottom bar -->
     <div class="footer-bottom">
       <div class="footer-bottom-left">
         <span>© 2026 Fitflix</span>
@@ -2391,7 +2411,6 @@
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════ QUIZ MODAL ═══════════════════════════════════════ -->
   <div class="quiz-modal-overlay" id="quizModalOverlay">
     <div class="quiz-modal-container">
       <button class="quiz-close-btn" id="quizCloseBtn">&times;</button>
@@ -3495,7 +3514,7 @@
     /* ── Steps: scroll-progress driven ──────────────────────────────────────
        As the user scrolls through the how-section, the connector line draws
        and each step card fades up in sequence, all tied to scroll position.
-       Scrolling back reverses the animation.                              */
+       Scrolling back reverses the animation.                                 */
     (function () {
       const timeline  = document.getElementById('stepsTimeline');
       const howBg     = document.querySelector('.how-bg');
@@ -3508,7 +3527,8 @@
       const N         = stepCols.length;
 
       // Thresholds at which each step fully appears (0–1 of section scroll)
-      const stepThresholds = [0.15, 0.30, 0.45, 0.60, 0.75];
+      // First step changed to -0.1 so it loads immediately upon reaching the section
+      const stepThresholds = [-0.1, 0.30, 0.45, 0.60, 0.75];
 
       function getProgress() {
         const rect    = howSection.getBoundingClientRect();
@@ -3552,7 +3572,6 @@
 
   <script type="module" src="/src/speed-insights.js"></script>
 
-  <!-- ── WIDGET DOM ── -->
   <button id="chatbot-trigger" class="chatbot-trigger" onclick="toggleChat()" aria-label="Chat with Fitflix AI">
     <svg viewBox="0 0 24 24">
       <path d="M20 2H4C2.9 2 2.01 2.9 2.01 4L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
