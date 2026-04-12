@@ -2503,7 +2503,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label>Follow up date:</label>
+          <label>Book appointment on:</label>
           <input type="date" name="date" id="followUpDate" required>
         </div>
         <div class="booking-honeypot" aria-hidden="true">
@@ -3916,8 +3916,15 @@
       RAW_LEAD_CAPTURE_BASE_URL && !RAW_LEAD_CAPTURE_BASE_URL.includes('%VITE_')
         ? RAW_LEAD_CAPTURE_BASE_URL
         : DEFAULT_LEAD_CAPTURE_BASE_URL
-    ).replace(/\/+$/, '');
+    ).trim().replace(/\/+$/, '');
     const LEAD_CAPTURE_ENDPOINT = `${LEAD_CAPTURE_BASE_URL}/leads/public-capture`;
+
+    function getLeadCaptchaToken() {
+      const token = typeof window.fitflixLeadCaptchaToken === 'string'
+        ? window.fitflixLeadCaptchaToken.trim()
+        : '';
+      return token || 'captcha-not-provided';
+    }
 
     function appendBotMessage(text) {
       const messagesEl = document.getElementById('chat-messages');
@@ -4107,10 +4114,13 @@
           interests: selectedInterest ? [selectedInterest] : [],
           source: window.location.hostname || 'fitflix.in',
           tags: ['website', 'call-me'],
-          followUpDate,
-          captchaToken: window.fitflixLeadCaptchaToken || '',
+          captchaToken: getLeadCaptchaToken(),
           website: String(formData.get('website') || '').trim()
         };
+
+        if (followUpDate) {
+          payload.followUpDate = followUpDate;
+        }
 
         if (submitBtn) {
           submitBtn.disabled = true;

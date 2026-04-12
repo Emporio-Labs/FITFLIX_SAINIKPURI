@@ -1115,8 +1115,15 @@
     RAW_LEAD_CAPTURE_BASE_URL && !RAW_LEAD_CAPTURE_BASE_URL.includes('%VITE_')
       ? RAW_LEAD_CAPTURE_BASE_URL
       : DEFAULT_LEAD_CAPTURE_BASE_URL
-  ).replace(/\/+$/, '');
+  ).trim().replace(/\/+$/, '');
   const LEAD_CAPTURE_ENDPOINT = `${LEAD_CAPTURE_BASE_URL}/leads/public-capture`;
+
+  function getLeadCaptchaToken() {
+    const token = typeof window.fitflixLeadCaptchaToken === 'string'
+      ? window.fitflixLeadCaptchaToken.trim()
+      : '';
+    return token || 'captcha-not-provided';
+  }
 
   function getAssessmentAnswers(ver) {
     const total = ver === 1 ? 7 : 15;
@@ -1137,25 +1144,30 @@
 
   async function submitHealthscoreLead(assessmentVersion, assessmentAnswers) {
     const parsedAge = Number.parseInt(userData.age, 10);
+    const personalDetails = {
+      fullName: userData.name || '',
+      phoneNumber: userData.phone || '',
+      emailAddress: userData.email || '',
+      gender: userData.gender || '',
+      primaryHealthGoal: userData.goal || '',
+      wellnessInterests: Array.isArray(userData.interests) ? userData.interests : [],
+      notes: userData.notes || ''
+    };
+
+    if (Number.isInteger(parsedAge)) {
+      personalDetails.age = parsedAge;
+    }
+
     const payload = {
       formType: 'healthscore',
-      personalDetails: {
-        fullName: userData.name || '',
-        phoneNumber: userData.phone || '',
-        emailAddress: userData.email || '',
-        age: Number.isInteger(parsedAge) ? parsedAge : null,
-        gender: userData.gender || '',
-        primaryHealthGoal: userData.goal || '',
-        wellnessInterests: Array.isArray(userData.interests) ? userData.interests : [],
-        notes: userData.notes || ''
-      },
+      personalDetails,
       assessment: {
         version: assessmentVersion,
         answers: assessmentAnswers
       },
       source: window.location.hostname || 'fitflix.in',
       tags: ['website', 'healthscore'],
-      captchaToken: window.fitflixLeadCaptchaToken || '',
+      captchaToken: getLeadCaptchaToken(),
       website: ''
     };
 

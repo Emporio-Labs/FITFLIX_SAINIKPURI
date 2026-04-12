@@ -17,6 +17,7 @@ Set these in Vercel Project Settings -> Environment Variables:
 - `CHATPLUG_API_KEY` = your tenant key (`cp_...`)
 - `CHATPLUG_API_URL` = `http://65.0.21.64:7860/v1/chat`
 - `CHATPLUG_COLLECTION_ID` = `fitflix-collection`
+- `VITE_LEAD_CAPTURE_BASE_URL` = `https://hybridhumanbackend.vercel.app`
 
 Optional hardening variables:
 
