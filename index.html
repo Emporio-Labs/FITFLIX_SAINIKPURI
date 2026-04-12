@@ -2504,7 +2504,7 @@
         </div>
         <div class="form-group">
           <label>Follow up date:</label>
-          <input type="date" name="date" required>
+          <input type="date" name="date" id="followUpDate" required>
         </div>
         <div class="booking-footer">
           <button type="submit" class="btn-booking-primary">Submit request</button>
@@ -3555,6 +3555,17 @@
       font-family: var(--sans);
       font-size: 0.9rem;
       transition: border-color 0.2s;
+      color-scheme: dark;
+    }
+    
+    .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    
+    .form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+      opacity: 1;
     }
     .form-group input:focus,
     .form-group select:focus {
@@ -4016,6 +4027,11 @@
     const bookingOverlay = document.getElementById('bookingModalOverlay');
     const bookingCloseBtn = document.getElementById('bookingCloseBtn');
     const bookingForm = document.getElementById('bookingForm');
+    const followUpDateInput = document.getElementById('followUpDate');
+    if (followUpDateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      followUpDateInput.min = today;
+    }
     
     const allBtns = document.querySelectorAll('button');
     allBtns.forEach(btn => {
