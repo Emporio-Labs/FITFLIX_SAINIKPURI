@@ -143,6 +143,31 @@
       opacity: 0.85;
     }
 
+    .nav-cta-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 0.65rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: all 0.2s;
+    }
+
+    .nav-cta-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     /* ── Hamburger ── */
     .nav-hamburger {
       display: none;
@@ -1825,7 +1850,7 @@
 
   <div class="floating-pill" id="floatingPill">
     <span class="floating-text">Need more info?</span>
-    <button class="floating-btn">Book a call</button>
+    <button class="floating-btn">Book a call back</button>
   </div>
 
   <nav id="mainNav">
@@ -1834,7 +1859,10 @@
         decoding="async" fetchpriority="high">
       Fitflix
     </a>
-    <button class="nav-cta">Take the Health Quiz</button>
+    <div class="nav-actions">
+      <button class="nav-cta-outline">Book a Free Consultancy</button>
+      <button class="nav-cta">Take the Health Quiz</button>
+    </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -1844,6 +1872,7 @@
     <a href="#" class="nav-mobile-link">How it works</a>
     <a href="#" class="nav-mobile-link">Diagnostics</a>
     <a href="#" class="nav-mobile-link">Locations</a>
+    <button class="nav-mobile-cta" style="background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff;">Book a Free Consultancy</button>
     <button class="nav-mobile-cta">Take the Health Quiz</button>
   </div>
 
@@ -1888,8 +1917,7 @@
       <p class="hero-sub">Your DNA, Your Wellness, Your Way.
       </p>
       <div class="hero-actions">
-        <button class="btn-hero-primary">Check my eligibility</button>
-        <button class="btn-hero-link">Book Your Free Consultancy    </button>
+        <button class="btn-hero-primary">Book your Free Consultancy</button>
       </div>
     </div>
 
@@ -2069,8 +2097,8 @@
       </div>
 
       <div class="how-actions">
-        <button class="btn-white-solid">Get Started Today</button>
-        <button class="btn-white-outline">Book Free Discovery Call</button>
+        <button class="btn-white-solid">Get Your health score</button>
+        <button class="btn-white-outline">Book a Free Consultancy</button>
       </div>
     </div>
   </section>
@@ -2217,7 +2245,7 @@
           <h2 class="loc-h2" data-reveal>Find us in <span>Sainikpuri, Hyderabad</span></h2>
           <div class="loc-actions">
             <button class="btn-white-solid">Get Started Today</button>
-            <button class="btn-white-outline">Book Free Discovery Call</button>
+            <button class="btn-white-outline">Book a Free Consultancy</button>
           </div>
         </div>
         <div class="loc-features">
@@ -2425,6 +2453,49 @@
       <div class="quiz-footer">
         <button class="btn-quiz-primary">Submit Answer</button>
       </div>
+    </div>
+  </div>
+
+  <div class="booking-modal-overlay" id="bookingModalOverlay">
+    <div class="booking-modal-container">
+      <button class="booking-close-btn" id="bookingCloseBtn">&times;</button>
+      <div class="booking-header">
+        <span class="booking-pill">Consultation</span>
+        <h3 class="booking-title">Book a free consultancy.</h3>
+      </div>
+      <form class="booking-form" id="bookingForm">
+        <div class="form-group">
+          <label>Name <span>*</span></label>
+          <input type="text" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Mobile Number <span>*</span></label>
+          <input type="tel" name="mobile" required placeholder="+91 00000 00000">
+        </div>
+        <div class="form-group">
+          <label>Email (Optional)</label>
+          <input type="email" name="email" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label>Interested in:</label>
+          <select name="interest" required>
+            <option value="" disabled selected>Select an option...</option>
+            <option value="General Health">General Health & Wellness</option>
+            <option value="Diagnostics">Advanced Diagnostics (Bloodwork, ECG, etc.)</option>
+            <option value="DNA Analysis">DNA & Genomic Analysis</option>
+            <option value="Therapies">Therapies (Cryo, HBOT, Sauna, etc.)</option>
+            <option value="Coaching">Health Coach Consultations</option>
+            <option value="Training">Strength & Conditioning</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Follow up date:</label>
+          <input type="date" name="date" required>
+        </div>
+        <div class="booking-footer">
+          <button type="submit" class="btn-booking-primary">Submit request</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -3355,6 +3426,153 @@
       color: #fff;
     }
     /* ─── END CHATBOT WIDGET ─── */
+
+    /* ─── BOOKING MODAL ─── */
+    .booking-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1.5rem;
+    }
+    .booking-modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .booking-modal-container {
+      background: #151515;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .booking-modal-overlay.active .booking-modal-container {
+      transform: translateY(0);
+    }
+    .booking-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    .booking-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+    .booking-header {
+      padding: 2.5rem 3rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .booking-pill {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.25rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-family: var(--sans);
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .booking-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .booking-form {
+      padding: 2rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .form-group label span {
+      color: #e8614a;
+    }
+    .form-group input,
+    .form-group select {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .form-group select option {
+      color: #000;
+    }
+    .booking-footer {
+      margin-top: 1rem;
+    }
+    .btn-booking-primary {
+      width: 100%;
+      background: #fff;
+      color: var(--dark);
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-booking-primary:hover {
+      background: #e6e6e6;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 600px) {
+      .booking-header, .booking-form { padding: 1.5rem; }
+    }
   </style>
 
   <script>
@@ -3779,6 +3997,44 @@
         observer.observe(targetSection);
       }
     });
+
+    /* ── Booking Modal Logic ── */
+    const bookingOverlay = document.getElementById('bookingModalOverlay');
+    const bookingCloseBtn = document.getElementById('bookingCloseBtn');
+    const bookingForm = document.getElementById('bookingForm');
+    
+    const allBtns = document.querySelectorAll('button');
+    allBtns.forEach(btn => {
+      const text = btn.textContent.trim().toLowerCase();
+      if (text.includes('book free discovery call') || text.includes('book a free consult') || text.includes('book a call')) {
+        btn.addEventListener('click', () => {
+          bookingOverlay.classList.add('active');
+        });
+      }
+    });
+
+    if (bookingCloseBtn) {
+      bookingCloseBtn.addEventListener('click', () => {
+        bookingOverlay.classList.remove('active');
+      });
+    }
+
+    if (bookingOverlay) {
+      bookingOverlay.addEventListener('click', (e) => {
+        if (e.target === bookingOverlay) {
+          bookingOverlay.classList.remove('active');
+        }
+      });
+    }
+
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Consultation request submitted successfully!');
+        bookingOverlay.classList.remove('active');
+        bookingForm.reset();
+      });
+    }
   </script>
 </body>
 
