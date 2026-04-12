@@ -143,6 +143,31 @@
       opacity: 0.85;
     }
 
+    .nav-cta-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 0.65rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: all 0.2s;
+    }
+
+    .nav-cta-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
     /* ── Hamburger ── */
     .nav-hamburger {
       display: none;
@@ -505,7 +530,7 @@
     
     .stop-waiting {
       background: var(--cream-light);
-      padding: 0 5vw 5rem;
+      padding: 0 5vw 1rem; /* Padding reduced to eliminate excessive white space */
       text-align: center;
     }
 
@@ -744,7 +769,7 @@
       flex-direction: column;
       align-items: center;
       background: var(--cream-light);
-      padding: 2rem 0;
+      padding: 0 0 2rem 0; /* Removed the 2rem top padding, kept the bottom padding */
     }
 
     .how-v-line {
@@ -981,6 +1006,29 @@
       color: var(--muted);
     }
 
+    /* Styling for the new step buttons */
+    .step-link-btn {
+        display: inline-block;
+        margin-top: 15px; /* Adds space between the paragraph and the button */
+        padding: 8px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
+        border-radius: 20px; /* Gives it the pill shape */
+        background-color: transparent;
+        color: #ffffff;
+        text-decoration: none; /* Removes the default link underline */
+        font-size: 0.85rem;
+        font-family: inherit;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        text-align: center;
+    }
+
+    /* Hover effect to make it interactive */
+    .step-link-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
+        border-color: #ffffff; /* Brighter border on hover */
+        color: #ffffff;
+    }
+
     /* ─── DIAGNOSTICS (dark brown) ─── */
     .diag-section {
       position: relative;
@@ -1180,7 +1228,7 @@
     /* mock data card */
     .mock-data {
       position: absolute;
-      inset: 2rem;
+      inset: 2rem 2rem 7.5rem 2rem;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(8px);
@@ -1511,9 +1559,10 @@
       }
 
       .stop-waiting {
-        padding-left: 5vw;
-        padding-right: 5vw;
-      }
+      background: var(--cream-light);
+      padding: 0 5vw 0; /* Changed bottom padding to 0 */
+      text-align: center;
+    }
 
       /* Protocol cards: ensure they don't overflow */
       .protocol-card {
@@ -1642,7 +1691,6 @@
     }
   </style>
 
-  <!-- ═══ ANIMATION SYSTEM ═══ -->
   <style>
     /* ─ SCROLL REVEAL ─ */
     [data-reveal] {
@@ -1797,40 +1845,37 @@
 
 <body>
 
-  <!-- SCROLL PROGRESS BAR -->
   <div id="scroll-progress"></div>
-  <!-- CURSOR SPOTLIGHT -->
   <div id="spotlight"></div>
 
-  <!-- FLOATING PILL -->
   <div class="floating-pill" id="floatingPill">
     <span class="floating-text">Need more info?</span>
-    <button class="floating-btn">Book a call</button>
+    <button class="floating-btn">Book a call back</button>
   </div>
 
-  <!-- NAV -->
   <nav id="mainNav">
     <a href="#" class="nav-logo">
       <img src="assets/fitflix_logo.png" alt="Fitflix wellness logo" class="nav-logo-img" width="34" height="30"
         decoding="async" fetchpriority="high">
       Fitflix
     </a>
-    <button class="nav-cta">Take the Health Quiz</button>
-    <!-- Hamburger -->
+    <div class="nav-actions">
+      <button class="nav-cta-outline">Book a Free Consultancy</button>
+      <button class="nav-cta">Take the Health Quiz</button>
+    </div>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- Mobile Menu Drawer -->
   <div class="nav-mobile-menu" id="navMobileMenu">
     <a href="#" class="nav-mobile-link">How it works</a>
     <a href="#" class="nav-mobile-link">Diagnostics</a>
     <a href="#" class="nav-mobile-link">Locations</a>
+    <button class="nav-mobile-cta" style="background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff;">Book a Free Consultancy</button>
     <button class="nav-mobile-cta">Take the Health Quiz</button>
   </div>
 
-  <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
   <section class="hero">
     <div class="hero-bg">
       <div class="hero-shape"></div>
@@ -1840,9 +1885,30 @@
 
     <div class="hero-content">
       <div class="hero-stars">
-        <span class="stars">★★★★★</span>
-        <span>The Ultimate Longevity & Wellness Club</span>
-      </div>
+  <div style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(212, 175, 95, 0.55);
+    background: rgba(212, 175, 95, 0.08);
+  ">
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
+    </svg>
+    <span style="
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #D4AF5F;
+    ">Fitflix Wellness Club</span>
+    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
+    </svg>
+  </div>
+</div>
       <h1>
         Prevent Disease<br>
         Optimise Health
@@ -1851,12 +1917,10 @@
       <p class="hero-sub">Your DNA, Your Wellness, Your Way.
       </p>
       <div class="hero-actions">
-        <button class="btn-hero-primary">Check my eligibility</button>
-        <button class="btn-hero-link">Book Free Discovery Call</button>
+        <button class="btn-hero-primary">Book your Free Consultancy</button>
       </div>
     </div>
 
-    <!-- press marquee -->
     <div class="hero-press">
       <div class="press-track">
         <span class="press-item">The Times of India</span>
@@ -1868,7 +1932,6 @@
         <span class="press-item">Men's Health</span>
         <span class="press-item">Women's Health</span>
         <span class="press-item">Financial Express</span>
-        <!-- duplicate for seamless loop -->
         <span class="press-item">The Times of India</span>
         <span class="press-item">The Hindu ◆</span>
         <span class="press-item">Vogue India</span>
@@ -1878,11 +1941,10 @@
         <span class="press-item">Men's Health</span>
         <span class="press-item">Women's Health</span>
         <span class="press-item">Financial Express</span>
-      </div>
+      </div>`
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ STOP WAITING ═══════════════════════════════════════ -->
   <div class="v-connector">
     <div class="v-line"></div>
     <div class="v-dot">
@@ -1939,10 +2001,8 @@
       </div>
     </div>
 
-    <!-- Mobile marquee rows (hidden on desktop via CSS) -->
     <div class="protocol-marquee-wrap" aria-hidden="true">
 
-      <!-- Row 1: scrolls Left (right → left) -->
       <div class="protocol-marquee-row row-ltr">
         <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
@@ -1951,7 +2011,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
-        <!-- duplicate for seamless loop -->
         <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
@@ -1961,7 +2020,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
       </div>
 
-      <!-- Row 2: scrolls Right (left → right) -->
       <div class="protocol-marquee-row row-rtl">
         <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
@@ -1970,7 +2028,6 @@
         <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
-        <!-- duplicate for seamless loop -->
         <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
         <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
@@ -1986,7 +2043,6 @@
     <p class="takes-txt">Takes 2 minutes</p>
   </section>
 
-  <!-- ═══════════════════════════════════════ HOW IT WORKS ═══════════════════════════════════════ -->
   <div class="how-v-connector">
     <div class="how-v-line"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2008,41 +2064,45 @@
           <div class="step-label">Step 1</div>
           <h3 class="step-title">Complete Body Analysis.</h3>
           <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a complete ECG.</p>
+          <a href="./pages/step1.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="2">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 2</div>
           <h3 class="step-title">Genetic Analysis.</h3>
           <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
+          <a href="./pages/step2.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="3">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 3</div>
           <h3 class="step-title">Health Coach Consultation.</h3>
           <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
+          <a href="./pages/step3.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="4">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 4</div>
           <h3 class="step-title">Sports Scientist Programming.</h3>
           <p class="step-desc">Your Health coach, scientist and nutritionist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
+          <a href="./pages/step4.html" class="step-link-btn">View Details</a>
         </div>
         <div class="step-col" data-step="5">
           <div class="step-node"><div class="step-node-dot"></div></div>
           <div class="step-label">Step 5</div>
           <h3 class="step-title">Coach Handover.</h3>
           <p class="step-desc">Your journey continues with ongoing support from your dedicated longevity coach to execute your plan.</p>
+          <a href="./pages/step5.html" class="step-link-btn">View Details</a>
         </div>
       </div>
 
       <div class="how-actions">
-        <button class="btn-white-solid">Get Started Today</button>
-        <button class="btn-white-outline">Book Free Discovery Call</button>
+        <button class="btn-white-solid">Get Your health score</button>
+        <button class="btn-white-outline">Book a Free Consultancy</button>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
   <section class="testimonials-section">
     <div class="test-stars" data-reveal>★★★★★</div>
     <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just three months</h2>
@@ -2071,7 +2131,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ DIAGNOSTICS ═══════════════════════════════════════ -->
   <div class="diag-v-connector">
     <div class="diag-v-line-top"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2081,7 +2140,7 @@
 
   <section class="diag-section">
     <div class="diag-bg">
-      <span class="section-pill diag-pill" data-reveal>Our diagnostics</span>
+      <span class="section-pill diag-pill" data-reveal>Our Services</span>
       <h2 class="diag-h2" data-reveal data-delay="2">Choose your path<br>to better health</h2>
       <p class="diag-sub" data-reveal data-delay="3">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health is heading and how to improve it.</p>
 
@@ -2108,7 +2167,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ APP SECTION ═══════════════════════════════════════ -->
   <section class="app-section">
     <h2 class="app-h2">The first longevity club of its kind.<br><span class="line2">Everything in one place.</span></h2>
     <p style="max-width: 650px; margin: -2rem auto 4rem; color: #6b6560; font-size: 1rem; line-height: 1.6;">Usually,
@@ -2116,7 +2174,6 @@
       together at one place in Sainikpuri, Hyderabad.</p>
 
     <div class="app-cards">
-      <!-- Phone card -->
       <div class="app-card app-card-phone">
         <div class="mock-phone">
           <div class="mock-notch"></div>
@@ -2138,7 +2195,6 @@
         <div class="app-card-title">Track every<br>biomarker, in one app.</div>
       </div>
 
-      <!-- Data card -->
       <div class="app-card app-card-data">
         <div class="mock-data">
           <div class="mock-data-row">
@@ -2172,7 +2228,6 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ LOCATIONS ═══════════════════════════════════════ -->
   <div class="loc-v-connect">
     <div class="loc-v-line"></div>
     <div class="v-dot" style="background: var(--cream-light);">
@@ -2190,7 +2245,7 @@
           <h2 class="loc-h2" data-reveal>Find us in <span>Sainikpuri, Hyderabad</span></h2>
           <div class="loc-actions">
             <button class="btn-white-solid">Get Started Today</button>
-            <button class="btn-white-outline">Book Free Discovery Call</button>
+            <button class="btn-white-outline">Book a Free Consultancy</button>
           </div>
         </div>
         <div class="loc-features">
@@ -2223,13 +2278,10 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
   <footer>
 
-    <!-- App promo band -->
     <div class="footer-app-band">
       <div class="footer-app-card">
-        <!-- Replace with actual app screenshot image -->
         <div class="footer-app-img-placeholder">
           <div class="footer-app-phone-mock">
             <div class="fap-notch"></div>
@@ -2260,7 +2312,6 @@
             </div>
             <div class="fap-action-label">Your action plan</div>
             <div class="fap-action-row">
-              <!-- image placeholder -->
               <div class="fap-action-img"></div>
               <div>
                 <div class="fap-action-title">Physical Assessment</div>
@@ -2271,7 +2322,6 @@
         </div>
         <div class="footer-app-copy">
           <h3 class="footer-app-heading">Things are better<br><span>in the Fitflix app</span></h3>
-          <!-- QR placeholder -->
           <div class="footer-qr-placeholder">
             <div class="qr-grid">
               <div class="qr-block"></div>
@@ -2304,7 +2354,6 @@
         </div>
       </div>
 
-      <!-- Nav columns + email signup -->
       <div class="footer-nav-block">
         <div class="footer-nav-cols">
           <div class="footer-nav-col">
@@ -2345,7 +2394,6 @@
       </div>
     </div>
 
-    <!-- Bottom bar -->
     <div class="footer-bottom">
       <div class="footer-bottom-left">
         <span>© 2026 Fitflix</span>
@@ -2391,7 +2439,6 @@
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════ QUIZ MODAL ═══════════════════════════════════════ -->
   <div class="quiz-modal-overlay" id="quizModalOverlay">
     <div class="quiz-modal-container">
       <button class="quiz-close-btn" id="quizCloseBtn">&times;</button>
@@ -2406,6 +2453,49 @@
       <div class="quiz-footer">
         <button class="btn-quiz-primary">Submit Answer</button>
       </div>
+    </div>
+  </div>
+
+  <div class="booking-modal-overlay" id="bookingModalOverlay">
+    <div class="booking-modal-container">
+      <button class="booking-close-btn" id="bookingCloseBtn">&times;</button>
+      <div class="booking-header">
+        <span class="booking-pill">Consultation</span>
+        <h3 class="booking-title">Book a free consultancy.</h3>
+      </div>
+      <form class="booking-form" id="bookingForm">
+        <div class="form-group">
+          <label>Name <span>*</span></label>
+          <input type="text" name="name" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label>Mobile Number <span>*</span></label>
+          <input type="tel" name="mobile" required placeholder="+91 00000 00000">
+        </div>
+        <div class="form-group">
+          <label>Email (Optional)</label>
+          <input type="email" name="email" placeholder="john@example.com">
+        </div>
+        <div class="form-group">
+          <label>Interested in:</label>
+          <select name="interest" required>
+            <option value="" disabled selected>Select an option...</option>
+            <option value="General Health">General Health & Wellness</option>
+            <option value="Diagnostics">Advanced Diagnostics (Bloodwork, ECG, etc.)</option>
+            <option value="DNA Analysis">DNA & Genomic Analysis</option>
+            <option value="Therapies">Therapies (Cryo, HBOT, Sauna, etc.)</option>
+            <option value="Coaching">Health Coach Consultations</option>
+            <option value="Training">Strength & Conditioning</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Follow up date:</label>
+          <input type="date" name="date" required>
+        </div>
+        <div class="booking-footer">
+          <button type="submit" class="btn-booking-primary">Submit request</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -3284,7 +3374,205 @@
       0%, 80%, 100% { transform: scale(0); }
       40% { transform: scale(1); }
     }
+    /* ADD THIS: Chatbot Notification Styles */
+    .chatbot-notification {
+      position: fixed;
+      bottom: 7rem;
+      right: 2rem;
+      background: #b89a78;
+      color: #fff;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      z-index: 9999;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: opacity 0.4s, transform 0.4s;
+      transform-origin: bottom right;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chatbot-notification::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 22px;
+      border-width: 6px 6px 0;
+      border-style: solid;
+      border-color: #b89a78 transparent transparent transparent;
+    }
+
+    .chatbot-notification.hidden {
+      opacity: 0;
+      transform: translateY(10px) scale(0.9);
+      pointer-events: none;
+    }
+
+    .chatbot-notif-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .chatbot-notif-close:hover {
+      color: #fff;
+    }
     /* ─── END CHATBOT WIDGET ─── */
+
+    /* ─── BOOKING MODAL ─── */
+    .booking-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 1.5rem;
+    }
+    .booking-modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .booking-modal-container {
+      background: #151515;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .booking-modal-overlay.active .booking-modal-container {
+      transform: translateY(0);
+    }
+    .booking-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.7);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    .booking-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+    .booking-header {
+      padding: 2.5rem 3rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .booking-pill {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.25rem 0.85rem;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-family: var(--sans);
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .booking-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .booking-form {
+      padding: 2rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group label {
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .form-group label span {
+      color: #e8614a;
+    }
+    .form-group input,
+    .form-group select {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    .form-group select option {
+      color: #000;
+    }
+    .booking-footer {
+      margin-top: 1rem;
+    }
+    .btn-booking-primary {
+      width: 100%;
+      background: #fff;
+      color: var(--dark);
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-booking-primary:hover {
+      background: #e6e6e6;
+      transform: translateY(-1px);
+    }
+    @media (max-width: 600px) {
+      .booking-header, .booking-form { padding: 1.5rem; }
+    }
   </style>
 
   <script>
@@ -3495,7 +3783,7 @@
     /* ── Steps: scroll-progress driven ──────────────────────────────────────
        As the user scrolls through the how-section, the connector line draws
        and each step card fades up in sequence, all tied to scroll position.
-       Scrolling back reverses the animation.                              */
+       Scrolling back reverses the animation.                                 */
     (function () {
       const timeline  = document.getElementById('stepsTimeline');
       const howBg     = document.querySelector('.how-bg');
@@ -3508,7 +3796,8 @@
       const N         = stepCols.length;
 
       // Thresholds at which each step fully appears (0–1 of section scroll)
-      const stepThresholds = [0.15, 0.30, 0.45, 0.60, 0.75];
+      // First step changed to -0.1 so it loads immediately upon reaching the section
+      const stepThresholds = [-0.1, 0.30, 0.45, 0.60, 0.75];
 
       function getProgress() {
         const rect    = howSection.getBoundingClientRect();
@@ -3552,7 +3841,10 @@
 
   <script type="module" src="/src/speed-insights.js"></script>
 
-  <!-- ── WIDGET DOM ── -->
+  <div id="chatbot-notification" class="chatbot-notification hidden" onclick="toggleChat()">
+    Hey there! Got any questions?
+    <button class="chatbot-notif-close" onclick="event.stopPropagation(); closeChatNotif()" aria-label="Close notification">×</button>
+  </div>
   <button id="chatbot-trigger" class="chatbot-trigger" onclick="toggleChat()" aria-label="Chat with Fitflix AI">
     <svg viewBox="0 0 24 24">
       <path d="M20 2H4C2.9 2 2.01 2.9 2.01 4L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
@@ -3596,6 +3888,7 @@
       if (!widget.classList.contains('chatbot-hidden')) {
         document.getElementById('chat-input-text').focus();
       }
+      closeChatNotif(); // ADD THIS LINE
     }
 
     function handleChatEnter(e) {
@@ -3674,6 +3967,73 @@
       }
 
       messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+    // ADD THIS: Hide notification function
+    function closeChatNotif() {
+      const notif = document.getElementById('chatbot-notification');
+      if (notif) notif.classList.add('hidden');
+    }
+
+    // ADD THIS: Scroll trigger logic (Targets the 3rd section: .how-section)
+    document.addEventListener("DOMContentLoaded", () => {
+      const targetSection = document.querySelector('.how-section');
+      const notif = document.getElementById('chatbot-notification');
+      let notifTriggered = false;
+
+      if (targetSection && notif) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting && !notifTriggered) {
+            notifTriggered = true; // Only show once
+            setTimeout(() => {
+              const widget = document.getElementById('chatbot-widget');
+              // Only show the bubble if the chat window is currently closed
+              if (widget && widget.classList.contains('chatbot-hidden')) {
+                notif.classList.remove('hidden');
+              }
+            }, 1000); // 1 second delay
+          }
+        }, { threshold: 0.2 }); // Triggers when user scrolls 20% into the 3rd section
+        
+        observer.observe(targetSection);
+      }
+    });
+
+    /* ── Booking Modal Logic ── */
+    const bookingOverlay = document.getElementById('bookingModalOverlay');
+    const bookingCloseBtn = document.getElementById('bookingCloseBtn');
+    const bookingForm = document.getElementById('bookingForm');
+    
+    const allBtns = document.querySelectorAll('button');
+    allBtns.forEach(btn => {
+      const text = btn.textContent.trim().toLowerCase();
+      if (text.includes('book free discovery call') || text.includes('book a free consult') || text.includes('book a call')) {
+        btn.addEventListener('click', () => {
+          bookingOverlay.classList.add('active');
+        });
+      }
+    });
+
+    if (bookingCloseBtn) {
+      bookingCloseBtn.addEventListener('click', () => {
+        bookingOverlay.classList.remove('active');
+      });
+    }
+
+    if (bookingOverlay) {
+      bookingOverlay.addEventListener('click', (e) => {
+        if (e.target === bookingOverlay) {
+          bookingOverlay.classList.remove('active');
+        }
+      });
+    }
+
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Consultation request submitted successfully!');
+        bookingOverlay.classList.remove('active');
+        bookingForm.reset();
+      });
     }
   </script>
 </body>

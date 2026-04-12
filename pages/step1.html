@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample hPod Health Screening Report</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #0056b3;
+            margin: 0;
+        }
+        .header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .card {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #0056b3;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+        .status-normal { color: #28a745; font-weight: bold; }
+        .status-high { color: #dc3545; font-weight: bold; }
+        .status-low { color: #ffc107; font-weight: bold; }
+        
+        .insights {
+            background: #e9f5ff;
+            border-left: 5px solid #0056b3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        .disclaimer {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 30px;
+            text-align: justify;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Sample Health Screening Report</h1>
+        <p>Digitally Generated via hPod Kiosk</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Patient Profile (Anonymized)</h3>
+            <div class="data-row"><span>Gender:</span> <strong>Male</strong></div>
+            <div class="data-row"><span>Age:</span> <strong>21 Years</strong></div>
+            <div class="data-row"><span>Height:</span> <strong>180.00 cm</strong></div>
+            <div class="data-row"><span>Weight:</span> <strong>108.86 kg</strong></div>
+        </div>
+
+        <div class="card">
+            <h3>Vitals & Heart Health</h3>
+            <div class="data-row"><span>Blood Pressure:</span> <strong>133/89 mmHg <span class="status-high">(Clinical Screening Recommended)</span></strong></div>
+            <div class="data-row"><span>Pulse:</span> <strong>85 bpm</strong></div>
+            <div class="data-row"><span>SpO2 (Oxygen Levels):</span> <strong>96% <span class="status-normal">(Normal)</span></strong></div>
+            <div class="data-row"><span>Body Temperature:</span> <strong>97.57 &deg;F <span class="status-normal">(Normal)</span></strong></div>
+            <div class="data-row"><span>ECG Heart Rate:</span> <strong>81 bpm</strong></div>
+        </div>
+
+        <div class="card">
+            <h3>Body Composition Analysis</h3>
+            <div class="data-row"><span>Total Body Weight:</span> <strong>108.86 kg</strong></div>
+            <div class="data-row"><span>Intracellular Water:</span> <strong>27.20 L <span class="status-normal">(Normal)</span></strong></div>
+            <div class="data-row"><span>Extracellular Water:</span> <strong>20.51 L <span class="status-high">(High)</span></strong></div>
+            <div class="data-row"><span>Waist Hip Ratio:</span> <strong>0.90 <span class="status-normal">(Normal)</span></strong></div>
+            <div class="data-row"><span>Skeletal Muscle Mass:</span> <strong>33.42 kg</strong></div>
+            <div class="data-row"><span>Visceral Fat:</span> <strong>217 cm&sup2;</strong></div>
+            <div class="data-row"><span>Basal Metabolic Rate:</span> <strong>1750 Cal</strong></div>
+        </div>
+
+        <div class="card">
+            <h3>Target Goals & Insights</h3>
+            <div class="data-row"><span>Metabolic Age:</span> <strong>44 Years</strong></div>
+            <div class="data-row"><span>Ideal Body Weight:</span> <strong>73.00 kg</strong></div>
+            <div class="data-row"><span>Weight to Lose:</span> <strong>36.00 kg</strong></div>
+            <p style="font-size: 0.85em; color: #555; margin-top: 15px;">
+                <em>Note: Metabolic age is a measure of your body's functional age based on muscle mass, body fat, and BMR. Ideal body weight is calculated for optimal health based on height, age, and gender.</em>
+            </p>
+        </div>
+    </div>
+
+    <div class="insights">
+        <strong>Health Advisory:</strong> Obesity and being overweight are linked with health concerns such as type 2 diabetes, kidney disease, high cholesterol, and hypertension. By gradually losing weight (0.5 to 1kg per week), you can significantly reduce your risk of developing these conditions.
+    </div>
+
+    <div class="disclaimer">
+        <strong>Disclaimer:</strong> The IHL service provides helpful information about vitals for informational and educational purposes only. It is not intended to constitute professional medical advice, diagnosis, or treatment. Users assume full risk and responsibility for the use of information obtained through this service. Kiosk intended for individuals 18 years or older.
+    </div>
+</div>
+
+</body>
+</html>
