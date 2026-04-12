@@ -3899,6 +3899,14 @@
     const CHATPLUG_CONFIG = {
       endpoint: '/api/chat'
     };
+    const DEFAULT_LEAD_CAPTURE_BASE_URL = 'https://hybridhumanbackend.vercel.app';
+    const RAW_LEAD_CAPTURE_BASE_URL = '%VITE_LEAD_CAPTURE_BASE_URL%';
+    const LEAD_CAPTURE_BASE_URL = (
+      RAW_LEAD_CAPTURE_BASE_URL && !RAW_LEAD_CAPTURE_BASE_URL.includes('%VITE_')
+        ? RAW_LEAD_CAPTURE_BASE_URL
+        : DEFAULT_LEAD_CAPTURE_BASE_URL
+    ).replace(/\/+$/, '');
+    const LEAD_CAPTURE_ENDPOINT = `${LEAD_CAPTURE_BASE_URL}/leads/public-capture`;
 
     function appendBotMessage(text) {
       const messagesEl = document.getElementById('chat-messages');
@@ -4094,7 +4102,7 @@
         }
 
         try {
-          const response = await fetch('/leads/public-capture', {
+          const response = await fetch(LEAD_CAPTURE_ENDPOINT, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

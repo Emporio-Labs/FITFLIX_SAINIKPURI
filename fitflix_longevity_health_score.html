@@ -1109,6 +1109,15 @@
   function calcV1() { showResult(getScores('#q-container', Q1), 1); }
   function calcV2() { showResult(getScores('#q-container', Q2), 2); }
 
+  const DEFAULT_LEAD_CAPTURE_BASE_URL = 'https://hybridhumanbackend.vercel.app';
+  const RAW_LEAD_CAPTURE_BASE_URL = '%VITE_LEAD_CAPTURE_BASE_URL%';
+  const LEAD_CAPTURE_BASE_URL = (
+    RAW_LEAD_CAPTURE_BASE_URL && !RAW_LEAD_CAPTURE_BASE_URL.includes('%VITE_')
+      ? RAW_LEAD_CAPTURE_BASE_URL
+      : DEFAULT_LEAD_CAPTURE_BASE_URL
+  ).replace(/\/+$/, '');
+  const LEAD_CAPTURE_ENDPOINT = `${LEAD_CAPTURE_BASE_URL}/leads/public-capture`;
+
   function getAssessmentAnswers(ver) {
     const total = ver === 1 ? 7 : 15;
     const prefix = ver === 1 ? 'v1' : 'v2';
@@ -1151,7 +1160,7 @@
     };
 
     try {
-      const response = await fetch('/leads/public-capture', {
+      const response = await fetch(LEAD_CAPTURE_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
