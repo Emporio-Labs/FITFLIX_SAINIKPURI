@@ -1109,6 +1109,65 @@
   function calcV1() { showResult(getScores('#q-container', Q1), 1); }
   function calcV2() { showResult(getScores('#q-container', Q2), 2); }
 
+  function getAssessmentAnswers(ver) {
+    const total = ver === 1 ? 7 : 15;
+    const prefix = ver === 1 ? 'v1' : 'v2';
+    const answers = {};
+
+    for (let i = 0; i < total; i += 1) {
+      const picked = document.querySelector(`#qopts-${i} .q-opt.picked`);
+      const parsedScore = picked ? parseInt(picked.dataset.score, 10) : 2;
+      const score = Number.isInteger(parsedScore) && parsedScore >= 1 && parsedScore <= 4
+        ? parsedScore
+        : 2;
+      answers[`${prefix}_q${i + 1}`] = score;
+    }
+
+    return answers;
+  }
+
+  async function submitHealthscoreLead(assessmentVersion, assessmentAnswers) {
+    const parsedAge = Number.parseInt(userData.age, 10);
+    const payload = {
+      formType: 'healthscore',
+      personalDetails: {
+        fullName: userData.name || '',
+        phoneNumber: userData.phone || '',
+        emailAddress: userData.email || '',
+        age: Number.isInteger(parsedAge) ? parsedAge : null,
+        gender: userData.gender || '',
+        primaryHealthGoal: userData.goal || '',
+        wellnessInterests: Array.isArray(userData.interests) ? userData.interests : [],
+        notes: userData.notes || ''
+      },
+      assessment: {
+        version: assessmentVersion,
+        answers: assessmentAnswers
+      },
+      source: window.location.hostname || 'fitflix.in',
+      tags: ['website', 'healthscore'],
+      captchaToken: window.fitflixLeadCaptchaToken || '',
+      website: ''
+    };
+
+    try {
+      const response = await fetch('/leads/public-capture', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorPayload = await response.json().catch(() => ({}));
+        throw new Error(errorPayload.error || `HTTP ${response.status}`);
+      }
+    } catch (error) {
+      console.warn('Lead capture request failed:', error.message || error);
+    }
+  }
+
   function showResult(data, ver) {
     const s = data.overall;
     const brand = BRANDS.find(b => s>=b.range[0] && s<=b.range[1]) || BRANDS[4];
@@ -1133,6 +1192,12 @@
         <div class="b-match-tier">Tier ${i+1}</div>
         <div class="b-match-name">${b.name}</div>
       </div>`).join('');
+
+    const assessmentVersion = ver === 1
+      ? 'v1_quick_vitality_check'
+      : 'v2_deep_longevity_assessment';
+    const assessmentAnswers = getAssessmentAnswers(ver);
+    submitHealthscoreLead(assessmentVersion, assessmentAnswers);
 
     document.getElementById('result-content').innerHTML = `
       <p class="section-title" style="margin-bottom:0.25rem;">Your Health Score</p>

@@ -1,5 +1,6 @@
 const { defineConfig, loadEnv } = require('vite');
 const chatHandler = require('./api/chat');
+const leadPublicCaptureHandler = require('./api/leads/public-capture');
 
 function readRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -33,29 +34,35 @@ function addVercelResponseHelpers(res) {
 }
 
 function localApiPlugin() {
-  return {
-    name: 'local-api-chat',
-    configureServer(server) {
-      server.middlewares.use('/api/chat', async (req, res, next) => {
-        try {
-          if (req.method === 'POST') {
-            req.body = await readRawBody(req);
-          }
-
-          addVercelResponseHelpers(res);
-          await chatHandler(req, res);
-        } catch (error) {
-          if (!res.headersSent) {
-            res.statusCode = 500;
-            res.setHeader('Content-Type', 'application/json; charset=utf-8');
-            res.end(JSON.stringify({
-              error: 'Local API middleware failed',
-              detail: error.message || 'Unknown error'
-            }));
-          }
-          next(error);
+  function registerLocalRoute(server, path, handler) {
+    server.middlewares.use(path, async (req, res, next) => {
+      try {
+        if (req.method === 'POST') {
+          req.body = await readRawBody(req);
         }
-      });
+
+        addVercelResponseHelpers(res);
+        await handler(req, res);
+      } catch (error) {
+        if (!res.headersSent) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json; charset=utf-8');
+          res.end(JSON.stringify({
+            error: 'Local API middleware failed',
+            detail: error.message || 'Unknown error'
+          }));
+        }
+        next(error);
+      }
+    });
+  }
+
+  return {
+    name: 'local-api-routes',
+    configureServer(server) {
+      registerLocalRoute(server, '/api/chat', chatHandler);
+      registerLocalRoute(server, '/api/leads/public-capture', leadPublicCaptureHandler);
+      registerLocalRoute(server, '/leads/public-capture', leadPublicCaptureHandler);
     }
   };
 }
