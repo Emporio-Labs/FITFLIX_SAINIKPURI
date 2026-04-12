@@ -1,551 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longevity Health Score | Fitflix</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --gold: #dcb36d;
+      --gold-light: #f5d699;
+      --bg-dark: #0a0d17; /* Midnight Blue base */
+      --bg-glow: #1a162e; /* Deep purple glow */
+      --border: rgba(255, 255, 255, 0.08);
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-hover: rgba(255, 255, 255, 0.06);
+      --text-muted: rgba(255, 255, 255, 0.65);
+      --text: rgba(255, 255, 255, 0.95);
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: var(--sans);
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    /* Background Ambient Glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(26, 22, 46, 0.6) 0%, transparent 60%),
+                  radial-gradient(circle at 20% 90%, rgba(30, 40, 70, 0.4) 0%, transparent 60%);
+      z-index: -1;
+      pointer-events: none;
+    }
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
-  :root {
-    --ff-display: 'Cormorant Garamond', Georgia, serif;
-    --ff-body: 'DM Sans', sans-serif;
-    --c-gold: #B8965A;
-    --c-gold-light: #D4B480;
-    --c-sage: #7A9E8A;
-    --c-dark: var(--color-text-primary);
-    --c-muted: var(--color-text-secondary);
-    --c-surface: var(--color-background-secondary);
-    --c-border: var(--color-border-tertiary);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--ff-body); }
-  .ff-wrap { max-width: 780px; margin: 0 auto; padding: 0 0 3rem; }
-  .ff-header { text-align: center; padding: 2.5rem 1rem 1.5rem; border-bottom: 0.5px solid var(--c-border); margin-bottom: 2rem; }
-  .ff-logo { font-family: var(--ff-display); font-size: 28px; font-weight: 600; color: var(--c-dark); letter-spacing: 0.04em; }
-  .ff-logo span { color: var(--c-gold); }
-  .ff-tagline { font-size: 12px; letter-spacing: 0.14em; color: var(--c-muted); text-transform: uppercase; margin-top: 4px; }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 2.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(10, 13, 23, 0.9);
+      backdrop-filter: blur(16px);
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: #fff; font-family: var(--sans); font-size: 1.1rem;
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo img { height: 30px; filter: brightness(0) invert(1); }
 
-  .section { display: none; }
-  .section.active { display: block; }
+    .nav-back-btn {
+      padding: 0.6rem 1.25rem;
+      background: #fff;
+      color: var(--bg-dark);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .nav-back-btn:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-1px);
+    }
 
-  .brand-scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 1.5rem 0 2rem; }
-  .brand-card { background: var(--c-surface); border: 0.5px solid var(--c-border); border-radius: 10px; padding: 10px 8px; text-align: center; cursor: default; transition: border-color 0.2s; }
-  .brand-card:hover { border-color: var(--c-gold); }
-  .brand-rank { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 4px; }
-  .brand-name { font-family: var(--ff-display); font-size: 13px; font-weight: 600; color: var(--c-dark); line-height: 1.3; }
-  .brand-country { font-size: 10px; color: var(--c-muted); margin-top: 2px; }
-  .brand-tier { font-size: 10px; margin-top: 6px; padding: 2px 6px; border-radius: 20px; display: inline-block; }
-  .t1 .brand-tier { background: #EAF3DE; color: #3B6D11; }
-  .t2 .brand-tier { background: #E1F5EE; color: #0F6E56; }
-  .t3 .brand-tier { background: #E6F1FB; color: #185FA5; }
-  .t4 .brand-tier { background: #FAEEDA; color: #854F0B; }
-  .t5 .brand-tier { background: #FAECE7; color: #993C1D; }
-  .scale-arrow { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
-  .scale-line { flex: 1; height: 2px; background: linear-gradient(to right, #9FE1CB, #FAC775, #F09595); border-radius: 2px; }
-  .scale-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-muted); }
+    .ff-wrap {
+      width: 100%;
+      max-width: 860px;
+      margin: 5rem auto 0;
+      padding: 3rem 1.5rem 6rem;
+      position: relative;
+    }
+    
+    .ff-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
 
-  .v-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 1.5rem 0; }
-  .v-card { border: 0.5px solid var(--c-border); border-radius: 14px; padding: 1.5rem; cursor: pointer; transition: all 0.2s; background: var(--color-background-primary); }
-  .v-card:hover { border-color: var(--c-gold); }
-  .v-card.selected { border: 1.5px solid var(--c-gold); background: var(--c-surface); }
-  .v-badge { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-gold); font-weight: 500; }
-  .v-title { font-family: var(--ff-display); font-size: 19px; font-weight: 600; margin: 6px 0 4px; color: var(--c-dark); }
-  .v-desc { font-size: 12px; color: var(--c-muted); line-height: 1.6; }
-  .v-meta { font-size: 11px; margin-top: 10px; color: var(--c-muted); }
-  .v-meta span { color: var(--c-sage); font-weight: 500; }
+    .ff-tagline {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
 
-  .section-title { font-family: var(--ff-display); font-size: 24px; font-weight: 600; color: var(--c-dark); margin-bottom: 4px; }
-  .section-sub { font-size: 13px; color: var(--c-muted); margin-bottom: 1.5rem; }
+    /* Transition & Sections */
+    .section {
+      display: none;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .form-group { display: flex; flex-direction: column; gap: 5px; }
-  .form-group.full { grid-column: 1 / -1; }
-  label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); font-weight: 500; }
-  input, select, textarea {
-    background: var(--c-surface); border: 0.5px solid var(--c-border);
-    border-radius: 8px; padding: 9px 12px; font-size: 13px; color: var(--c-dark);
-    font-family: var(--ff-body); width: 100%; outline: none;
-    transition: border-color 0.2s;
-  }
-  input:focus, select:focus, textarea:focus { border-color: var(--c-gold); }
-  .interests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
-  .interest-chip { padding: 6px 10px; border: 0.5px solid var(--c-border); border-radius: 20px; font-size: 11px; cursor: pointer; text-align: center; color: var(--c-muted); transition: all 0.15s; background: var(--color-background-primary); }
-  .interest-chip.on { border-color: var(--c-gold); color: var(--c-gold); background: var(--c-surface); }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      line-height: 1.7;
+    }
 
-  .q-block { background: var(--color-background-primary); border: 0.5px solid var(--c-border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 12px; }
-  .q-label { font-size: 13px; color: var(--c-dark); font-weight: 500; margin-bottom: 12px; line-height: 1.5; }
-  .q-cat { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-sage); margin-bottom: 6px; font-weight: 500; }
-  .q-options { display: grid; gap: 7px; }
-  .q-opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 0.5px solid var(--c-border); border-radius: 8px; cursor: pointer; font-size: 12px; color: var(--c-muted); transition: all 0.15s; background: var(--c-surface); }
-  .q-opt:hover { border-color: var(--c-gold-light); }
-  .q-opt.picked { border-color: var(--c-gold); color: var(--c-dark); background: var(--color-background-primary); }
-  .q-opt input[type=radio] { display: none; }
-  .q-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--c-border); flex-shrink: 0; margin-top: 1px; transition: all 0.15s; }
-  .q-opt.picked .q-dot { border-color: var(--c-gold); background: var(--c-gold); }
+    /* Quote Screen */
+    .quote-screen {
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .quote-text {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1.4;
+      opacity: 0;
+      animation: gentleFadeIn 1.5s ease 0.5s forwards;
+    }
+    @keyframes gentleFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-  .progress-bar-wrap { height: 3px; background: var(--c-surface); border-radius: 2px; margin-bottom: 1.5rem; }
-  .progress-bar-fill { height: 3px; background: var(--c-gold); border-radius: 2px; transition: width 0.4s ease; }
+    /* Form Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    
+    label {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    
+    input, select, textarea {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      font-size: 0.95rem;
+      color: #fff;
+      font-family: var(--sans);
+      width: 100%;
+      outline: none;
+      transition: all 0.3s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.25); }
+    input:focus, select:focus, textarea:focus { 
+      border-color: rgba(220, 179, 109, 0.4); /* Gold focus */
+      background: var(--glass-hover); 
+    }
+    select option { background: var(--bg-dark); color: #fff; }
 
-  .btn { display: inline-block; padding: 10px 28px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; border: 0.5px solid var(--c-border); background: var(--color-background-primary); color: var(--c-dark); transition: all 0.18s; font-family: var(--ff-body); }
-  .btn:hover { border-color: var(--c-gold); color: var(--c-gold); }
-  .btn-primary { background: var(--c-gold); color: #fff; border-color: var(--c-gold); }
-  .btn-primary:hover { background: var(--c-gold-light); border-color: var(--c-gold-light); color: #fff; }
-  .btn-row { display: flex; gap: 10px; justify-content: space-between; margin-top: 1.5rem; align-items: center; }
+    /* Chips (Interests) */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .interest-chip {
+      padding: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: center;
+      color: var(--text-muted);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      background: var(--glass);
+    }
+    .interest-chip:hover {
+      background: var(--glass-hover);
+      color: #fff;
+    }
+    .interest-chip.on {
+      border-color: var(--gold);
+      color: #fff;
+      background: rgba(220, 179, 109, 0.1); /* Gold translucent */
+    }
 
-  .score-ring-wrap { display: flex; flex-direction: column; align-items: center; margin: 2rem 0 1.5rem; }
-  .score-num { font-family: var(--ff-display); font-size: 60px; font-weight: 600; line-height: 1; color: var(--c-dark); }
-  .score-denom { font-size: 16px; color: var(--c-muted); }
-  .score-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-muted); margin-top: 8px; }
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .btn-row.between { justify-content: space-between; }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.25rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: #fff;
+      transition: all 0.3s ease;
+      font-family: var(--sans);
+    }
+    .btn:hover { background: var(--glass); border-color: rgba(255, 255, 255, 0.2); }
+    
+    .btn-primary {
+      background: #fff;
+      color: var(--bg-dark);
+      border-color: #fff;
+    }
+    .btn-primary:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
 
-  .tier-match { border: 0.5px solid var(--c-gold); border-radius: 14px; padding: 1.25rem 1.5rem; background: var(--c-surface); margin-bottom: 1rem; }
-  .tier-brand { font-family: var(--ff-display); font-size: 22px; font-weight: 600; color: var(--c-dark); }
-  .tier-sub { font-size: 12px; color: var(--c-muted); line-height: 1.6; margin-top: 4px; }
-  .tier-tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: #FAEEDA; color: #854F0B; margin-bottom: 8px; }
+    /* Brand Scale */
+    .brand-scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      margin: 2rem 0 3rem;
+    }
+    .brand-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 0.75rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s;
+    }
+    .brand-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
+    .brand-rank {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .brand-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .brand-tier { display:none;}
+    .brand-country { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; }
 
-  .score-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.2rem 0; }
-  .score-cat { background: var(--color-background-primary); border: 0.5px solid var(--c-border); border-radius: 10px; padding: 10px 12px; }
-  .sc-name { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-muted); margin-bottom: 6px; }
-  .sc-bar-wrap { height: 4px; background: var(--c-surface); border-radius: 2px; }
-  .sc-bar { height: 4px; border-radius: 2px; background: var(--c-gold); }
-  .sc-val { font-size: 11px; color: var(--c-muted); margin-top: 4px; }
+    /* Assessment Versions */
+    .v-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+    .v-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .v-card:hover { border-color: rgba(255,255,255,0.2); }
+    .v-card.selected {
+      border-color: var(--gold);
+      background: rgba(220, 179, 109, 0.05); /* Gold gentle fill */
+    }
+    .v-card.selected::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gold);
+    }
+    .v-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      background: var(--gold);
+      padding: 0.25rem 0.85rem;
+      border-radius: 100px;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .v-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .v-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
+    .v-meta {
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      color: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .v-meta span { color: var(--gold); font-weight: 500; }
 
-  .rec-row { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid var(--c-border); }
-  .rec-row:last-child { border: none; }
-  .rec-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--c-surface); border: 0.5px solid var(--c-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; }
-  .rec-text { font-size: 12px; color: var(--c-dark); line-height: 1.6; }
-  .rec-text strong { color: var(--c-gold); font-weight: 500; }
+    /* Single Question Questionnaire Layout */
+    .progress-bar-wrap {
+      height: 3px;
+      background: var(--glass);
+      border-radius: 4px;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
-  @media (max-width: 540px) {
-    .brand-scale { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-    .brand-name { font-size: 11px; }
-    .form-grid { grid-template-columns: 1fr; }
-    .v-picker { grid-template-columns: 1fr; }
-    .score-cats { grid-template-columns: 1fr; }
-    .interests-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    #q-container {
+      position: relative;
+      min-height: 380px;
+      margin-bottom: 2rem;
+    }
 
-<div class="ff-wrap">
-  <div class="ff-header">
-    <div class="ff-logo">fit<span>flix</span>.in</div>
-    <div class="ff-tagline">Longevity Health Score Assessment</div>
+    .q-slide {
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      opacity: 0; pointer-events: none;
+      transform: translateX(30px);
+      transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .q-slide.active {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(0);
+      position: relative; /* Takes up space when active */
+    }
+    .q-slide.exit {
+      transform: translateX(-30px);
+      position: absolute;
+    }
+
+    .q-cat {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--gold);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      background: rgba(220, 179, 109, 0.05); /* very soft gold */
+    }
+    .q-label {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: #fff;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      line-height: 1.2;
+    }
+    .q-options { display: grid; gap: 0.85rem; }
+    .q-opt {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      background: var(--glass);
+    }
+    .q-opt:hover { border-color: rgba(255,255,255,0.2); color: #fff; transform: translateY(-2px); }
+    .q-opt.picked {
+      border-color: var(--gold);
+      color: #fff;
+      background: rgba(220, 179, 109, 0.1);
+    }
+    .q-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--text-muted);
+      flex-shrink: 0;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .q-opt.picked .q-dot {
+      border-color: var(--gold);
+    }
+    .q-opt.picked .q-dot::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Results */
+    .score-ring-wrap {
+      text-align: center;
+      margin: 4rem 0 3rem;
+      position: relative;
+    }
+    .score-num {
+      font-family: var(--serif);
+      font-size: 8rem;
+      font-weight: 300;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 0 50px rgba(220, 179, 109, 0.2);
+    }
+    .score-denom { font-size: 1.5rem; color: var(--text-muted); }
+    .score-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 1rem;
+    }
+
+    .tier-match {
+      border: 1px solid rgba(220, 179, 109, 0.4);
+      border-radius: 24px;
+      padding: 3.5rem;
+      background: linear-gradient(150deg, rgba(220, 179, 109, 0.08) 0%, rgba(26, 22, 46, 0.2) 100%);
+      margin-bottom: 3rem;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+    .tier-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.25rem;
+      border-radius: 100px;
+      background: var(--gold);
+      color: var(--bg-dark);
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+    }
+    .tier-brand {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .tier-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-top: 1.5rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .score-cats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 2.5rem 0;
+    }
+    .score-cat {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      backdrop-filter: blur(8px);
+    }
+    .sc-name {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1rem;
+    }
+    .sc-bar-wrap {
+      height: 4px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+    .sc-bar { height: 100%; border-radius: 2px; background: var(--gold); }
+    .sc-val { font-size: 0.95rem; color: #fff; font-weight: 300; }
+
+    .recs-box {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3.5rem;
+      margin-top: 3rem;
+      backdrop-filter: blur(10px);
+    }
+    .recs-title {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #fff;
+      margin-bottom: 2.5rem;
+    }
+    .rec-row {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rec-row:last-child { border: none; padding-bottom: 0; }
+    .rec-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-top: -2px;
+    }
+    .rec-text { font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+    .bottom-cta {
+      margin-top: 3rem;
+      padding: 3rem 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(0deg, rgba(255,255,255,0.02), transparent);
+      text-align: center;
+    }
+
+    /* Progress Match Scale */
+    .brand-match-grid {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .b-match-col {
+      flex: 1;
+      text-align: center;
+      padding: 0.85rem 0.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      transition: all 0.3s;
+    }
+    .b-match-col.active {
+      border-color: var(--gold);
+      background: rgba(220, 179, 109, 0.1);
+    }
+    .b-match-tier {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .b-match-col.active .b-match-tier { color: var(--gold); }
+    .b-match-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* Final Quote */
+    .final-quote {
+      margin: 5rem 0 2rem;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 1.5s ease 1s forwards;
+    }
+    .final-quote h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--gold-light);
+      font-weight: 300;
+      line-height: 1.3;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      body::before { background: none; }
+      .ff-wrap { padding: 8rem 1.25rem 4rem; margin-top: 0; }
+      .brand-scale { grid-template-columns: repeat(3, 1fr); }
+      .form-grid, .v-picker, .score-cats { grid-template-columns: 1fr; }
+      .section-title { font-size: 2.5rem; }
+      .q-label { font-size: 2rem; }
+      .score-num { font-size: 5rem; }
+      .tier-brand { font-size: 2.2rem; }
+      .btn-row { flex-direction: column-reverse; align-items: stretch; gap: 0.75rem; }
+      .btn { justify-content: center; width: 100%; }
+      .brand-match-grid { flex-wrap: wrap; }
+      .b-match-col { min-width: 30%; }
+    }
+    @media (max-width: 480px) {
+      .brand-scale { grid-template-columns: repeat(2, 1fr); }
+      .brand-card:last-child { grid-column: span 2; }
+      nav { padding: 1rem; }
+      .nav-logo, .nav-logo img { font-size: 1rem; height: 24px; }
+      .nav-back-btn { padding: 0.5rem 1rem; font-size: 0.75rem; }
+      .tier-match, .recs-box { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="./index.html" class="nav-logo">
+      <img src="assets/fitflix_logo.png" alt="Fitflix">
+      Fitflix
+    </a>
+    <a href="./index.html" class="nav-back-btn">Back to Home</a>
+  </nav>
+
+  <div class="ff-wrap">
+    <div class="ff-header">
+      <div class="ff-tagline">Longevity Health Score Assessment</div>
+    </div>
+
+    <!-- Intro Section -->
+    <section class="section active" id="s-intro">
+      <div>
+        <p class="section-title">The Global Standard for Longevity</p>
+        <p class="section-sub">Your health score is benchmarked against the world's five premier longevity & wellness institutes.</p>
+
+        <div class="brand-scale">
+          <div class="brand-card">
+            <div class="brand-rank">Tier 1</div>
+            <div class="brand-name">Equinox</div>
+            <div class="brand-country">USA · Global</div>
+          </div>
+          <div class="brand-card">
+            <div class="brand-rank">Tier 2</div>
+            <div class="brand-name">Six Senses</div>
+            <div class="brand-country">Global</div>
+          </div>
+          <div class="brand-card">
+            <div class="brand-rank">Tier 3</div>
+            <div class="brand-name">Canyon Ranch</div>
+            <div class="brand-country">USA</div>
+          </div>
+          <div class="brand-card">
+            <div class="brand-rank">Tier 4</div>
+            <div class="brand-name">SHA Wellness</div>
+            <div class="brand-country">Spain</div>
+          </div>
+          <div class="brand-card">
+            <div class="brand-rank">Tier 5</div>
+            <div class="brand-name">Lanserhof</div>
+            <div class="brand-country">Germany · AT</div>
+          </div>
+        </div>
+
+        <p style="font-size:1rem; color: var(--text-muted); line-height:1.7; margin-bottom:2.5rem; max-width: 700px; text-align: center; margin-inline: auto;">
+          Each tier represents a distinct philosophy of longevity — from performance-driven fitness to full-spectrum medical diagnostics. Your score will place you on this scale and guide your next steps.
+        </p>
+
+        <div class="v-picker">
+          <div class="v-card selected" onclick="selectVersion(1,this)">
+            <div class="v-badge">Version 1</div>
+            <div class="v-title">Quick Vitality Check</div>
+            <div class="v-desc">7 targeted questions covering your core health pillars. Ideal for a first-time snapshot.</div>
+            <div class="v-meta"><span>5 minutes</span> · 7 questions · Instant score</div>
+          </div>
+          <div class="v-card" onclick="selectVersion(2,this)">
+            <div class="v-badge">Version 2</div>
+            <div class="v-title">Deep Longevity Assessment</div>
+            <div class="v-desc">15 clinical-grade questions across 7 wellness domains. Inspired by SHA & Lanserhof protocols.</div>
+            <div class="v-meta"><span>12 minutes</span> · 15 questions · Full report</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="goTo('s-details')">Begin Assessment</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details Section -->
+    <section class="section" id="s-details">
+      <div>
+        <p class="section-title">Your Profile</p>
+        <p class="section-sub">Your details are used to personalise your health report and connect you with the right program.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="f-name" placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="f-phone" placeholder="+91 00000 00000" />
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="f-email" placeholder="john@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="f-age" placeholder="32" min="16" max="100" />
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select id="f-gender">
+              <option value="">Prefer not to say</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Non-binary</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Primary Health Goal</label>
+            <select id="f-goal">
+              <option value="">Select a goal...</option>
+              <option>Weight Management</option>
+              <option>Build Strength & Muscle</option>
+              <option>Improve Cardiovascular Health</option>
+              <option>Stress & Mental Wellness</option>
+              <option>Longevity & Disease Prevention</option>
+              <option>Better Sleep & Recovery</option>
+              <option>Hormone & Metabolic Balance</option>
+              <option>General Fitness & Energy</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Wellness Interests (select all that apply)</label>
+            <div class="interests-grid" id="interests-grid">
+              <div class="interest-chip" onclick="toggleChip(this)">Yoga & Mindfulness</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Strength Training</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Nutrition & Diet</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Sleep Optimisation</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Biohacking & Longevity</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Cardio & Endurance</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Detox & Cleansing</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Mental Health & Therapy</div>
+              <div class="interest-chip" onclick="toggleChip(this)">Spa & Recovery</div>
+            </div>
+          </div>
+          <div class="form-group full">
+            <label>Anything you'd like us to know?</label>
+            <textarea id="f-notes" rows="2" placeholder="Medical conditions, preferences, or questions for our team..." style="resize:none;"></textarea>
+          </div>
+        </div>
+        <div class="btn-row between">
+          <button class="btn" style="opacity: 0.7;" onclick="goTo('s-intro')">Back</button>
+          <button class="btn btn-primary" onclick="startQuestionnaire()">Start Assessment</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pre-Quiz Quote Section -->
+    <section class="section" id="s-quote">
+      <div class="quote-screen">
+        <h2 class="quote-text">"Longevity is not just adding years to life, but life to years."</h2>
+      </div>
+    </section>
+
+    <!-- Quiz Question Section -->
+    <section class="section" id="s-q">
+      <div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb-paginated" style="width:0%"></div></div>
+        
+        <div id="q-container"></div>
+        
+        <div class="btn-row between" style="margin-top: 3rem;">
+          <button class="btn" id="btn-prev" onclick="prevQ()">Previous</button>
+          <button class="btn btn-primary" id="btn-next" onclick="nextQ()">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result Section -->
+    <section class="section" id="s-result">
+      <div id="result-content"></div>
+    </section>
   </div>
 
-  <section class="section active" id="s-intro">
-    <div style="padding: 0 1rem;">
-      <p class="section-title">The Global Standard for Longevity</p>
-      <p class="section-sub">Your health score is benchmarked against the world's five premier longevity & wellness institutes.</p>
+  <script>
+  let selVersion = 1;
+  let userData = {};
+  
+  // Pagination State
+  let currentQ = 0;
+  let totalQ = 0;
+  let qList = [];
 
-      <div style="margin-bottom: 8px;">
-        <div class="scale-arrow">
-          <span class="scale-label">Lifestyle</span>
-          <div class="scale-line"></div>
-          <span class="scale-label">Medical Precision</span>
-        </div>
-      </div>
+  const Q1 = [
+    { cat:"Movement", q:"How many days per week do you exercise or move intentionally?",
+      opts:[["0–1 days — mostly sedentary",1],["2–3 days — light activity",2],["4–5 days — regular workouts",3],["6–7 days — very active or athletic",4]] },
+    { cat:"Nutrition", q:"How would you describe your typical diet?",
+      opts:[["Processed foods, irregular meals",1],["Mixed — some healthy, some junk",2],["Mostly whole foods with occasional treats",3],["Clean, whole-food focused with mindful eating",4]] },
+    { cat:"Sleep", q:"On average, how many hours of quality sleep do you get?",
+      opts:[["Less than 5 hours",1],["5–6 hours — often tired",2],["7–8 hours — generally rested",3],["8–9 hours — consistent and restorative",4]] },
+    { cat:"Mental Wellness", q:"How well do you manage daily stress and mental load?",
+      opts:[["Frequently overwhelmed or anxious",1],["Moderate stress, occasional coping",2],["Generally calm with good coping tools",3],["Consistently resilient with active practices",4]] },
+    { cat:"Hydration", q:"How much water do you drink daily?",
+      opts:[["Less than 1 litre",1],["1–1.5 litres",2],["1.5–2.5 litres",3],["2.5+ litres, consciously hydrated",4]] },
+    { cat:"Recovery", q:"How do you typically recover after physical activity or a tough week?",
+      opts:[["I don't really recover — just push through",1],["Rest on weekends, minimal structure",2],["Some stretching, decent sleep routine",3],["Active recovery, sleep tracking, stress release practices",4]] },
+    { cat:"Energy", q:"How are your energy levels throughout a typical day?",
+      opts:[["Fatigued most of the day — caffeine dependent",1],["Afternoon energy dips are common",2],["Mostly good with minor fluctuations",3],["Consistently high energy, no crashes",4]] },
+  ];
 
-      <div class="brand-scale">
-        <div class="brand-card t1">
-          <div class="brand-rank">Tier 1</div>
-          <div class="brand-name">Equinox</div>
-          <div class="brand-country">USA · Global</div>
-          <div class="brand-tier">Performance</div>
-        </div>
-        <div class="brand-card t2">
-          <div class="brand-rank">Tier 2</div>
-          <div class="brand-name">Six Senses</div>
-          <div class="brand-country">Global</div>
-          <div class="brand-tier">Holistic</div>
-        </div>
-        <div class="brand-card t3">
-          <div class="brand-rank">Tier 3</div>
-          <div class="brand-name">Canyon Ranch</div>
-          <div class="brand-country">USA</div>
-          <div class="brand-tier">Integrative</div>
-        </div>
-        <div class="brand-card t4">
-          <div class="brand-rank">Tier 4</div>
-          <div class="brand-name">SHA Wellness</div>
-          <div class="brand-country">Spain</div>
-          <div class="brand-tier">Longevity Rx</div>
-        </div>
-        <div class="brand-card t5">
-          <div class="brand-rank">Tier 5</div>
-          <div class="brand-name">Lanserhof</div>
-          <div class="brand-country">Germany · AT</div>
-          <div class="brand-tier">Precision MD</div>
-        </div>
-      </div>
+  const Q2 = [
+    { cat:"Movement", q:"How many minutes of moderate-to-vigorous exercise do you average per week?",
+      opts:[["Under 60 minutes",1],["60–120 minutes",2],["150–250 minutes",3],["250+ minutes with varied modalities",4]] },
+    { cat:"Movement", q:"Do you incorporate strength training, flexibility, and cardio in your routine?",
+      opts:[["No structured routine",1],["One modality only",2],["Two modalities regularly",3],["All three, periodized and tracked",4]] },
+    { cat:"Nutrition", q:"How many servings of vegetables and legumes do you eat daily?",
+      opts:[["0–1 servings",1],["2–3 servings",2],["4–5 servings",3],["6+ servings, diverse and plant-rich",4]] },
+    { cat:"Nutrition", q:"How is your relationship with eating habits, hunger cues, and meal timing?",
+      opts:[["Emotional eating or skipping meals",1],["Inconsistent — no clear pattern",2],["Regular meals, mostly intuitive",3],["Structured, mindful, timed eating",4]] },
+    { cat:"Sleep", q:"Do you follow a consistent sleep schedule (same bed & wake time)?",
+      opts:[["No consistency at all",1],["Roughly consistent on weekdays",2],["Consistent most days",3],["Always consistent, protected sleep window",4]] },
+    { cat:"Sleep", q:"Do you experience issues like waking frequently, snoring, or unrefreshing sleep?",
+      opts:[["Frequently — major issues",1],["Occasionally noticeable",2],["Rarely — minor",3],["Never — sleep is deep and restorative",4]] },
+    { cat:"Mental Health", q:"Do you have regular practices for mental health (meditation, therapy, journaling)?",
+      opts:[["No practices",1],["Occasionally when stressed",2],["2–3 times a week",3],["Daily dedicated practice",4]] },
+    { cat:"Mental Health", q:"How connected do you feel to purpose, meaning, or flow in daily life?",
+      opts:[["Disconnected or purposeless",1],["Occasionally purposeful",2],["Generally fulfilled",3],["Deeply connected to purpose and community",4]] },
+    { cat:"Social Wellness", q:"How robust is your social support network and sense of belonging?",
+      opts:[["Isolated or lonely",1],["Limited social connection",2],["Good relationships, some depth",3],["Rich, reciprocal, nourishing relationships",4]] },
+    { cat:"Biomarkers", q:"Have you had health screenings (blood panels, metabolic markers) in the past year?",
+      opts:[["Never checked",1],["More than 2 years ago",2],["Within the past year — basic tests",3],["Comprehensive annual panel with physician review",4]] },
+    { cat:"Habits", q:"Do you consume alcohol, tobacco, or other substances?",
+      opts:[["Daily or heavy use",1],["Several times a week",2],["Occasional social use",3],["Rarely or never",4]] },
+    { cat:"Habits", q:"How much time do you spend in natural light and nature per week?",
+      opts:[["Almost none — mostly indoors",1],["1–2 hours",2],["3–5 hours",3],["Daily outdoor time, nature-integrated lifestyle",4]] },
+    { cat:"Recovery", q:"Do you use any active recovery methods (cold therapy, massage, breathwork, sauna)?",
+      opts:[["None",1],["Occasionally, inconsistently",2],["1–2 tools used weekly",3],["Multiple modalities, structured protocol",4]] },
+    { cat:"Environment", q:"How clean and optimised is your home/work environment (air, light, EMF, noise)?",
+      opts:[["Unaware or unconcerned",1],["Somewhat aware, minimal changes",2],["Moderate adjustments made",3],["Highly optimised, air filters, blue-light, routines",4]] },
+    { cat:"Purpose", q:"Do you have long-term health goals and actively track progress?",
+      opts:[["No goals or tracking",1],["Vague goals, no tracking",2],["Some goals with occasional review",3],["Clear goals, regular review, data-informed",4]] },
+  ];
 
-      <p style="font-size:12px; color: var(--c-muted); line-height:1.7; margin-bottom:1.5rem;">
-        Each tier represents a distinct philosophy of longevity — from performance-driven fitness to full-spectrum medical diagnostics. Your score will place you on this scale and guide your next steps.
-      </p>
+  const BRANDS = [
+    { name:"Equinox", country:"USA · Global", range:[0,20], tier:"Performance & Lifestyle",
+      desc:"Your starting point. Equinox's methodology focuses on movement fundamentals, body composition, and building consistent fitness habits — the essential foundation of longevity.",
+      rec:["Start a 3-day/week structured workout plan","Prioritise 7–8 hours of sleep nightly","Begin tracking your daily steps and water intake"] },
+    { name:"Six Senses", country:"Global Retreats", range:[21,40], tier:"Holistic Mind-Body",
+      desc:"You're building wellness awareness. Six Senses integrates mindfulness, sleep science, and holistic nutrition — addressing the whole person beyond just the gym.",
+      rec:["Add a daily 10-min mindfulness or breathwork session","Experiment with a whole-food, plant-forward diet","Introduce weekly digital detox periods"] },
+    { name:"Canyon Ranch", country:"USA", range:[41,60], tier:"Integrative Preventive Health",
+      desc:"You have solid health foundations. Canyon Ranch's integrative approach bridges preventive medicine, nutrition counselling, and movement optimisation for sustained wellbeing.",
+      rec:["Schedule a comprehensive blood panel this quarter","Add strength training 2x/week if not already","Explore cognitive behavioural stress techniques"] },
+    { name:"SHA Wellness", country:"Alicante, Spain", range:[61,80], tier:"Medical Nutrition & Longevity",
+      desc:"You're operating at an advanced wellness level. SHA's protocol combines macrobiotic nutrition, anti-ageing diagnostics, and metabolic optimisation for measurable longevity gains.",
+      rec:["Consider advanced metabolic & hormonal testing","Adopt time-restricted eating or intermittent fasting","Explore epigenetic or microbiome testing with a specialist"] },
+    { name:"Lanserhof", country:"Germany · Austria", range:[81,100], tier:"Precision Medical Longevity",
+      desc:"You exemplify elite longevity practice. Lanserhof's precision approach — combining diagnostics, detoxification, and functional medicine — mirrors your disciplined, data-driven lifestyle.",
+      rec:["Maintain your protocols with quarterly biometric review","Add advanced recovery: peptide therapy or IV micronutrients","Explore genetic longevity profiling for the next frontier"] },
+  ];
 
-      <div class="v-picker">
-        <div class="v-card selected" onclick="selectVersion(1,this)">
-          <div class="v-badge">Version 1</div>
-          <div class="v-title">Quick Vitality Check</div>
-          <div class="v-desc">7 targeted questions covering your core health pillars. Ideal for a first-time snapshot.</div>
-          <div class="v-meta"><span>5 minutes</span> · 7 questions · Instant score</div>
-        </div>
-        <div class="v-card" onclick="selectVersion(2,this)">
-          <div class="v-badge">Version 2</div>
-          <div class="v-title">Deep Longevity Assessment</div>
-          <div class="v-desc">15 clinical-grade questions across 7 wellness domains. Inspired by SHA & Lanserhof protocols.</div>
-          <div class="v-meta"><span>12 minutes</span> · 15 questions · Full report</div>
-        </div>
-      </div>
-
-      <div class="btn-row" style="justify-content: flex-end;">
-        <button class="btn btn-primary" onclick="goTo('s-details')">Begin Assessment</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="s-details">
-    <div style="padding: 0 1rem;">
-      <p class="section-title">Your Profile</p>
-      <p class="section-sub">Your details are used to personalise your health report and connect you with the right program.</p>
-      <div class="form-grid">
-        <div class="form-group">
-          <label>Full Name *</label>
-          <input type="text" id="f-name" placeholder="Arjun Sharma" />
-        </div>
-        <div class="form-group">
-          <label>Phone Number *</label>
-          <input type="tel" id="f-phone" placeholder="+91 98765 43210" />
-        </div>
-        <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" id="f-email" placeholder="arjun@email.com" />
-        </div>
-        <div class="form-group">
-          <label>Age</label>
-          <input type="number" id="f-age" placeholder="32" min="16" max="99" />
-        </div>
-        <div class="form-group">
-          <label>Gender</label>
-          <select id="f-gender">
-            <option value="">Prefer not to say</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Non-binary</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>City</label>
-          <input type="text" id="f-city" placeholder="Hyderabad" />
-        </div>
-        <div class="form-group">
-          <label>Primary Health Goal</label>
-          <select id="f-goal">
-            <option value="">Select a goal...</option>
-            <option>Weight Management</option>
-            <option>Build Strength & Muscle</option>
-            <option>Improve Cardiovascular Health</option>
-            <option>Stress & Mental Wellness</option>
-            <option>Longevity & Disease Prevention</option>
-            <option>Better Sleep & Recovery</option>
-            <option>Hormone & Metabolic Balance</option>
-            <option>General Fitness & Energy</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Fitness Level</label>
-          <select id="f-level">
-            <option value="">Select level...</option>
-            <option>Beginner (0-6 months)</option>
-            <option>Intermediate (6mo - 2yrs)</option>
-            <option>Active (2-5 years)</option>
-            <option>Advanced (5+ years)</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label>Wellness Interests (select all that apply)</label>
-          <div class="interests-grid" id="interests-grid">
-            <div class="interest-chip" onclick="toggleChip(this)">Yoga & Mindfulness</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Strength Training</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Nutrition & Diet</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Sleep Optimisation</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Biohacking & Longevity</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Cardio & Endurance</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Detox & Cleansing</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Mental Health & Therapy</div>
-            <div class="interest-chip" onclick="toggleChip(this)">Spa & Recovery</div>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Anything you'd like us to know?</label>
-          <textarea id="f-notes" rows="2" placeholder="Medical conditions, preferences, or questions for our team..." style="resize:none;"></textarea>
-        </div>
-      </div>
-      <div class="btn-row">
-        <button class="btn" onclick="goTo('s-intro')">Back</button>
-        <button class="btn btn-primary" onclick="startQuestionnaire()">Start Assessment</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="s-q1">
-    <div style="padding: 0 1rem;">
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb1" style="width:14%"></div></div>
-      <p class="section-title">Quick Vitality Check</p>
-      <p class="section-sub">Version 1 · 7 questions · Answer honestly for the most accurate score</p>
-      <div id="q1-container"></div>
-      <div class="btn-row">
-        <button class="btn" onclick="goTo('s-details')">Back</button>
-        <button class="btn btn-primary" onclick="calcV1()">Calculate My Score</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="s-q2">
-    <div style="padding: 0 1rem;">
-      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pb2" style="width:7%"></div></div>
-      <p class="section-title">Deep Longevity Assessment</p>
-      <p class="section-sub">Version 2 · 15 clinical questions across 7 wellness domains</p>
-      <div id="q2-container"></div>
-      <div class="btn-row">
-        <button class="btn" onclick="goTo('s-details')">Back</button>
-        <button class="btn btn-primary" onclick="calcV2()">Calculate My Score</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="s-result">
-    <div style="padding: 0 1rem;" id="result-content"></div>
-  </section>
-</div>
-
-<script>
-let selVersion = 1;
-let userData = {};
-
-const Q1 = [
-  { cat:"Movement", q:"How many days per week do you exercise or move intentionally?",
-    opts:[["0–1 days — mostly sedentary",1],["2–3 days — light activity",2],["4–5 days — regular workouts",3],["6–7 days — very active or athletic",4]] },
-  { cat:"Nutrition", q:"How would you describe your typical diet?",
-    opts:[["Processed foods, irregular meals",1],["Mixed — some healthy, some junk",2],["Mostly whole foods with occasional treats",3],["Clean, whole-food focused with mindful eating",4]] },
-  { cat:"Sleep", q:"On average, how many hours of quality sleep do you get?",
-    opts:[["Less than 5 hours",1],["5–6 hours — often tired",2],["7–8 hours — generally rested",3],["8–9 hours — consistent and restorative",4]] },
-  { cat:"Mental Wellness", q:"How well do you manage daily stress and mental load?",
-    opts:[["Frequently overwhelmed or anxious",1],["Moderate stress, occasional coping",2],["Generally calm with good coping tools",3],["Consistently resilient with active practices",4]] },
-  { cat:"Hydration", q:"How much water do you drink daily?",
-    opts:[["Less than 1 litre",1],["1–1.5 litres",2],["1.5–2.5 litres",3],["2.5+ litres, consciously hydrated",4]] },
-  { cat:"Recovery", q:"How do you typically recover after physical activity or a tough week?",
-    opts:[["I don't really recover — just push through",1],["Rest on weekends, minimal structure",2],["Some stretching, decent sleep routine",3],["Active recovery, sleep tracking, stress release practices",4]] },
-  { cat:"Energy", q:"How are your energy levels throughout a typical day?",
-    opts:[["Fatigued most of the day — caffeine dependent",1],["Afternoon energy dips are common",2],["Mostly good with minor fluctuations",3],["Consistently high energy, no crashes",4]] },
-];
-
-const Q2 = [
-  { cat:"Movement", q:"How many minutes of moderate-to-vigorous exercise do you average per week?",
-    opts:[["Under 60 minutes",1],["60–120 minutes",2],["150–250 minutes",3],["250+ minutes with varied modalities",4]] },
-  { cat:"Movement", q:"Do you incorporate strength training, flexibility, and cardio in your routine?",
-    opts:[["No structured routine",1],["One modality only",2],["Two modalities regularly",3],["All three, periodized and tracked",4]] },
-  { cat:"Nutrition", q:"How many servings of vegetables and legumes do you eat daily?",
-    opts:[["0–1 servings",1],["2–3 servings",2],["4–5 servings",3],["6+ servings, diverse and plant-rich",4]] },
-  { cat:"Nutrition", q:"How is your relationship with eating habits, hunger cues, and meal timing?",
-    opts:[["Emotional eating or skipping meals",1],["Inconsistent — no clear pattern",2],["Regular meals, mostly intuitive",3],["Structured, mindful, timed eating",4]] },
-  { cat:"Sleep", q:"Do you follow a consistent sleep schedule (same bed & wake time)?",
-    opts:[["No consistency at all",1],["Roughly consistent on weekdays",2],["Consistent most days",3],["Always consistent, protected sleep window",4]] },
-  { cat:"Sleep", q:"Do you experience issues like waking frequently, snoring, or unrefreshing sleep?",
-    opts:[["Frequently — major issues",1],["Occasionally noticeable",2],["Rarely — minor",3],["Never — sleep is deep and restorative",4]] },
-  { cat:"Mental Health", q:"Do you have regular practices for mental health (meditation, therapy, journaling)?",
-    opts:[["No practices",1],["Occasionally when stressed",2],["2–3 times a week",3],["Daily dedicated practice",4]] },
-  { cat:"Mental Health", q:"How connected do you feel to purpose, meaning, or flow in daily life?",
-    opts:[["Disconnected or purposeless",1],["Occasionally purposeful",2],["Generally fulfilled",3],["Deeply connected to purpose and community",4]] },
-  { cat:"Social Wellness", q:"How robust is your social support network and sense of belonging?",
-    opts:[["Isolated or lonely",1],["Limited social connection",2],["Good relationships, some depth",3],["Rich, reciprocal, nourishing relationships",4]] },
-  { cat:"Biomarkers", q:"Have you had health screenings (blood panels, metabolic markers) in the past year?",
-    opts:[["Never checked",1],["More than 2 years ago",2],["Within the past year — basic tests",3],["Comprehensive annual panel with physician review",4]] },
-  { cat:"Habits", q:"Do you consume alcohol, tobacco, or other substances?",
-    opts:[["Daily or heavy use",1],["Several times a week",2],["Occasional social use",3],["Rarely or never",4]] },
-  { cat:"Habits", q:"How much time do you spend in natural light and nature per week?",
-    opts:[["Almost none — mostly indoors",1],["1–2 hours",2],["3–5 hours",3],["Daily outdoor time, nature-integrated lifestyle",4]] },
-  { cat:"Recovery", q:"Do you use any active recovery methods (cold therapy, massage, breathwork, sauna)?",
-    opts:[["None",1],["Occasionally, inconsistently",2],["1–2 tools used weekly",3],["Multiple modalities, structured protocol",4]] },
-  { cat:"Environment", q:"How clean and optimised is your home/work environment (air, light, EMF, noise)?",
-    opts:[["Unaware or unconcerned",1],["Somewhat aware, minimal changes",2],["Moderate adjustments made",3],["Highly optimised, air filters, blue-light, routines",4]] },
-  { cat:"Purpose", q:"Do you have long-term health goals and actively track progress?",
-    opts:[["No goals or tracking",1],["Vague goals, no tracking",2],["Some goals with occasional review",3],["Clear goals, regular review, data-informed",4]] },
-];
-
-const BRANDS = [
-  { name:"Equinox", country:"USA · Global", range:[0,20], tier:"Performance & Lifestyle",
-    desc:"Your starting point. Equinox's methodology focuses on movement fundamentals, body composition, and building consistent fitness habits — the essential foundation of longevity.",
-    icon:"E", rec:["Start a 3-day/week structured workout plan","Prioritise 7–8 hours of sleep nightly","Begin tracking your daily steps and water intake"] },
-  { name:"Six Senses", country:"Global Retreats", range:[21,40], tier:"Holistic Mind-Body",
-    desc:"You're building wellness awareness. Six Senses integrates mindfulness, sleep science, and holistic nutrition — addressing the whole person beyond just the gym.",
-    icon:"S", rec:["Add a daily 10-min mindfulness or breathwork session","Experiment with a whole-food, plant-forward diet","Introduce weekly digital detox periods"] },
-  { name:"Canyon Ranch", country:"USA", range:[41,60], tier:"Integrative Preventive Health",
-    desc:"You have solid health foundations. Canyon Ranch's integrative approach bridges preventive medicine, nutrition counselling, and movement optimisation for sustained wellbeing.",
-    icon:"C", rec:["Schedule a comprehensive blood panel this quarter","Add strength training 2x/week if not already","Explore cognitive behavioural stress techniques"] },
-  { name:"SHA Wellness Clinic", country:"Alicante, Spain", range:[61,80], tier:"Medical Nutrition & Longevity Science",
-    desc:"You're operating at an advanced wellness level. SHA's protocol combines macrobiotic nutrition, anti-ageing diagnostics, and metabolic optimisation for measurable longevity gains.",
-    icon:"S", rec:["Consider advanced metabolic & hormonal testing","Adopt time-restricted eating or intermittent fasting","Explore epigenetic or microbiome testing with a specialist"] },
-  { name:"Lanserhof", country:"Germany · Austria", range:[81,100], tier:"Precision Medical Longevity",
-    desc:"You exemplify elite longevity practice. Lanserhof's medical precision approach — combining diagnostics, detoxification, and functional medicine — mirrors your disciplined, data-driven lifestyle.",
-    icon:"L", rec:["Maintain your protocols with quarterly biometric review","Add advanced recovery: peptide therapy or IV micronutrients","Explore genetic longevity profiling for the next frontier"] },
-];
-
-function selectVersion(v, el) {
-  selVersion = v;
-  document.querySelectorAll('.v-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-}
-
-function toggleChip(el) { el.classList.toggle('on'); }
-
-function goTo(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function buildQ(container, questions) {
-  container.innerHTML = '';
-  questions.forEach((q,i) => {
-    const block = document.createElement('div');
-    block.className = 'q-block';
-    block.innerHTML = `
-      <div class="q-cat">${q.cat}</div>
-      <div class="q-label">Q${i+1}. ${q.q}</div>
-      <div class="q-options" id="qopts-${i}">
-        ${q.opts.map((o,j)=>`
-          <div class="q-opt" onclick="pickOpt(${i},${j},this)" data-score="${o[1]}">
-            <div class="q-dot"></div>
-            <span>${o[0]}</span>
-          </div>
-        `).join('')}
-      </div>`;
-    container.appendChild(block);
-  });
-}
-
-function pickOpt(qi, oi, el) {
-  document.querySelectorAll(`#qopts-${qi} .q-opt`).forEach(o=>o.classList.remove('picked'));
-  el.classList.add('picked');
-  updateProgress();
-}
-
-function updateProgress() {
-  const qs = selVersion===1?Q1:Q2;
-  const picked = document.querySelectorAll((selVersion===1?'#q1-container':'#q2-container')+' .q-opt.picked').length;
-  const pct = Math.round((picked/qs.length)*100);
-  document.getElementById(selVersion===1?'pb1':'pb2').style.width = pct+'%';
-}
-
-function startQuestionnaire() {
-  userData = {
-    name: document.getElementById('f-name').value || 'User',
-    phone: document.getElementById('f-phone').value,
-    email: document.getElementById('f-email').value,
-    age: document.getElementById('f-age').value,
-    gender: document.getElementById('f-gender').value,
-    city: document.getElementById('f-city').value,
-    goal: document.getElementById('f-goal').value,
-    level: document.getElementById('f-level').value,
-    interests: [...document.querySelectorAll('.interest-chip.on')].map(c=>c.textContent),
-    notes: document.getElementById('f-notes').value,
-  };
-  if(!userData.name||!userData.phone||!userData.email){
-    alert('Please fill in Name, Phone, and Email to continue.');
-    return;
+  function selectVersion(v, el) {
+    selVersion = v;
+    document.querySelectorAll('.v-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
   }
-  if(selVersion===1){
-    buildQ(document.getElementById('q1-container'), Q1);
-    goTo('s-q1');
-  } else {
-    buildQ(document.getElementById('q2-container'), Q2);
-    goTo('s-q2');
+
+  function toggleChip(el) { el.classList.toggle('on'); }
+
+  function goTo(id) {
+    document.querySelectorAll('.section').forEach(s => {
+      s.classList.remove('active');
+    });
+    // Slight delay to allow fade out, though we are using immediate class swap with css transition
+    setTimeout(() => {
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }, 50);
   }
-}
 
-function getScores(containerSel, questions) {
-  const scores = {};
-  const totals = {};
-  questions.forEach((q,i)=>{
-    const picked = document.querySelector(`${containerSel} #qopts-${i} .q-opt.picked`);
-    const s = picked ? parseInt(picked.dataset.score) : 2;
-    if(!scores[q.cat]) { scores[q.cat]=0; totals[q.cat]=0; }
-    scores[q.cat]+=s; totals[q.cat]+=4;
-  });
-  const catPct = {};
-  let total=0, maxTotal=0;
-  for(const cat in scores){ catPct[cat]=Math.round((scores[cat]/totals[cat])*100); total+=scores[cat]; maxTotal+=totals[cat]; }
-  const overall = Math.round((total/maxTotal)*100);
-  return { overall, catPct };
-}
+  function startQuestionnaire() {
+    userData = {
+      name: document.getElementById('f-name').value || 'User',
+      phone: document.getElementById('f-phone').value,
+      email: document.getElementById('f-email').value,
+      age: document.getElementById('f-age').value,
+      gender: document.getElementById('f-gender').value,
+      goal: document.getElementById('f-goal').value,
+      interests: [...document.querySelectorAll('.interest-chip.on')].map(c=>c.textContent),
+      notes: document.getElementById('f-notes').value,
+    };
+    if(!userData.name||!userData.phone||!userData.email){
+      alert('Please fill in Name, Phone, and Email to continue.');
+      return;
+    }
+    
+    // Transition to Quote Screen
+    goTo('s-quote');
+    
+    // Wait and transition to Quiz
+    setTimeout(() => {
+      qList = selVersion === 1 ? Q1 : Q2;
+      buildQ(document.getElementById('q-container'), qList);
+      goTo('s-q');
+      updateProgressPaginated();
+    }, 2800);
+  }
 
-function calcV1() { showResult(getScores('#q1-container', Q1), 1); }
-function calcV2() { showResult(getScores('#q2-container', Q2), 2); }
+  function buildQ(container, questions) {
+    container.innerHTML = '';
+    totalQ = questions.length;
+    currentQ = 0;
 
-function showResult(data, ver) {
-  const s = data.overall;
-  const brand = BRANDS.find(b => s>=b.range[0] && s<=b.range[1]) || BRANDS[4];
-  const cats = data.catPct;
+    questions.forEach((q,i) => {
+      const block = document.createElement('div');
+      block.className = `q-slide ${i === 0 ? 'active' : ''}`;
+      block.id = `q-slide-${i}`;
+      block.innerHTML = `
+        <div class="q-cat">${q.cat}</div>
+        <div class="q-label">Q${i+1} of ${totalQ}.<br>${q.q}</div>
+        <div class="q-options" id="qopts-${i}">
+          ${q.opts.map((o,j)=>`
+            <div class="q-opt" onclick="pickOptPaginated(${i},${j},this)" data-score="${o[1]}">
+              <div class="q-dot"></div>
+              <span>${o[0]}</span>
+            </div>
+          `).join('')}
+        </div>`;
+      container.appendChild(block);
+    });
+    updateBtnStates();
+  }
 
-  const tierColors = ['#3B6D11','#0F6E56','#185FA5','#854F0B','#993C1D'];
-  const tierBgs = ['#EAF3DE','#E1F5EE','#E6F1FB','#FAEEDA','#FAECE7'];
-  const bi = BRANDS.indexOf(brand);
+  function pickOptPaginated(qi, oi, el) {
+    document.querySelectorAll(`#qopts-${qi} .q-opt`).forEach(o=>o.classList.remove('picked'));
+    el.classList.add('picked');
+    
+    // Auto advance smoothly
+    setTimeout(() => {
+      if(currentQ < totalQ - 1) {
+        nextQ();
+      }
+    }, 450);
+  }
 
-  const catRows = Object.entries(cats).map(([cat,pct])=>`
-    <div class="score-cat">
-      <div class="sc-name">${cat}</div>
-      <div class="sc-bar-wrap"><div class="sc-bar" style="width:${pct}%"></div></div>
-      <div class="sc-val">${pct}/100</div>
-    </div>`).join('');
+  function updateBtnStates() {
+    document.getElementById('btn-prev').style.display = currentQ === 0 ? 'none' : 'inline-flex';
+    document.getElementById('btn-next').innerText = currentQ === totalQ - 1 ? 'Calculate Score' : 'Next';
+  }
 
-  const recs = brand.rec.map(r=>`
-    <div class="rec-row">
-      <div class="rec-icon" style="color:var(--c-gold);">✦</div>
-      <div class="rec-text">${r}</div>
-    </div>`).join('');
+  function updateProgressPaginated() {
+    const pct = Math.round(((currentQ + 1) / totalQ) * 100);
+    document.getElementById('pb-paginated').style.width = pct + '%';
+  }
 
-  const brandScale = BRANDS.map((b,i)=>`
-    <div style="flex:1; text-align:center; padding:6px 4px; border-radius:8px; background:${i===bi?b===brand?'#FAEEDA':'var(--c-surface)':'var(--c-surface)'}; border:${i===bi?'1.5px solid var(--c-gold)':'0.5px solid var(--c-border)'};">
-      <div style="font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--c-muted);">Tier ${i+1}</div>
-      <div style="font-family:var(--ff-display);font-size:11px;font-weight:600;color:var(--c-dark);line-height:1.3;">${b.name}</div>
-    </div>`).join('');
+  function nextQ() {
+    // Validate if current question is answered (optional, right now we allow skip)
+    if(currentQ < totalQ - 1) {
+      const currentSlide = document.getElementById(`q-slide-${currentQ}`);
+      currentSlide.classList.remove('active');
+      currentSlide.classList.add('exit');
+      
+      currentQ++;
+      const nextSlide = document.getElementById(`q-slide-${currentQ}`);
+      nextSlide.classList.remove('exit');
+      
+      // Slight delay for animation timing
+      setTimeout(() => {
+        nextSlide.classList.add('active');
+        updateBtnStates();
+        updateProgressPaginated();
+      }, 50);
+    } else {
+      // Calculate
+      if(selVersion === 1) calcV1(); else calcV2();
+    }
+  }
 
-  document.getElementById('result-content').innerHTML = `
-    <p class="section-title" style="margin-bottom:2px;">Your Health Score</p>
-    <p class="section-sub">Version ${ver} · ${ver===1?'Quick Vitality Check':'Deep Longevity Assessment'} · ${userData.name}</p>
+  function prevQ() {
+    if(currentQ > 0) {
+      const currentSlide = document.getElementById(`q-slide-${currentQ}`);
+      currentSlide.classList.remove('active');
+      
+      currentQ--;
+      const prevSlide = document.getElementById(`q-slide-${currentQ}`);
+      prevSlide.classList.remove('exit');
+      
+      setTimeout(() => {
+        prevSlide.classList.add('active');
+        updateBtnStates();
+        updateProgressPaginated();
+      }, 50);
+    }
+  }
 
-    <div class="score-ring-wrap">
-      <div><span class="score-num">${s}</span><span class="score-denom">/100</span></div>
-      <div class="score-label">Longevity Vitality Score</div>
-    </div>
+  function getScores(containerSel, questions) {
+    const scores = {};
+    const totals = {};
+    questions.forEach((q,i)=>{
+      const picked = document.querySelector(`${containerSel} #qopts-${i} .q-opt.picked`);
+      const s = picked ? parseInt(picked.dataset.score) : 2; // Default to mid-score if unanswered
+      if(!scores[q.cat]) { scores[q.cat]=0; totals[q.cat]=0; }
+      scores[q.cat]+=s; totals[q.cat]+=4;
+    });
+    const catPct = {};
+    let total=0, maxTotal=0;
+    for(const cat in scores){ catPct[cat]=Math.round((scores[cat]/totals[cat])*100); total+=scores[cat]; maxTotal+=totals[cat]; }
+    const overall = Math.round((total/maxTotal)*100);
+    return { overall, catPct };
+  }
 
-    <div style="display:flex;gap:8px;margin-bottom:1.5rem;">${brandScale}</div>
+  function calcV1() { showResult(getScores('#q-container', Q1), 1); }
+  function calcV2() { showResult(getScores('#q-container', Q2), 2); }
 
-    <div class="tier-match">
-      <div class="tier-tag" style="background:${tierBgs[bi]};color:${tierColors[bi]};">${brand.tier}</div>
-      <div class="tier-brand">${brand.name} Level</div>
-      <div style="font-size:11px;color:var(--c-muted);margin-top:2px;">${brand.country}</div>
-      <div class="tier-sub">${brand.desc}</div>
-    </div>
+  function showResult(data, ver) {
+    const s = data.overall;
+    const brand = BRANDS.find(b => s>=b.range[0] && s<=b.range[1]) || BRANDS[4];
+    const cats = data.catPct;
+    const bi = BRANDS.indexOf(brand);
 
-    <div style="margin-bottom:4px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--c-muted);font-weight:500;">Score by Category</div>
-    <div class="score-cats">${catRows}</div>
+    const catRows = Object.entries(cats).map(([cat,pct])=>`
+      <div class="score-cat">
+        <div class="sc-name">${cat}</div>
+        <div class="sc-bar-wrap"><div class="sc-bar" style="width:${pct}%"></div></div>
+        <div class="sc-val">${pct}/100</div>
+      </div>`).join('');
 
-    <div style="background:var(--color-background-primary);border:0.5px solid var(--c-border);border-radius:12px;padding:1rem 1.25rem;margin-top:1rem;">
-      <div style="font-family:var(--ff-display);font-size:17px;font-weight:600;color:var(--c-dark);margin-bottom:10px;">Personalised Recommendations</div>
-      ${recs}
-    </div>
+    const recs = brand.rec.map(r=>`
+      <div class="rec-row">
+        <div class="rec-icon">✦</div>
+        <div class="rec-text">${r}</div>
+      </div>`).join('');
 
-    <div style="background:var(--c-surface);border-radius:12px;padding:1rem 1.25rem;margin-top:12px;border:0.5px solid var(--c-border);">
-      <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--c-muted);margin-bottom:8px;">Your Profile</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;color:var(--c-dark);">
-        <div><span style="color:var(--c-muted);">Goal: </span>${userData.goal||'—'}</div>
-        <div><span style="color:var(--c-muted);">Level: </span>${userData.level||'—'}</div>
-        <div><span style="color:var(--c-muted);">City: </span>${userData.city||'—'}</div>
-        <div><span style="color:var(--c-muted);">Age: </span>${userData.age||'—'}</div>
-        ${userData.interests.length?`<div style="grid-column:1/-1;"><span style="color:var(--c-muted);">Interests: </span>${userData.interests.join(', ')}</div>`:''}
+    const brandScale = BRANDS.map((b,i)=>`
+      <div class="b-match-col ${i===bi ? 'active' : ''}">
+        <div class="b-match-tier">Tier ${i+1}</div>
+        <div class="b-match-name">${b.name}</div>
+      </div>`).join('');
+
+    document.getElementById('result-content').innerHTML = `
+      <p class="section-title" style="margin-bottom:0.25rem;">Your Health Score</p>
+      <p class="section-sub" style="margin-bottom: 0;">Version ${ver} · ${ver===1?'Quick Vitality Check':'Deep Longevity Assessment'} · ${userData.name}</p>
+
+      <div class="score-ring-wrap">
+        <div><span class="score-num">${s}</span><span class="score-denom">/100</span></div>
+        <div class="score-label">Longevity Vitality Score</div>
       </div>
-    </div>
 
-    <div style="margin-top:1rem;padding:1rem;border:0.5px solid var(--c-gold);border-radius:10px;background:var(--c-surface);text-align:center;">
-      <div style="font-size:12px;color:var(--c-muted);margin-bottom:8px;">Our wellness coaches will reach out to <strong style="color:var(--c-dark);">${userData.phone}</strong> within 24 hours.</div>
-      <button class="btn btn-primary" onclick="goTo('s-intro');setTimeout(()=>location.reload(),100);">Retake Assessment</button>
-    </div>
-  `;
-  goTo('s-result');
-}
-</script>
+      <div class="brand-match-grid">${brandScale}</div>
+
+      <div class="tier-match">
+        <div class="tier-tag">${brand.tier}</div>
+        <div class="tier-brand">${brand.name} Level</div>
+        <div style="font-size:0.9rem;color:var(--text-muted);margin-top:0.35rem;">${brand.country}</div>
+        <div class="tier-sub">${brand.desc}</div>
+      </div>
+
+      <h3 style="font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: #fff; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem;">Score by Category</h3>
+      <div class="score-cats">${catRows}</div>
+
+      <div class="recs-box">
+        <div class="recs-title">Your Action Plan</div>
+        ${recs}
+      </div>
+
+      <div class="final-quote">
+        <h2>"Healing that begins with you, for you."</h2>
+      </div>
+
+      <div class="bottom-cta">
+        <div style="font-size:1.1rem;color:rgba(255,255,255,0.85);margin-bottom:1.5rem;">Our wellness experts will reach out to <strong style="color:#dcb36d;">${userData.phone}</strong> within 24 hours.</div>
+        <button class="btn btn-primary" onclick="goTo('s-intro');setTimeout(()=>location.reload(),100);">Retake Assessment</button>
+      </div>
+    `;
+    goTo('s-result');
+  }
+  </script>
+</body>
+</html>

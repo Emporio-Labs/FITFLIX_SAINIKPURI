@@ -4010,6 +4010,11 @@
         btn.addEventListener('click', () => {
           bookingOverlay.classList.add('active');
         });
+      } else if (text.includes('health quiz') || text.includes('health score')) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'fitflix_longevity_health_score.html';
+        });
       }
     });
 
