@@ -2243,6 +2243,20 @@
       <div class="loc-grid">
         <div>
           <h2 class="loc-h2" data-reveal>Find us in <span>Sainikpuri, Hyderabad</span></h2>
+          
+          <div class="loc-map-container" style="margin-top: 2rem; margin-bottom: 2.5rem; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;">
+            <!-- Overlay prevents scroll trapping; vanishes when clicked -->
+            <div style="position: absolute; inset: 0; z-index: 10; cursor: pointer;" onclick="this.style.pointerEvents='none'"></div>
+            <iframe 
+              src="https://maps.google.com/maps?q=FITFLIX%20WELLNESS%20CLUB%20SAINIKPURI&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="280" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+          </div>
+
           <div class="loc-actions">
             <button class="btn-white-solid">Get Started Today</button>
             <button class="btn-white-outline">Book a Free Consultancy</button>
