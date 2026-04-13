@@ -4064,7 +4064,12 @@
     const allBtns = document.querySelectorAll('button');
     allBtns.forEach(btn => {
       const text = btn.textContent.trim().toLowerCase();
-      if (text.includes('book free discovery call') || text.includes('book a free consult') || text.includes('book a call')) {
+      const opensBookingModal = text.includes('book free discovery call')
+        || text.includes('book a free consult')
+        || text.includes('book your free consult')
+        || text.includes('book a call');
+
+      if (opensBookingModal) {
         btn.addEventListener('click', () => {
           bookingOverlay.classList.add('active');
         });
@@ -4112,8 +4117,8 @@
           phone: String(formData.get('mobile') || '').trim(),
           email: String(formData.get('email') || '').trim(),
           interests: selectedInterest ? [selectedInterest] : [],
-          source: window.location.hostname || 'fitflix.in',
-          tags: ['website', 'call-me'],
+          source: `${window.location.hostname || 'fitflix.in'}:booking-consultancy`,
+          tags: ['website', 'call-me', 'booking-consultancy'],
           captchaToken: getLeadCaptchaToken(),
           website: String(formData.get('website') || '').trim()
         };
