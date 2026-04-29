@@ -1,0 +1,28 @@
+# Fitflix Sainikpuri - Robots.txt
+# SEO Configuration for search engines
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /pages/
+Allow: /assets/
+Disallow: /temp
+Disallow: /dist
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /.env*
+Disallow: /.git
+
+# Specific rules for crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemaps
+Sitemap: https://fitflixsainikpuri.com/sitemap.xml
+Sitemap: https://fitflixsainikpuri.com/pages-sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
