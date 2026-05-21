@@ -1,4 +1,5 @@
 const { defineConfig, loadEnv } = require('vite');
+const { resolve } = require('path');
 const chatHandler = require('./api/chat');
 const leadPublicCaptureHandler = require('./api/leads/public-capture');
 
@@ -72,6 +73,14 @@ module.exports = defineConfig(({ mode }) => {
   Object.assign(process.env, env);
 
   return {
-    plugins: [localApiPlugin()]
+    plugins: [localApiPlugin()],
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          longevity: resolve(__dirname, 'fitflix_longevity_health_score.html')
+        }
+      }
+    }
   };
 });
