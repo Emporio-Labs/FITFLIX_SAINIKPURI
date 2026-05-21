@@ -7,11 +7,12 @@
   <title>Fitflix Sainikpuri | DNA Fitness & Wellness</title>
   <meta name="description"
     content="India's first DNA-based fitness and wellness club in Sainikpuri, Hyderabad. Personalized DNA coaching, diagnostics, cold plunge, HBOT, cryotherapy, sauna and gym training.">
-  <meta name="keywords" content="fitness, wellness, gym, cold plunge, HBOT, cryotherapy, sauna, DNA based, club, DNA wellness club, Sainikpuri, best gym in Sainikpuri, DNA fitness, DNA-based wellness, fitness coaching Sainikpuri, longevity wellness Hyderabad, genetic fitness analysis, personalized fitness coaching, wellness diagnostics, fitness and wellness club, health optimization, strength training Hyderabad, recovery therapies, health assessment">
+  <meta name="keywords"
+    content="fitness, wellness, gym, cold plunge, HBOT, cryotherapy, sauna, DNA based, club, DNA wellness club, Sainikpuri, best gym in Sainikpuri, DNA fitness, DNA-based wellness, fitness coaching Sainikpuri, longevity wellness Hyderabad, genetic fitness analysis, personalized fitness coaching, wellness diagnostics, fitness and wellness club, health optimization, strength training Hyderabad, recovery therapies, health assessment">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#1a0804">
   <meta name="author" content="Fitflix">
-  <link rel="canonical" href="https://fitflixsainikpuri.com/">
+  <link rel="canonical" href="https://www.fitflix.in/" />
   <meta name="language" content="English">
   <meta name="revisit-after" content="7 days">
   <meta name="category" content="Health & Wellness">
@@ -20,15 +21,17 @@
   <meta property="og:title" content="Fitflix Sainikpuri | DNA Fitness & Wellness">
   <meta property="og:description"
     content="India's first DNA-based fitness and wellness club in Sainikpuri. Personalized DNA coaching, diagnostics, cold plunge, HBOT, cryotherapy, sauna and gym training.">
-  <meta property="og:image" content="assets/fitflix_logo.png">
+  <meta property="og:image" content="https://www.fitflix.in/assets/fitflix_og_share.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Fitflix Sainikpuri - DNA Based Fitness and Wellness Club">
-  <meta property="og:url" content="https://fitflixsainikpuri.com/">
+  <meta property="og:url" content="https://www.fitflix.in/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@fitflix">
   <meta name="twitter:title" content="Fitflix Sainikpuri | DNA Fitness & Wellness">
   <meta name="twitter:description"
     content="India's first DNA-based fitness and wellness club in Sainikpuri offers DNA coaching, diagnostics, cold plunge, HBOT, cryotherapy, sauna and gym training.">
-  <meta name="twitter:image" content="assets/fitflix_logo.png">
+  <meta name="twitter:image" content="https://www.fitflix.in/assets/fitflix_og_share.jpg" />
   <link rel="icon" type="image/png" href="assets/fitflix_logo.png">
   <link rel="shortcut icon" href="assets/fitflix_logo.png">
   <link rel="apple-touch-icon" href="assets/fitflix_logo.png">
@@ -40,7 +43,7 @@
       "name": "Fitflix Sainikpuri",
       "alternative_name": "Fitflix - India's First DNA Based Fitness and Wellness Club",
       "description": "India's first DNA-based fitness and wellness club combining diagnostics, genetic analysis, therapies, personalized coaching, and strength training under one roof.",
-      "url": "https://fitflixsainikpuri.com",
+      "url": "https://www.fitflix.in",
       "image": "assets/fitflix_logo.png",
       "email": "support@fitflix.in",
       "phone": "+91-XXXXXXXXXX",
@@ -179,8 +182,26 @@
     }
 
     .nav-cta {
-      background: #fff;
-      color: var(--dark);
+      background: transparent;
+      color: #c8873a;
+      border: 1px solid #c8873a;
+      padding: 0.65rem 1.5rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: rgba(200, 135, 58, 0.12);
+    }
+
+    .nav-cta-outline {
+      background: #c8873a;
+      color: #fff;
       border: none;
       padding: 0.65rem 1.5rem;
       border-radius: 100px;
@@ -192,27 +213,8 @@
       transition: opacity 0.2s;
     }
 
-    .nav-cta:hover {
-      opacity: 0.85;
-    }
-
-    .nav-cta-outline {
-      background: transparent;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.6);
-      padding: 0.65rem 1.5rem;
-      border-radius: 100px;
-      font-family: var(--sans);
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      letter-spacing: 0.01em;
-      transition: all 0.2s;
-    }
-
     .nav-cta-outline:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: #fff;
+      opacity: 0.9;
     }
 
     .nav-actions {
@@ -233,6 +235,7 @@
       z-index: 201;
       overflow: visible;
     }
+
     .nav-hamburger span {
       display: block;
       width: 22px;
@@ -242,9 +245,19 @@
       transition: transform 0.3s, opacity 0.3s, width 0.3s;
       transform-origin: center;
     }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
 
     /* ── Mobile Menu Drawer ── */
     .nav-mobile-menu {
@@ -252,7 +265,7 @@
       position: fixed;
       inset: 0;
       z-index: 199;
-      background: rgba(10,10,8,0.97);
+      background: rgba(10, 10, 8, 0.97);
       backdrop-filter: blur(16px);
       flex-direction: column;
       align-items: center;
@@ -262,14 +275,13 @@
       pointer-events: none;
       transition: opacity 0.3s;
     }
+
     .nav-mobile-menu.open {
       opacity: 1;
       pointer-events: all;
     }
+
     .nav-mobile-cta {
-      background: #fff;
-      color: var(--dark);
-      border: none;
       padding: 1rem 2.5rem;
       border-radius: 100px;
       font-family: var(--sans);
@@ -277,10 +289,23 @@
       font-weight: 500;
       cursor: pointer;
       letter-spacing: 0.01em;
-      transition: opacity 0.2s;
+      transition: all 0.2s;
     }
+
+    .nav-mobile-cta-primary {
+      background: #c8873a;
+      color: #fff;
+      border: none;
+    }
+
+    .nav-mobile-cta-ghost {
+      background: transparent;
+      color: #c8873a;
+      border: 1px solid #c8873a;
+    }
+
     .nav-mobile-link {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-family: var(--sans);
       font-size: 0.95rem;
       text-decoration: none;
@@ -288,7 +313,10 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-mobile-link:hover { color: #fff; }
+
+    .nav-mobile-link:hover {
+      color: #fff;
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -401,6 +429,7 @@
       letter-spacing: -0.01em;
       margin-bottom: 0.25rem;
     }
+
     .hero h2 {
       font-family: var(--serif);
       font-weight: 500;
@@ -415,9 +444,11 @@
       .hero h1 {
         font-size: clamp(1.8rem, 6.5vw, 2.8rem);
       }
+
       .hero h2 {
         font-size: clamp(1.4rem, 5vw, 2rem);
       }
+
       .hero-stars {
         flex-direction: column;
         gap: 0.3rem;
@@ -456,9 +487,9 @@
     }
 
     .hero-links a {
-      color: rgba(255,255,255,0.85);
+      color: rgba(255, 255, 255, 0.85);
       text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       padding: 0.75rem 1rem;
       border-radius: 999px;
       font-family: var(--sans);
@@ -468,8 +499,8 @@
 
     .hero-links a:hover {
       color: #fff;
-      border-color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.08);
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .btn-hero-primary {
@@ -605,10 +636,11 @@
     }
 
     /* ─── STOP WAITING SECTION ─── */
-    
+
     .stop-waiting {
       background: var(--cream-light);
-      padding: 0 5vw 1rem; /* Padding reduced to eliminate excessive white space */
+      padding: 0 5vw 1rem;
+      /* Padding reduced to eliminate excessive white space */
       text-align: center;
     }
 
@@ -634,6 +666,10 @@
       line-height: 1.7;
     }
 
+    .protocol-scroll-wrap {
+      display: none;
+    }
+
     /* protocol grid */
     .protocol-grid {
       display: flex;
@@ -645,50 +681,41 @@
       margin-inline: auto;
     }
 
-    /* ── Mobile Marquee Rows ── */
+    /* ── Mobile: horizontal service image strip ── */
     @media (max-width: 640px) {
       .protocol-grid {
-        display: none; /* hide desktop grid on mobile */
+        display: none;
       }
 
-      .protocol-marquee-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 0.85rem;
-        margin-bottom: 3rem;
+      .protocol-scroll-wrap {
+        display: block;
         overflow: hidden;
+        margin-bottom: 3rem;
         width: 100%;
       }
 
-      .protocol-marquee-row {
+      .protocol-scroll-track {
         display: flex;
         gap: 0.75rem;
         width: max-content;
+        animation: marquee-ltr 40s linear infinite;
       }
 
-      .protocol-marquee-row.row-ltr {
-        animation: marquee-ltr 22s linear infinite;
-      }
-
-      .protocol-marquee-row.row-rtl {
-        animation: marquee-rtl 22s linear infinite;
-      }
-
-      .protocol-marquee-row:hover {
+      .protocol-scroll-track:hover {
         animation-play-state: paused;
       }
 
       @keyframes marquee-ltr {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
       }
 
-      @keyframes marquee-rtl {
-        0%   { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
-      }
-
-      .protocol-marquee-row .protocol-card {
+      .protocol-scroll-track .protocol-card {
         flex-shrink: 0;
         width: 210px;
         max-width: 210px;
@@ -696,8 +723,8 @@
     }
 
     @media (min-width: 641px) {
-      .protocol-marquee-wrap {
-        display: none; /* hide mobile marquee on desktop */
+      .protocol-scroll-wrap {
+        display: none;
       }
     }
 
@@ -847,7 +874,8 @@
       flex-direction: column;
       align-items: center;
       background: var(--cream-light);
-      padding: 0 0 2rem 0; /* Removed the 2rem top padding, kept the bottom padding */
+      padding: 0 0 2rem 0;
+      /* Removed the 2rem top padding, kept the bottom padding */
     }
 
     .how-v-line {
@@ -878,8 +906,13 @@
     .steps-timeline {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
       position: relative;
       margin-bottom: 3rem;
+    }
+
+    .step-col[data-step="5"] {
+      padding-bottom: 48px;
     }
 
     .step-track {
@@ -1023,6 +1056,111 @@
       color: var(--dark);
     }
 
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 2rem;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .testimonials-section .testimonial-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #c8873a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-quote {
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: 0.85;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .testimonial-location {
+      font-size: 13px;
+      opacity: 0.5;
+      margin: 4px 0 0;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      margin-bottom: 1rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+
+    .service-group {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .service-group h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 10px;
+    }
+
+    .service-group p {
+      font-size: 13px;
+      opacity: 0.65;
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+
+    .service-cta {
+      font-size: 13px;
+      font-weight: 500;
+      color: #c8873a;
+      text-decoration: none;
+    }
+
+    .service-cta:hover {
+      text-decoration: underline;
+    }
+
+    .app-coming-soon {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 1rem;
+    }
+
     .google-reviews-wrap {
       max-width: 1200px;
       margin: 0 auto;
@@ -1090,25 +1228,31 @@
 
     /* Styling for the new step buttons */
     .step-link-btn {
-        display: inline-block;
-        margin-top: 15px; /* Adds space between the paragraph and the button */
-        padding: 8px 16px;
-        border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
-        border-radius: 20px; /* Gives it the pill shape */
-        background-color: transparent;
-        color: #ffffff;
-        text-decoration: none; /* Removes the default link underline */
-        font-size: 0.85rem;
-        font-family: inherit;
-        transition: background-color 0.3s ease, border-color 0.3s ease;
-        text-align: center;
+      display: inline-block;
+      margin-top: 15px;
+      /* Adds space between the paragraph and the button */
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      /* Subtle white border */
+      border-radius: 20px;
+      /* Gives it the pill shape */
+      background-color: transparent;
+      color: #ffffff;
+      text-decoration: none;
+      /* Removes the default link underline */
+      font-size: 0.85rem;
+      font-family: inherit;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      text-align: center;
     }
 
     /* Hover effect to make it interactive */
     .step-link-btn:hover {
-        background-color: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
-        border-color: #ffffff; /* Brighter border on hover */
-        color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+      /* Slight white background on hover */
+      border-color: #ffffff;
+      /* Brighter border on hover */
+      color: #ffffff;
     }
 
     /* ─── DIAGNOSTICS (dark brown) ─── */
@@ -1255,7 +1399,7 @@
       line-height: 1.3;
       position: relative;
       z-index: 2;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     }
 
     /* mock phone UI */
@@ -1621,7 +1765,7 @@
         padding: 4rem 5vw;
       }
 
-      .app-section > p {
+      .app-section>p {
         margin-top: 0;
         margin-bottom: 2.5rem;
       }
@@ -1641,10 +1785,11 @@
       }
 
       .stop-waiting {
-      background: var(--cream-light);
-      padding: 0 5vw 0; /* Changed bottom padding to 0 */
-      text-align: center;
-    }
+        background: var(--cream-light);
+        padding: 0 5vw 0;
+        /* Changed bottom padding to 0 */
+        text-align: center;
+      }
 
       /* Protocol cards: ensure they don't overflow */
       .protocol-card {
@@ -1669,7 +1814,7 @@
         margin: 0 auto;
       }
 
-      .app-section > p {
+      .app-section>p {
         font-size: 0.9rem;
         margin-top: 0;
         margin-bottom: 2rem;
@@ -1695,7 +1840,9 @@
     }
 
     @media (max-width: 600px) {
-      .steps-timeline { grid-template-columns: 1fr; }
+      .steps-timeline {
+        grid-template-columns: 1fr;
+      }
 
       .how-actions {
         flex-direction: column;
@@ -1703,7 +1850,9 @@
         padding: 0 0.5rem;
       }
 
-      .how-actions button { width: 100%; }
+      .how-actions button {
+        width: 100%;
+      }
     }
 
     /* ── 480px: small phones ── */
@@ -1712,8 +1861,13 @@
         padding: 0.85rem 1.25rem;
       }
 
-      .hero-content { padding: 0 1rem; }
-      .hero-sub { font-size: 0.88rem; }
+      .hero-content {
+        padding: 0 1rem;
+      }
+
+      .hero-sub {
+        font-size: 0.88rem;
+      }
 
       .btn-hero-primary {
         min-width: 0;
@@ -1722,50 +1876,122 @@
       }
 
       /* Protocol cards wrap to full-width on tiny screens */
-      .protocol-grid { gap: 0.6rem; }
+      .protocol-grid {
+        gap: 0.6rem;
+      }
+
       .protocol-card {
         padding: 0 1rem;
         min-height: 60px;
         max-width: 100%;
         width: 100%;
       }
-      .protocol-img  { width: 44px; height: 44px; }
-      .protocol-name { font-size: 0.8rem; }
 
-      .how-h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
-      .step-title { font-size: 1.2rem; }
-      .step-desc  { font-size: 0.74rem; padding: 0 0.75rem; }
+      .protocol-img {
+        width: 44px;
+        height: 44px;
+      }
 
-      .test-h2 { font-size: clamp(1.6rem, 6vw, 2rem); }
-      .test-card { padding: 1.5rem; }
+      .protocol-name {
+        font-size: 0.8rem;
+      }
 
-      .app-h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); margin-bottom: 2rem; }
-      .app-card { min-height: 260px; }
-      .mock-phone { width: 120px; bottom: 4rem; }
+      .how-h2 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+      }
 
-      .diag-h2 { font-size: clamp(1.8rem, 7vw, 2.5rem); }
+      .step-title {
+        font-size: 1.2rem;
+      }
 
-      .loc-h2 { font-size: clamp(1.7rem, 6vw, 2.2rem); margin-bottom: 2rem; }
-      .loc-actions { flex-direction: column; gap: 0.75rem; }
-      .loc-actions button { width: 100%; }
+      .step-desc {
+        font-size: 0.74rem;
+        padding: 0 0.75rem;
+      }
 
-      .how-actions { flex-direction: column; gap: 0.75rem; padding: 0 1rem; }
-      .how-actions button { width: 100%; }
+      .test-h2 {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+      }
 
-      .build-plan-btn { width: 100%; max-width: 360px; }
+      .test-card {
+        padding: 1.5rem;
+      }
 
-      .floating-pill { bottom: 1rem; max-width: calc(100vw - 1.5rem); }
-      .floating-text { display: block; font-size: 0.78rem; padding: 0.6rem 1rem; }
-      .floating-btn  { margin: 0.3rem; padding: 0.75rem 1.1rem; font-size: 0.8rem; }
+      .app-h2 {
+        font-size: clamp(1.7rem, 6vw, 2.2rem);
+        margin-bottom: 2rem;
+      }
 
-      .diag-pills-wrap { gap: 0.5rem; }
+      .app-card {
+        min-height: 260px;
+      }
+
+      .mock-phone {
+        width: 120px;
+        bottom: 4rem;
+      }
+
+      .diag-h2 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+      }
+
+      .loc-h2 {
+        font-size: clamp(1.7rem, 6vw, 2.2rem);
+        margin-bottom: 2rem;
+      }
+
+      .loc-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .loc-actions button {
+        width: 100%;
+      }
+
+      .how-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0 1rem;
+      }
+
+      .how-actions button {
+        width: 100%;
+      }
+
+      .build-plan-btn {
+        width: 100%;
+        max-width: 360px;
+      }
+
+      .floating-pill {
+        bottom: 1rem;
+        max-width: calc(100vw - 1.5rem);
+      }
+
+      .floating-text {
+        display: block;
+        font-size: 0.78rem;
+        padding: 0.6rem 1rem;
+      }
+
+      .floating-btn {
+        margin: 0.3rem;
+        padding: 0.75rem 1.1rem;
+        font-size: 0.8rem;
+      }
+
+      .diag-pills-wrap {
+        gap: 0.5rem;
+      }
+
       .diag-pill-tag {
         font-size: 0.76rem;
         padding: 0.5rem 1rem;
       }
 
       /* app section sub-text: fix negative margin on mobile */
-      .app-section > p {
+      .app-section>p {
         margin-top: 0 !important;
         margin-bottom: 2rem;
         font-size: 0.88rem;
@@ -1776,72 +2002,185 @@
   <style>
     /* ─ SCROLL REVEAL ─ */
     [data-reveal] {
-      opacity: 0; transform: translateY(36px);
-      transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    [data-reveal].revealed { opacity:1; transform:none; }
-    [data-reveal][data-delay="1"] { transition-delay:.1s; }
-    [data-reveal][data-delay="2"] { transition-delay:.2s; }
-    [data-reveal][data-delay="3"] { transition-delay:.3s; }
-    [data-reveal][data-delay="4"] { transition-delay:.4s; }
-    [data-reveal][data-delay="5"] { transition-delay:.5s; }
+
+    [data-reveal].revealed {
+      opacity: 1;
+      transform: none;
+    }
+
+    [data-reveal][data-delay="1"] {
+      transition-delay: .1s;
+    }
+
+    [data-reveal][data-delay="2"] {
+      transition-delay: .2s;
+    }
+
+    [data-reveal][data-delay="3"] {
+      transition-delay: .3s;
+    }
+
+    [data-reveal][data-delay="4"] {
+      transition-delay: .4s;
+    }
+
+    [data-reveal][data-delay="5"] {
+      transition-delay: .5s;
+    }
 
     /* ─ SCROLL PROGRESS BAR ─ */
     #scroll-progress {
-      position:fixed; top:0; left:0; z-index:9999;
-      height:2px; width:0%;
-      background:linear-gradient(90deg,#c0362a,#e8614a,#ff8c7a);
-      transition:width .1s; pointer-events:none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, #c0362a, #e8614a, #ff8c7a);
+      transition: width .1s;
+      pointer-events: none;
     }
 
     /* ─ CURSOR SPOTLIGHT ─ */
     #spotlight {
-      position:fixed; inset:0; z-index:999; pointer-events:none;
-      background:radial-gradient(circle 320px at var(--mx,50%) var(--my,50%),rgba(192,54,42,.09) 0%,transparent 70%);
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: radial-gradient(circle 320px at var(--mx, 50%) var(--my, 50%), rgba(192, 54, 42, .09) 0%, transparent 70%);
     }
 
     /* ─ HERO CANVAS ─ */
-    #hero-canvas { position:absolute; inset:0; z-index:1; pointer-events:none; }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
 
     /* ─ HERO ENTRANCE STAGGER ─ */
-    .hero-stars   { animation:heroFadeUp .9s .3s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero h1      { animation:heroFadeUp .9s .5s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero h2      { animation:heroFadeUp .9s .7s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero-sub     { animation:heroFadeUp .9s .9s cubic-bezier(0.22,1,0.36,1) both; }
-    .hero-actions { animation:heroFadeUp .9s 1.1s cubic-bezier(0.22,1,0.36,1) both; }
+    .hero-stars {
+      animation: heroFadeUp .9s .3s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero h1 {
+      animation: heroFadeUp .9s .5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero h2 {
+      animation: heroFadeUp .9s .7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-sub {
+      animation: heroFadeUp .9s .9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-actions {
+      animation: heroFadeUp .9s 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
     @keyframes heroFadeUp {
-      from { opacity:0; transform:translateY(28px); }
-      to   { opacity:1; transform:none; }
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     /* ─ BUTTON RIPPLE ─ */
-    button { position:relative; overflow:hidden; }
-    .ripple {
-      position:absolute; border-radius:50%;
-      background:rgba(255,255,255,.35); pointer-events:none;
-      transform:scale(0); animation:rippleAnim .6s ease-out;
+    button {
+      position: relative;
+      overflow: hidden;
     }
-    @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .35);
+      pointer-events: none;
+      transform: scale(0);
+      animation: rippleAnim .6s ease-out;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
 
     /* ─ FLOATING PILL SINGLE-LINE ─ */
-    .floating-pill { white-space:nowrap; width:max-content; max-width:calc(100vw - 2rem); }
-    .floating-text { white-space:nowrap; flex-shrink:0; }
-    .floating-btn  { white-space:nowrap; flex-shrink:0; }
-    @keyframes pillSlideIn {
-      from { opacity:0; transform:translateX(-50%) translateY(20px); }
-      to   { opacity:1; transform:translateX(-50%) translateY(0); }
+    .floating-pill {
+      white-space: nowrap;
+      width: max-content;
+      max-width: calc(100vw - 2rem);
     }
-    .floating-pill:not(.hidden) { animation:pillSlideIn .5s cubic-bezier(0.22,1,0.36,1) both; }
+
+    .floating-text {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .floating-btn {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    @keyframes pillSlideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .floating-pill:not(.hidden) {
+      animation: pillSlideIn .5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
 
     /* ─ STEP NODE PULSE ─ */
-    .step-node { animation:nodePulse 3.5s ease-in-out infinite; }
-    .step-col:nth-child(2) .step-node { animation-delay:.7s; }
-    .step-col:nth-child(3) .step-node { animation-delay:1.4s; }
-    .step-col:nth-child(4) .step-node { animation-delay:2.1s; }
-    .step-col:nth-child(5) .step-node { animation-delay:2.8s; }
+    .step-node {
+      animation: nodePulse 3.5s ease-in-out infinite;
+    }
+
+    .step-col:nth-child(2) .step-node {
+      animation-delay: .7s;
+    }
+
+    .step-col:nth-child(3) .step-node {
+      animation-delay: 1.4s;
+    }
+
+    .step-col:nth-child(4) .step-node {
+      animation-delay: 2.1s;
+    }
+
+    .step-col:nth-child(5) .step-node {
+      animation-delay: 2.8s;
+    }
+
     @keyframes nodePulse {
-      0%,100% { box-shadow:0 0 0 0 rgba(255,255,255,.4); }
-      50%      { box-shadow:0 0 0 8px rgba(255,255,255,0); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, .4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+      }
     }
 
     /* ─ STEP CASCADE — scroll-driven ─ */
@@ -1849,9 +2188,10 @@
     .step-col[data-step] {
       opacity: 0;
       transform: translateY(44px) scale(0.96);
-      transition: opacity .5s cubic-bezier(0.22,1,0.36,1), transform .5s cubic-bezier(0.22,1,0.36,1);
+      transition: opacity .5s cubic-bezier(0.22, 1, 0.36, 1), transform .5s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: opacity, transform;
     }
+
     .step-col[data-step].step-visible {
       opacity: 1;
       transform: none;
@@ -1861,67 +2201,154 @@
     .step-track {
       transform-origin: left;
       transform: scaleX(var(--line-progress, 0));
-      transition: none; /* JS drives it smoothly */
+      transition: none;
+      /* JS drives it smoothly */
     }
 
     /* ─ PROTOCOL CARD: 3D TILT + IMAGE ZOOM ─ */
-    .protocol-card { transform-style:preserve-3d; will-change:transform; }
-    .protocol-img {
-      transition:transform .4s cubic-bezier(0.22,1,0.36,1), box-shadow .4s;
+    .protocol-card {
+      transform-style: preserve-3d;
+      will-change: transform;
     }
+
+    .protocol-img {
+      transition: transform .4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow .4s;
+    }
+
     .protocol-card:hover .protocol-img {
-      transform:scale(1.1);
-      box-shadow:0 8px 24px rgba(0,0,0,.28);
+      transform: scale(1.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
     }
 
     /* ─ TESTIMONIAL SHIMMER ─ */
-    .test-card { position:relative; overflow:hidden; transition:transform .3s cubic-bezier(0.22,1,0.36,1), box-shadow .3s; }
-    .test-card::before {
-      content:''; position:absolute; top:0; left:-75%;
-      width:50%; height:100%;
-      background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
-      transform:skewX(-15deg); transition:left .7s ease; pointer-events:none;
+    .test-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow .3s;
     }
-    .test-card:hover::before { left:140%; }
-    .test-card:hover { transform:translateY(-6px); box-shadow:0 20px 48px rgba(0,0,0,.12); }
+
+    .test-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
+      transform: skewX(-15deg);
+      transition: left .7s ease;
+      pointer-events: none;
+    }
+
+    .test-card:hover::before {
+      left: 140%;
+    }
+
+    .test-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, .12);
+    }
 
     /* ─ APP CARD HOVER LIFT ─ */
     .app-card {
-      transition:transform .4s cubic-bezier(0.22,1,0.36,1), box-shadow .4s;
-      cursor:pointer;
+      transition: transform .4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow .4s;
+      cursor: pointer;
     }
-    .app-card:hover { transform:translateY(-8px) scale(1.015); box-shadow:0 28px 64px rgba(0,0,0,.35); }
+
+    .app-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow: 0 28px 64px rgba(0, 0, 0, .35);
+    }
 
     /* ─ MOCK PHONE FLOAT ─ */
-    .mock-phone { animation:phoneBob 4s ease-in-out infinite; }
+    .mock-phone {
+      animation: phoneBob 4s ease-in-out infinite;
+    }
+
     @keyframes phoneBob {
-      0%,100% { transform:translateX(-50%) translateY(0); }
-      50%      { transform:translateX(-50%) translateY(-10px); }
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
     }
 
     /* ─ LOCATION FEATURE SLIDE ─ */
-    .loc-feature { transition:transform .3s cubic-bezier(0.22,1,0.36,1); }
-    .loc-feature:hover { transform:translateX(6px); }
-    .loc-icon { transition:color .2s, transform .3s; }
-    .loc-feature:hover .loc-icon { color:#fff; transform:scale(1.3); }
+    .loc-feature {
+      transition: transform .3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .loc-feature:hover {
+      transform: translateX(6px);
+    }
+
+    .loc-icon {
+      transition: color .2s, transform .3s;
+    }
+
+    .loc-feature:hover .loc-icon {
+      color: #fff;
+      transform: scale(1.3);
+    }
 
     /* ─ DIAGNOSTIC PILL HOVER ─ */
-    .diag-pill-tag { transition:all .25s cubic-bezier(0.22,1,0.36,1) !important; }
+    .diag-pill-tag {
+      transition: all .25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+
     .diag-pill-tag:hover {
-      background:rgba(255,255,255,.22) !important;
-      border-color:rgba(255,255,255,.6) !important;
-      transform:translateY(-3px) scale(1.04);
-      box-shadow:0 8px 24px rgba(0,0,0,.3);
+      background: rgba(255, 255, 255, .22) !important;
+      border-color: rgba(255, 255, 255, .6) !important;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
     }
 
     /* ─ NAV LOGO ANIMATE (removed) ─ */
 
     /* ─ SECTION CONNECTOR DRAW ─ */
-    .v-line,.how-v-line,.loc-v-line,.diag-v-line-top {
-      transform-origin:top;
-      animation:drawLine 1.2s ease-in-out both;
+    .v-line,
+    .how-v-line,
+    .loc-v-line,
+    .diag-v-line-top {
+      transform-origin: top;
+      animation: drawLine 1.2s ease-in-out both;
     }
-    @keyframes drawLine { from { transform:scaleY(0); } to { transform:scaleY(1); } }
+
+    @keyframes drawLine {
+      from {
+        transform: scaleY(0);
+      }
+
+      to {
+        transform: scaleY(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 80px;
+      }
+
+      .chat-widget-container,
+      [class*="chat-bubble"],
+      [id*="chat"],
+      .chatbot-trigger,
+      #chatbot-widget {
+        bottom: 16px !important;
+        right: 16px !important;
+        z-index: 999;
+      }
+
+      #whatsapp-float {
+        bottom: 90px !important;
+        left: 16px !important;
+        right: auto !important;
+      }
+    }
   </style>
 </head>
 
@@ -1954,8 +2381,8 @@
     <a href="#" class="nav-mobile-link">How it works</a>
     <a href="#" class="nav-mobile-link">Diagnostics</a>
     <a href="#" class="nav-mobile-link">Locations</a>
-    <button class="nav-mobile-cta" style="background: transparent; border: 1px solid rgba(255,255,255,0.5); color: #fff;">Book a Free Consultancy</button>
-    <button class="nav-mobile-cta">Take your health score</button>
+    <button class="nav-mobile-cta nav-mobile-cta-primary">Book a Free Consultancy</button>
+    <button class="nav-mobile-cta nav-mobile-cta-ghost">Take your health score</button>
   </div>
 
   <section class="hero">
@@ -1967,7 +2394,7 @@
 
     <div class="hero-content">
       <div class="hero-stars">
-  <div style="
+        <div style="
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -1976,21 +2403,21 @@
     border: 1px solid rgba(212, 175, 95, 0.55);
     background: rgba(212, 175, 95, 0.08);
   ">
-    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
-    </svg>
-    <span style="
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F" />
+          </svg>
+          <span style="
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       color: #D4AF5F;
     ">Fitflix Wellness Club</span>
-    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-      <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F"/>
-    </svg>
-  </div>
-</div>
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <polygon points="7,1 8.5,5.5 13,5.5 9.3,8.3 10.8,13 7,10.2 3.2,13 4.7,8.3 1,5.5 5.5,5.5" fill="#D4AF5F" />
+          </svg>
+        </div>
+      </div>
       <h1>
         Prevent Disease<br>
         Optimise Health
@@ -2025,7 +2452,7 @@
         <span class="press-item">Biohacking</span>
         <span class="press-item">Strength & Conditioning</span>
         <span class="press-item">Mobility Training</span>
-    
+
         <!-- Duplicate for smooth infinite scroll -->
         <span class="press-item">Wellness</span>
         <span class="press-item">Longevity ◆</span>
@@ -2055,89 +2482,127 @@
 
   <section class="stop-waiting">
     <h2 data-reveal>Stop waiting.<br><span class="line2">Start knowing.</span></h2>
-    <p data-reveal data-delay="2">We go beyond standard check-ups to build plans that uncover risks early and optimise your long-term health.</p>
+    <p data-reveal data-delay="2">We go beyond standard check-ups to build plans that uncover risks early and optimise
+      your long-term health.</p>
 
     <div class="protocol-grid">
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span>
+        <img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span
+          class="protocol-name">HBOT Therapy</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span>
+        <img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span
+          class="protocol-name">CRYO Therapy</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna Room" /><span class="protocol-name">IR Sauna &amp; Steam Room</span>
+        <img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna Room" /><span
+          class="protocol-name">IR Sauna &amp; Steam Room</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span>
+        <img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span
+          class="protocol-name">Cold Plunge</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga & Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span>
+        <img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga & Pilates" /><span
+          class="protocol-name">Yoga &amp; Pilates</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength & Conditioning" /><span class="protocol-name">Strength &amp; Conditioning</span>
+        <img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength & Conditioning" /><span
+          class="protocol-name">Strength &amp; Conditioning</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Full Body Analysis" /><span class="protocol-name">Full Body Analysis</span>
+        <img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Full Body Analysis" /><span
+          class="protocol-name">Full Body Analysis</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="Genetic Analysis" /><span class="protocol-name">Genetic Analysis</span>
+        <img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="Genetic Analysis" /><span
+          class="protocol-name">Genetic Analysis</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor Consultations" /><span class="protocol-name">Healt coach Consultation</span>
+        <img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Health Coach Consultation" /><span
+          class="protocol-name">Health Coach Consultation</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Programming</span>
+        <img class="protocol-img" src="assets/sports_scientist_1775110828509.png"
+          alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Programming</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Customised Diets" /><span class="protocol-name">Customised Diets</span>
+        <img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Customised Diets" /><span
+          class="protocol-name">Customised Diets</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Bespoke Workouts" /><span class="protocol-name">Bespoke Workouts</span>
+        <img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Bespoke Workouts" /><span
+          class="protocol-name">Bespoke Workouts</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span>
+        <img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span
+          class="protocol-name">Disease Prevention</span>
       </div>
       <div class="protocol-card" data-tilt data-reveal data-delay="1">
-        <img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy & Genomic Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span>
+        <img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy & Genomic Testing" /><span
+          class="protocol-name">Allergy &amp; Genomic Testing</span>
       </div>
     </div>
 
-    <div class="protocol-marquee-wrap" aria-hidden="true">
-
-      <div class="protocol-marquee-row row-ltr">
-        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png" alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png" alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png" alt="IR Sauna" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png" alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png" alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png" alt="Strength" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png" alt="Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
+    <div class="protocol-scroll-wrap" aria-hidden="true">
+      <div class="protocol-scroll-track">
+        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png"
+            alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png"
+            alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png"
+            alt="IR Sauna Room" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png"
+            alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png"
+            alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png"
+            alt="Strength & Conditioning" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png"
+            alt="Full Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png"
+            alt="Genetic Analysis" /><span class="protocol-name">Genetic Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png"
+            alt="Health Coach Consultation" /><span class="protocol-name">Health Coach Consultation</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png"
+            alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Programming</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png"
+            alt="Customised Diets" /><span class="protocol-name">Customised Diets</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png"
+            alt="Bespoke Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png"
+            alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png"
+            alt="Allergy & Genomic Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/hbot_therapy_1775110674649.png"
+            alt="HBOT Therapy" /><span class="protocol-name">HBOT Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cryo_therapy_1775110695276.png"
+            alt="CRYO Therapy" /><span class="protocol-name">CRYO Therapy</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/ir_sauna_1775110714954.png"
+            alt="IR Sauna Room" /><span class="protocol-name">IR Sauna &amp; Steam Room</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/cold_plunge_1775110732335.png"
+            alt="Cold Plunge" /><span class="protocol-name">Cold Plunge</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/yoga_pilates_1775110748232.png"
+            alt="Yoga &amp; Pilates" /><span class="protocol-name">Yoga &amp; Pilates</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/strength_cond_1775110766760.png"
+            alt="Strength & Conditioning" /><span class="protocol-name">Strength &amp; Conditioning</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/body_analysis_1775110781646.png"
+            alt="Full Body Analysis" /><span class="protocol-name">Full Body Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png"
+            alt="Genetic Analysis" /><span class="protocol-name">Genetic Analysis</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png"
+            alt="Health Coach Consultation" /><span class="protocol-name">Health Coach Consultation</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png"
+            alt="Sports Scientist Coaching" /><span class="protocol-name">Sports Scientist Programming</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png"
+            alt="Customised Diets" /><span class="protocol-name">Customised Diets</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png"
+            alt="Bespoke Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png"
+            alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
+        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png"
+            alt="Allergy & Genomic Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
       </div>
-
-      <div class="protocol-marquee-row row-rtl">
-        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Diets" /><span class="protocol-name">Customised Diets</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/dna_analysis_1775110797790.png" alt="DNA Analysis" /><span class="protocol-name">Saliva DNA Analysis</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/doctor_consult_1775110811570.png" alt="Doctor" /><span class="protocol-name">Doctor Consultations</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/sports_scientist_1775110828509.png" alt="Sports Scientist" /><span class="protocol-name">Sports Scientist Coaching</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/custom_diets_1775110844907.png" alt="Diets" /><span class="protocol-name">Customised Diets</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/bespoke_workouts_1775110860741.png" alt="Workouts" /><span class="protocol-name">Bespoke Workouts</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/disease_prevention_1775110876063.png" alt="Disease Prevention" /><span class="protocol-name">Disease Prevention</span></div>
-        <div class="protocol-card"><img class="protocol-img" src="assets/allergy_testing_1775110893174.png" alt="Allergy Testing" /><span class="protocol-name">Allergy &amp; Genomic Testing</span></div>
-      </div>
-
     </div>
 
     <button class="build-plan-btn">Build your health plan</button>
@@ -2161,38 +2626,53 @@
       <div class="steps-timeline" id="stepsTimeline">
         <div class="step-track"></div>
         <div class="step-col" data-step="1">
-          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-node">
+            <div class="step-node-dot"></div>
+          </div>
           <div class="step-label">Step 1</div>
           <h3 class="step-title">Complete Body Analysis.</h3>
-          <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a complete ECG.</p>
+          <p class="step-desc">Start with an in-depth analysis measuring everything from body fat and hemoglobin to a
+            complete ECG.</p>
           <a href="./pages/step1.html" class="step-link-btn">Explore body analysis</a>
         </div>
         <div class="step-col" data-step="2">
-          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-node">
+            <div class="step-node-dot"></div>
+          </div>
           <div class="step-label">Step 2</div>
           <h3 class="step-title">Genetic Analysis.</h3>
-          <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any underlying allergies.</p>
+          <p class="step-desc">Discover your genome data to reveal your predisposition to certain diseases and any
+            underlying allergies.</p>
           <a href="./pages/step2.html" class="step-link-btn">Discover genetic analysis</a>
         </div>
         <div class="step-col" data-step="3">
-          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-node">
+            <div class="step-node-dot"></div>
+          </div>
           <div class="step-label">Step 3</div>
           <h3 class="step-title">Health Coach Consultation.</h3>
-          <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you to discuss health markers.</p>
+          <p class="step-desc">If anything is flagged in your reports, an in-house doctor will directly consult with you
+            to discuss health markers.</p>
           <a href="./pages/step3.html" class="step-link-btn">Meet your health coach</a>
         </div>
         <div class="step-col" data-step="4">
-          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-node">
+            <div class="step-node-dot"></div>
+          </div>
           <div class="step-label">Step 4</div>
           <h3 class="step-title">Sports Scientist Programming.</h3>
-          <p class="step-desc">Your Health coach, scientist and nutritionist work closely to build your bespoke schedule, workouts, therapies, and diets.</p>
+          <p class="step-desc">Your Health coach, scientist and nutritionist work closely to build your bespoke
+            schedule, workouts, therapies, and diets.</p>
           <a href="./pages/step4.html" class="step-link-btn">Review your program</a>
         </div>
         <div class="step-col" data-step="5">
-          <div class="step-node"><div class="step-node-dot"></div></div>
+          <div class="step-node">
+            <div class="step-node-dot"></div>
+          </div>
           <div class="step-label">Step 5</div>
           <h3 class="step-title">Coach Handover.</h3>
-          <p class="step-desc">Your journey continues with ongoing support from your dedicated longevity coach to execute your plan.</p>
+          <p class="step-desc">Your journey continues with ongoing support from your dedicated longevity coach to
+            execute your plan.</p>
           <a href="./pages/step5.html" class="step-link-btn">Start your health plan</a>
         </div>
       </div>
@@ -2206,7 +2686,8 @@
 
   <section class="testimonials-section">
     <div class="test-stars" data-reveal>★★★★★</div>
-    <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just three months</h2>
+    <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just
+      three months</h2>
     <div class="google-reviews-wrap" data-reveal data-delay="2">
       <div class="sk-ww-google-reviews" data-embed-id="25683407"></div>
     </div>
@@ -2221,30 +2702,35 @@
 
   <section class="diag-section" id="wellness-services">
     <div class="diag-bg">
-      <span class="section-pill diag-pill" data-reveal>Our Services</span>
+      <p class="section-eyebrow" data-reveal>Our Services</p>
       <h2 class="diag-h2" data-reveal data-delay="2">Choose your path<br>to better health</h2>
-      <p class="diag-sub" data-reveal data-delay="3">From bloodwork to advanced diagnostics, create a tailored plan that reveals where your health is heading and how to improve it.</p>
+      <p class="diag-sub" data-reveal data-delay="3">From bloodwork to advanced diagnostics, create a tailored plan that
+        reveals where your health is heading and how to improve it.</p>
 
-      <div class="diag-pills-wrap">
-        <div class="diag-pill-tag">Body Fat Analysis</div>
-        <div class="diag-pill-tag">Hemoglobin Test</div>
-        <div class="diag-pill-tag">ECG & Heart Health</div>
-        <div class="diag-pill-tag">Genome Data</div>
-        <div class="diag-pill-tag">Allergy Testing</div>
-        <div class="diag-pill-tag">HBOT Setup</div>
-        <div class="diag-pill-tag">CRYO Therapy</div>
-        <div class="diag-pill-tag">IR Sauna</div>
-        <div class="diag-pill-tag">Cold Plunge</div>
-        <div class="diag-pill-tag">Steam Room</div>
-        <div class="diag-pill-tag">Yoga Classes</div>
-        <div class="diag-pill-tag">Pilates Studio</div>
-        <div class="diag-pill-tag">Strength & Conditioning</div>
-        <div class="diag-pill-tag">Custom Diets</div>
-        <div class="diag-pill-tag">Personal Workouts</div>
+      <div class="services-grid">
+        <div class="service-group">
+          <h3>Diagnostics</h3>
+          <p>Body fat analysis, hemoglobin, ECG, heart health, genome data, allergy testing, full body analysis</p>
+          <a href="#consultation" class="service-cta">Book diagnostic →</a>
+        </div>
+        <div class="service-group">
+          <h3>Recovery Therapies</h3>
+          <p>HBOT, cryotherapy, IR sauna, cold plunge, steam room, red light therapy</p>
+          <a href="#consultation" class="service-cta">Explore therapies →</a>
+        </div>
+        <div class="service-group">
+          <h3>Fitness & Training</h3>
+          <p>Strength & conditioning, yoga, pilates, personal workouts, bespoke training programs</p>
+          <a href="#consultation" class="service-cta">Start training →</a>
+        </div>
+        <div class="service-group">
+          <h3>Nutrition & Coaching</h3>
+          <p>Customised diets, health coach consultations, sports scientist programming, disease prevention</p>
+          <a href="#consultation" class="service-cta">Get your plan →</a>
+        </div>
       </div>
 
       <button class="btn-white-solid">Get Your Recommended Plan</button>
-      <p class="takes-txt" style="color: rgba(255,255,255,0.4); margin-top: 0.75rem;">Takes 2 minutes</p>
     </div>
   </section>
 
@@ -2324,18 +2810,12 @@
       <div class="loc-grid">
         <div>
           <h2 class="loc-h2" data-reveal>Find us in <span>Sainikpuri, Hyderabad</span></h2>
-          
-          <div class="loc-map-container" style="margin-top: 2rem; margin-bottom: 2.5rem; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.3); position: relative;">
-            <!-- Overlay prevents scroll trapping; vanishes when clicked -->
-            <div style="position: absolute; inset: 0; z-index: 10; cursor: pointer;" onclick="this.style.pointerEvents='none'"></div>
-            <iframe 
-              src="https://maps.google.com/maps?q=FITFLIX%20WELLNESS%20CLUB%20SAINIKPURI&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-              width="100%" 
-              height="280" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy">
-            </iframe>
+
+          <div class="loc-map-container" style="margin-top: 2rem; margin-bottom: 2.5rem;">
+            <iframe
+              src="https://maps.google.com/maps?q=FITFLIX+WELLNESS+CLUB+SAINIKPURI&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="420" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" title="Fitflix Sainikpuri Location"></iframe>
           </div>
 
           <div class="loc-actions">
@@ -2378,18 +2858,26 @@
       <div>
         <span class="section-pill share-pill">Share & Explore</span>
         <h2 class="share-h2">Share Fitflix with your friends and family.</h2>
-        <p class="share-copy">Help others discover our DNA-based fitness and wellness club in Sainikpuri by sharing via WhatsApp, Twitter, Facebook, or LinkedIn.</p>
+        <p class="share-copy">Help others discover our DNA-based fitness and wellness club in Sainikpuri by sharing via
+          WhatsApp, Twitter, Facebook, or LinkedIn.</p>
         <div class="resource-links">
-          <a href="https://www.healthline.com/health/cryotherapy" target="_blank" rel="noreferrer">Cryotherapy benefits on Healthline</a>
-          <a href="https://www.healthline.com/health/hyperbaric-oxygen-therapy" target="_blank" rel="noreferrer">HBOT research and recovery science</a>
-          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7441611/" target="_blank" rel="noreferrer">DNA-based fitness personalization study</a>
+          <a href="https://www.healthline.com/health/cryotherapy" target="_blank" rel="noreferrer">Cryotherapy benefits
+            on Healthline</a>
+          <a href="https://www.healthline.com/health/hyperbaric-oxygen-therapy" target="_blank" rel="noreferrer">HBOT
+            research and recovery science</a>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7441611/" target="_blank" rel="noreferrer">DNA-based
+            fitness personalization study</a>
         </div>
       </div>
       <div class="share-actions">
-        <a href="https://api.whatsapp.com/send?text=Discover%20Fitflix%20Sainikpuri%20%E2%80%94%20India%27s%20first%20DNA-based%20fitness%20and%20wellness%20club.%20https%3A%2F%2Ffitflixsainikpuri.com%2F" target="_blank" rel="noreferrer" class="share-button">WhatsApp</a>
-        <a href="https://twitter.com/intent/tweet?text=Discover%20Fitflix%20Sainikpuri%20%E2%80%94%20India%27s%20first%20DNA-based%20fitness%20and%20wellness%20club.&url=https%3A%2F%2Ffitflixsainikpuri.com%2F" target="_blank" rel="noreferrer" class="share-button">Twitter</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffitflixsainikpuri.com%2F" target="_blank" rel="noreferrer" class="share-button">Facebook</a>
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffitflixsainikpuri.com%2F" target="_blank" rel="noreferrer" class="share-button">LinkedIn</a>
+        <a href="https://api.whatsapp.com/send?text=Discover%20Fitflix%20Sainikpuri%20%E2%80%94%20India%27s%20first%20DNA-based%20fitness%20and%20wellness%20club.%20https%3A%2F%2Ffitflix.in%2F"
+          target="_blank" rel="noreferrer" class="share-button">WhatsApp</a>
+        <a href="https://twitter.com/intent/tweet?text=Discover%20Fitflix%20Sainikpuri%20%E2%80%94%20India%27s%20first%20DNA-based%20fitness%20and%20wellness%20club.&url=https%3A%2F%2Ffitflix.in%2F"
+          target="_blank" rel="noreferrer" class="share-button">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffitflix.in%2F" target="_blank"
+          rel="noreferrer" class="share-button">Facebook</a>
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffitflix.in%2F" target="_blank"
+          rel="noreferrer" class="share-button">LinkedIn</a>
       </div>
     </div>
   </section>
@@ -2438,73 +2926,19 @@
         </div>
         <div class="footer-app-copy">
           <h3 class="footer-app-heading">Things are better<br><span>in the Fitflix app</span></h3>
-          <div class="footer-qr-placeholder">
-            <div class="qr-grid">
-              <div class="qr-block"></div>
-              <div class="qr-gap"></div>
-              <div class="qr-block"></div>
-              <div class="qr-gap"></div>
-              <div class="qr-gap"></div>
-              <div class="qr-gap"></div>
-              <div class="qr-block"></div>
-              <div class="qr-gap"></div>
-              <div class="qr-block"></div>
-            </div>
-          </div>
-          <div class="footer-store-btns">
-            <div class="store-btn">
-              <span class="store-icon">⌘</span>
-              <div>
-                <div class="store-small">Download on the</div>
-                <div class="store-big">App Store</div>
-              </div>
-            </div>
-            <div class="store-btn">
-              <span class="store-icon">▶</span>
-              <div>
-                <div class="store-small">GET IT ON</div>
-                <div class="store-big">Google Play</div>
-              </div>
-            </div>
-          </div>
+          <p class="app-coming-soon">📱 Fitflix app — coming soon on iOS & Android</p>
         </div>
       </div>
 
       <div class="footer-nav-block">
-        <div class="footer-nav-cols">
-          <div class="footer-nav-col">
-            <div class="footer-nav-heading">Services</div>
-            <a href="#" class="footer-nav-link">Health Check</a>
-            <a href="#" class="footer-nav-link">Longevity Programs</a>
-            <a href="#" class="footer-nav-link">Advanced Blood Test</a>
-            <a href="#" class="footer-nav-link">Full Body MRI</a>
-            <a href="#" class="footer-nav-link">Gut Microbiome</a>
-          </div>
-          <div class="footer-nav-col">
-            <div class="footer-nav-heading">About</div>
-            <a href="#" class="footer-nav-link">Our Biomarkers</a>
-            <a href="#" class="footer-nav-link">Fitflix Doctors</a>
-            <a href="#" class="footer-nav-link">Our Locations</a>
-            <a href="#" class="footer-nav-link">For Business</a>
-            <a href="#" class="footer-nav-link">Customer Stories</a>
-          </div>
-          <div class="footer-nav-col">
-            <div class="footer-nav-heading">Other</div>
-            <a href="#" class="footer-nav-link">FAQs</a>
-            <a href="#" class="footer-nav-link">Gifting</a>
-            <a href="#" class="footer-nav-link">Blog &nbsp;|&nbsp; Press Centre</a>
-            <a href="#" class="footer-nav-link">Careers</a>
-            <a href="#" id="share-page-link" class="footer-nav-link">Share Fitflix</a>
-          </div>
-        </div>
-
         <div class="footer-email-row">
           <p class="footer-signup-label"><strong>Sign up</strong> to discover better health with Fitflix</p>
           <div class="footer-email-form">
             <input type="email" placeholder="Email address" class="footer-email-input" />
             <button class="footer-submit-btn">Submit</button>
           </div>
-          <p class="footer-consent">By submitting, you agree to our <a href="#" class="footer-policy-link">Privacy
+          <p class="footer-consent">By submitting, you agree to our <a href="pages/privacy.html"
+              class="footer-policy-link">Privacy
               Policy</a>. Unsubscribe anytime.</p>
         </div>
       </div>
@@ -2514,11 +2948,24 @@
       <div class="footer-bottom-left">
         <span>© 2026 Fitflix</span>
         <span class="footer-sep">|</span>
-        <a href="mailto:support@fitflix.in" class="footer-bottom-link">support@fitflix.in</a>
+        <a href="mailto:support@fitflix.in" style="
+    color: #c8873a;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+  ">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+          </svg>
+          support@fitflix.in
+        </a>
         <span class="footer-sep">|</span>
-        <a href="#" class="footer-bottom-link">Terms &amp; Conditions</a>
+        <a href="pages/terms.html" class="footer-bottom-link">Terms &amp; Conditions</a>
         <span class="footer-sep">|</span>
-        <a href="#" class="footer-bottom-link">Privacy Policy</a>
+        <a href="pages/privacy.html" class="footer-bottom-link">Privacy Policy</a>
       </div>
       <div class="footer-bottom-right">
         <a href="#" class="footer-social" aria-label="LinkedIn">
@@ -2555,7 +3002,7 @@
     </div>
   </footer>
 
-  <div class="booking-modal-overlay" id="bookingModalOverlay">
+  <div class="booking-modal-overlay" id="consultation">
     <div class="booking-modal-container">
       <button class="booking-close-btn" id="bookingCloseBtn">&times;</button>
       <div class="booking-header">
@@ -2596,9 +3043,14 @@
           <input type="text" name="website" tabindex="-1" autocomplete="off">
         </div>
         <div class="booking-footer">
-          <button type="submit" class="btn-booking-primary">Submit request</button>
+          <button type="submit" class="btn-booking-primary" id="bookingSubmitBtn">Submit request</button>
         </div>
       </form>
+      <div id="form-success" style="display:none; text-align:center; padding: 2rem 1rem;">
+        <div style="font-size: 48px; margin-bottom: 16px;">✓</div>
+        <h3 style="margin-bottom: 8px;">Request received!</h3>
+        <p style="opacity: 0.7;">We'll call you back within 24 hours to schedule your free consultancy.</p>
+      </div>
     </div>
   </div>
 
@@ -3169,8 +3621,8 @@
       border-radius: 50%;
       background: #b89a78;
       color: #fff;
-      border: 2px solid rgba(255,255,255,0.1);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       cursor: pointer;
       z-index: 9999;
       display: flex;
@@ -3178,10 +3630,12 @@
       justify-content: center;
       transition: transform 0.3s, background 0.3s;
     }
+
     .chatbot-trigger:hover {
       transform: scale(1.05);
       background: #a07850;
     }
+
     .chatbot-trigger svg {
       width: 32px;
       height: 32px;
@@ -3200,20 +3654,21 @@
       backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 20px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
       display: flex;
       flex-direction: column;
       z-index: 9999;
       overflow: hidden;
-      transition: opacity 0.3s cubic-bezier(0.22,1,0.36,1), transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       transform-origin: bottom right;
     }
+
     #chatbot-widget.chatbot-hidden {
       opacity: 0;
       pointer-events: none;
       transform: scale(0.9) translateY(20px);
     }
-    
+
     .chatbot-header {
       padding: 1.25rem 1.5rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -3221,8 +3676,9 @@
       align-items: center;
       justify-content: space-between;
       color: #fff;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
+
     .chatbot-title {
       display: flex;
       align-items: center;
@@ -3231,6 +3687,7 @@
       font-size: 1.2rem;
       letter-spacing: 0.02em;
     }
+
     .chatbot-dot {
       width: 10px;
       height: 10px;
@@ -3238,19 +3695,21 @@
       background: #4caf82;
       box-shadow: 0 0 8px #4caf82;
     }
+
     .chatbot-close {
       background: none;
       border: none;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       font-size: 1.5rem;
       cursor: pointer;
       line-height: Math;
       transition: color 0.2s;
     }
+
     .chatbot-close:hover {
       color: #fff;
     }
-    
+
     .chatbot-messages {
       flex: 1;
       padding: 1.5rem;
@@ -3269,6 +3728,7 @@
       line-height: 1.5;
       word-wrap: break-word;
     }
+
     .chat-msg.bot {
       background: rgba(255, 255, 255, 0.05);
       color: rgba(255, 255, 255, 0.9);
@@ -3276,24 +3736,26 @@
       border-bottom-left-radius: 4px;
       align-self: flex-start;
     }
+
     .chat-msg.user {
       background: #b89a78;
       color: #fff;
       border-bottom-right-radius: 4px;
       align-self: flex-end;
     }
-    
+
     .chatbot-input-area {
       padding: 1.25rem 1.5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       gap: 0.75rem;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
     }
+
     #chat-input-text {
       flex: 1;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 0.8rem 1rem;
       color: #fff;
@@ -3302,9 +3764,11 @@
       outline: none;
       transition: border-color 0.2s;
     }
+
     #chat-input-text:focus {
       border-color: #b89a78;
     }
+
     #chat-send-btn {
       background: #b89a78;
       color: #fff;
@@ -3316,27 +3780,46 @@
       font-weight: 500;
       transition: background 0.2s;
     }
+
     #chat-send-btn:hover {
       background: #a07850;
     }
+
     .loading-dots {
       display: flex;
       gap: 4px;
       padding: 0.5rem;
     }
+
     .loading-dots span {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.5);
       animation: bounce 1.4s infinite ease-in-out both;
     }
-    .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-    .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1); }
+
+    .loading-dots span:nth-child(1) {
+      animation-delay: -0.32s;
     }
+
+    .loading-dots span:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0);
+      }
+
+      40% {
+        transform: scale(1);
+      }
+    }
+
     /* ADD THIS: Chatbot Notification Styles */
     .chatbot-notification {
       position: fixed;
@@ -3348,7 +3831,7 @@
       border-radius: 12px;
       font-family: var(--sans);
       font-size: 0.9rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       z-index: 9999;
       cursor: pointer;
       display: flex;
@@ -3378,7 +3861,7 @@
     .chatbot-notif-close {
       background: none;
       border: none;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 1.2rem;
       cursor: pointer;
       padding: 0;
@@ -3388,6 +3871,7 @@
     .chatbot-notif-close:hover {
       color: #fff;
     }
+
     /* ─── END CHATBOT WIDGET ─── */
 
     /* ─── BOOKING MODAL ─── */
@@ -3405,10 +3889,12 @@
       transition: opacity 0.3s ease;
       padding: 1.5rem;
     }
+
     .booking-modal-overlay.active {
       opacity: 1;
       pointer-events: all;
     }
+
     .booking-modal-container {
       background: #151515;
       width: 100%;
@@ -3425,9 +3911,11 @@
       max-height: 90vh;
       overflow-y: auto;
     }
+
     .booking-modal-overlay.active .booking-modal-container {
       transform: translateY(0);
     }
+
     .booking-close-btn {
       position: absolute;
       top: 1.25rem;
@@ -3446,16 +3934,19 @@
       transition: all 0.2s;
       z-index: 10;
     }
+
     .booking-close-btn:hover {
       background: rgba(255, 255, 255, 0.2);
       color: #fff;
     }
+
     .booking-header {
       padding: 2.5rem 3rem 1.5rem;
       text-align: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     .booking-pill {
       display: inline-block;
       border: 1px solid rgba(255, 255, 255, 0.3);
@@ -3468,6 +3959,7 @@
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
+
     .booking-title {
       font-family: var(--serif);
       font-size: 2rem;
@@ -3475,12 +3967,14 @@
       color: #fff;
       line-height: 1.2;
     }
+
     .booking-form {
       padding: 2rem 3rem 2.5rem;
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
     }
+
     .booking-honeypot {
       position: absolute;
       left: -9999px;
@@ -3490,19 +3984,23 @@
       opacity: 0;
       pointer-events: none;
     }
+
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
     }
+
     .form-group label {
       font-family: var(--sans);
       font-size: 0.8rem;
       color: rgba(255, 255, 255, 0.7);
     }
+
     .form-group label span {
       color: #e8614a;
     }
+
     .form-group input,
     .form-group select {
       background: rgba(0, 0, 0, 0.3);
@@ -3515,27 +4013,31 @@
       transition: border-color 0.2s;
       color-scheme: dark;
     }
-    
+
     .form-group input[type="date"]::-webkit-calendar-picker-indicator {
       cursor: pointer;
       opacity: 0.8;
       transition: opacity 0.2s;
     }
-    
+
     .form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
       opacity: 1;
     }
+
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
       border-color: rgba(255, 255, 255, 0.4);
     }
+
     .form-group select option {
       color: #000;
     }
+
     .booking-footer {
       margin-top: 1rem;
     }
+
     .btn-booking-primary {
       width: 100%;
       background: #fff;
@@ -3549,12 +4051,18 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .btn-booking-primary:hover {
       background: #e6e6e6;
       transform: translateY(-1px);
     }
+
     @media (max-width: 600px) {
-      .booking-header, .booking-form { padding: 1.5rem; }
+
+      .booking-header,
+      .booking-form {
+        padding: 1.5rem;
+      }
     }
   </style>
 
@@ -3591,7 +4099,7 @@
     /* ── Floating pill ── */
     const pill = document.getElementById('floatingPill');
     const hero = document.querySelector('.hero');
-    new IntersectionObserver(([e]) => pill.classList.toggle('hidden', e.isIntersecting), {threshold:.1}).observe(hero);
+    new IntersectionObserver(([e]) => pill.classList.toggle('hidden', e.isIntersecting), { threshold: .1 }).observe(hero);
 
     /* ── Scroll progress ── */
     const _prog = document.getElementById('scroll-progress');
@@ -3599,7 +4107,7 @@
       const t = document.documentElement.scrollTop;
       const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       _prog.style.width = (t / h * 100) + '%';
-    }, {passive:true});
+    }, { passive: true });
 
     /* ── Cursor spotlight ── */
     const _spot = document.getElementById('spotlight');
@@ -3611,16 +4119,16 @@
     /* ── Scroll Reveal (bidirectional toggle) ── */
     const revealObs = new IntersectionObserver(entries => {
       entries.forEach(e => e.target.classList.toggle('revealed', e.isIntersecting));
-    }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+    }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
     document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
 
     /* ── 3D Card Tilt ── */
     document.querySelectorAll('[data-tilt]').forEach(card => {
       card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
-        const dx = (e.clientX - r.left - r.width/2)  / (r.width/2);
-        const dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
-        card.style.transform = `translateY(-4px) rotateX(${-dy*6}deg) rotateY(${dx*6}deg) scale(1.03)`;
+        const dx = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+        const dy = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+        card.style.transform = `translateY(-4px) rotateX(${-dy * 6}deg) rotateY(${dx * 6}deg) scale(1.03)`;
       });
       card.addEventListener('mouseleave', () => card.style.transform = '');
     });
@@ -3632,7 +4140,7 @@
       const ripple = document.createElement('span');
       ripple.classList.add('ripple');
       const r = btn.getBoundingClientRect(), size = Math.max(r.width, r.height);
-      ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-r.left-size/2}px;top:${e.clientY-r.top-size/2}px`;
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px`;
       btn.appendChild(ripple);
       ripple.addEventListener('animationend', () => ripple.remove());
     });
@@ -3643,24 +4151,24 @@
        and each step card fades up in sequence, all tied to scroll position.
        Scrolling back reverses the animation.                                 */
     (function () {
-      const timeline  = document.getElementById('stepsTimeline');
-      const howBg     = document.querySelector('.how-bg');
+      const timeline = document.getElementById('stepsTimeline');
+      const howBg = document.querySelector('.how-bg');
       const howSection = document.querySelector('.how-section');
       if (!timeline || !howBg || !howSection) return;
 
-      const track     = timeline.querySelector('.step-track');
-      const stepCols  = [...timeline.querySelectorAll('.step-col[data-step]')]
-                          .sort((a, b) => +a.dataset.step - +b.dataset.step);
-      const N         = stepCols.length;
+      const track = timeline.querySelector('.step-track');
+      const stepCols = [...timeline.querySelectorAll('.step-col[data-step]')]
+        .sort((a, b) => +a.dataset.step - +b.dataset.step);
+      const N = stepCols.length;
 
       // Thresholds at which each step fully appears (0–1 of section scroll)
       // First step changed to -0.1 so it loads immediately upon reaching the section
       const stepThresholds = [-0.1, 0.30, 0.45, 0.60, 0.75];
 
       function getProgress() {
-        const rect    = howSection.getBoundingClientRect();
-        const winH    = window.innerHeight;
-        
+        const rect = howSection.getBoundingClientRect();
+        const winH = window.innerHeight;
+
         const totalScrollable = rect.height - winH;
         let progress = 0;
         if (totalScrollable > 0) {
@@ -3699,13 +4207,38 @@
 
   <script type="module" src="/src/speed-insights.js"></script>
 
+  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Fitflix%2C%20I%27d%20like%20to%20know%20more%20about%20your%20wellness%20programs"
+    target="_blank" rel="noopener noreferrer" id="whatsapp-float" aria-label="Chat with Fitflix on WhatsApp" style="
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      z-index: 1000;
+      text-decoration: none;
+      transition: transform 0.2s;
+    " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  </a>
+
   <div id="chatbot-notification" class="chatbot-notification hidden" onclick="toggleChat()">
     Hey there! Got any questions?
-    <button class="chatbot-notif-close" onclick="event.stopPropagation(); closeChatNotif()" aria-label="Close notification">×</button>
+    <button class="chatbot-notif-close" onclick="event.stopPropagation(); closeChatNotif()"
+      aria-label="Close notification">×</button>
   </div>
   <button id="chatbot-trigger" class="chatbot-trigger" onclick="toggleChat()" aria-label="Chat with Fitflix AI">
     <svg viewBox="0 0 24 24">
-      <path d="M20 2H4C2.9 2 2.01 2.9 2.01 4L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z"/>
+      <path
+        d="M20 2H4C2.9 2 2.01 2.9 2.01 4L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 11H7V9h2v2zm4 0h-2V9h2v2zm4 0h-2V9h2v2z" />
     </svg>
   </button>
 
@@ -3718,7 +4251,8 @@
       <button class="chatbot-close" onclick="toggleChat()">×</button>
     </div>
     <div class="chatbot-messages" id="chat-messages">
-      <div class="chat-msg bot">Hello. I can answer Fitflix questions from our knowledge base. Ask me anything about Fitflix programs and services.</div>
+      <div class="chat-msg bot">Hello. I can answer Fitflix questions from our knowledge base. Ask me anything about
+        Fitflix programs and services.</div>
     </div>
     <div class="chatbot-input-area">
       <input type="text" id="chat-input-text" placeholder="Message..." onkeypress="handleChatEnter(event)" />
@@ -3829,8 +4363,8 @@
         messagesEl.appendChild(botDiv);
 
       } catch (err) {
-        if(messagesEl.contains(loaderDiv)) {
-           messagesEl.removeChild(loaderDiv);
+        if (messagesEl.contains(loaderDiv)) {
+          messagesEl.removeChild(loaderDiv);
         }
 
         const errDiv = document.createElement('div');
@@ -3866,13 +4400,13 @@
             }, 1000); // 1 second delay
           }
         }, { threshold: 0.2 }); // Triggers when user scrolls 20% into the 3rd section
-        
+
         observer.observe(targetSection);
       }
     });
 
     /* ── Booking Modal Logic ── */
-    const bookingOverlay = document.getElementById('bookingModalOverlay');
+    const bookingOverlay = document.getElementById('consultation');
     const bookingCloseBtn = document.getElementById('bookingCloseBtn');
     const bookingForm = document.getElementById('bookingForm');
     const followUpDateInput = document.getElementById('followUpDate');
@@ -3880,7 +4414,7 @@
       const today = new Date().toISOString().split('T')[0];
       followUpDateInput.min = today;
     }
-    
+
     const allBtns = document.querySelectorAll('button');
     allBtns.forEach(btn => {
       const text = btn.textContent.trim().toLowerCase();
@@ -3901,9 +4435,25 @@
       }
     });
 
+    function resetBookingForm() {
+      if (bookingForm) {
+        bookingForm.reset();
+        bookingForm.style.display = '';
+      }
+      const formSuccess = document.getElementById('form-success');
+      if (formSuccess) {
+        formSuccess.style.display = 'none';
+      }
+      const submitBtn = document.getElementById('bookingSubmitBtn');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
+    }
+
     if (bookingCloseBtn) {
       bookingCloseBtn.addEventListener('click', () => {
         bookingOverlay.classList.remove('active');
+        resetBookingForm();
       });
     }
 
@@ -3911,17 +4461,51 @@
       bookingOverlay.addEventListener('click', (e) => {
         if (e.target === bookingOverlay) {
           bookingOverlay.classList.remove('active');
+          resetBookingForm();
         }
       });
     }
+
+    function openBookingModal() {
+      if (bookingOverlay) {
+        bookingOverlay.classList.add('active');
+      }
+    }
+
+    if (window.location.hash === '#consultation') {
+      openBookingModal();
+    }
+
+    document.querySelectorAll('a[href="#consultation"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBookingModal();
+      });
+    });
 
     if (bookingForm) {
       bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn ? submitBtn.textContent : '';
+        const formSuccess = document.getElementById('form-success');
         const formData = new FormData(bookingForm);
+        const name = String(formData.get('name') || '').trim();
+        const phone = String(formData.get('mobile') || '').trim();
+
+        if (!name || !phone) {
+          alert('Please enter your name and mobile number.');
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = true;
+        }
+
+        bookingForm.style.display = 'none';
+        if (formSuccess) {
+          formSuccess.style.display = 'block';
+        }
 
         const selectedDate = String(formData.get('date') || '').trim();
         let followUpDate = null;
@@ -3933,8 +4517,8 @@
         const selectedInterest = String(formData.get('interest') || '').trim();
         const payload = {
           formType: 'callback',
-          name: String(formData.get('name') || '').trim(),
-          phone: String(formData.get('mobile') || '').trim(),
+          name,
+          phone,
           email: String(formData.get('email') || '').trim(),
           interests: selectedInterest ? [selectedInterest] : [],
           source: `${window.location.hostname || 'fitflix.in'}:booking-consultancy`,
@@ -3945,11 +4529,6 @@
 
         if (followUpDate) {
           payload.followUpDate = followUpDate;
-        }
-
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitting...';
         }
 
         try {
@@ -3965,86 +4544,9 @@
           if (!response.ok) {
             throw new Error(result.error || `HTTP ${response.status}`);
           }
-
-          alert('Consultation request submitted successfully!');
-          bookingOverlay.classList.remove('active');
-          bookingForm.reset();
         } catch (error) {
-          alert(`Unable to submit your request right now: ${error.message}`);
-        } finally {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalBtnText || 'Submit request';
-          }
+          console.warn('Lead capture failed:', error.message);
         }
-      });
-    }
-  </script>
-  <script>
-    const sharePageLink = document.getElementById('share-page-link');
-    if (sharePageLink) {
-      sharePageLink.addEventListener('click', async function (event) {
-        event.preventDefault();
-        const shareData = {
-          title: document.title,
-          text: 'Check out Fitflix Sainikpuri – DNA-based fitness, wellness, cold plunge, HBOT, cryotherapy, sauna and gym training.',
-          url: window.location.href
-        };
-
-        if (navigator.share) {
-          try {
-            await navigator.share(shareData);
-          } catch (error) {
-            console.warn('Native share canceled or not available', error);
-          }
-          return;
-        }
-
-        if (navigator.clipboard) {
-          try {
-            await navigator.clipboard.writeText(`${shareData.title} - ${shareData.url}`);
-            alert('Page link copied to clipboard. Share it on your social media.');
-            return;
-          } catch (error) {
-            console.warn('Clipboard write failed', error);
-          }
-        }
-
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
-      });
-    }
-  </script>
-  <script>
-    const sharePageLink = document.getElementById('share-page-link');
-    if (sharePageLink) {
-      sharePageLink.addEventListener('click', async function (event) {
-        event.preventDefault();
-        const shareData = {
-          title: document.title,
-          text: 'Check out Fitflix Sainikpuri – DNA-based fitness, wellness, cold plunge, HBOT, cryotherapy, sauna and gym training.',
-          url: window.location.href
-        };
-
-        if (navigator.share) {
-          try {
-            await navigator.share(shareData);
-          } catch (error) {
-            console.warn('Native share canceled or unavailable', error);
-          }
-          return;
-        }
-
-        if (navigator.clipboard) {
-          try {
-            await navigator.clipboard.writeText(`${shareData.title} - ${shareData.url}`);
-            alert('Page link copied to clipboard. Share it on your social network.');
-            return;
-          } catch (error) {
-            console.warn('Clipboard write failed', error);
-          }
-        }
-
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
       });
     }
   </script>
