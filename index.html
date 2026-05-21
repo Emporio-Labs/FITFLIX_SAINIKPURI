@@ -2349,10 +2349,214 @@
         right: auto !important;
       }
     }
+
+    /* Hello Bar Styling */
+    .hello-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(90deg, #c0362a, #ff5733);
+      color: white;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      padding: 0 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .hello-bar-hidden .hello-bar {
+      transform: translateY(-100%);
+    }
+    .hello-bar-hidden nav {
+      top: 0 !important;
+    }
+    .hello-bar-hidden body {
+      padding-top: 0 !important;
+    }
+    .hello-bar-content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hello-bar-link {
+      color: white;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .hello-bar-close {
+      position: absolute;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Nav Highlight Link */
+    .clinical-highlight {
+      color: #ff5733 !important;
+      font-weight: 600;
+      position: relative;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 1.25rem;
+      font-size: 0.82rem;
+      font-family: var(--sans);
+    }
+    .clinical-highlight:hover {
+      opacity: 0.9;
+    }
+    .new-badge {
+      font-size: 7px;
+      background: #ff5733;
+      color: white;
+      padding: 1px 4px;
+      border-radius: 4px;
+      position: absolute;
+      top: -8px;
+      right: -15px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    /* Mobile Nav Highlight Link */
+    .nav-mobile-link.clinical-highlight-mobile {
+      color: #ff5733 !important;
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+    }
+    .nav-mobile-link.clinical-highlight-mobile .new-badge {
+      top: -6px;
+      right: -18px;
+    }
+
+    /* Glassmorphic Popup Overlay */
+    .clinical-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 8, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .clinical-popup-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .clinical-popup-content {
+      background: rgba(26, 14, 10, 0.92);
+      border: 1px solid rgba(255, 87, 51, 0.35);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.05);
+      transform: scale(0.95);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .clinical-popup-overlay.active .clinical-popup-content {
+      transform: scale(1);
+    }
+    .clinical-popup-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .clinical-popup-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: #ff5733;
+      border: 1px solid #ff5733;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .clinical-popup-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      color: white;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+    .clinical-popup-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .clinical-popup-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .clinical-popup-btn-primary {
+      background: #ff5733;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 100px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, transform 0.2s;
+      text-align: center;
+      display: block;
+    }
+    .clinical-popup-btn-primary:hover {
+      background: #e04e2b;
+      transform: translateY(-1px);
+    }
+    .clinical-popup-btn-secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.2s;
+    }
+    .clinical-popup-btn-secondary:hover {
+      color: white;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Smart Hello Bar -->
+  <div id="hello-bar" class="hello-bar">
+    <div class="hello-bar-content">
+      <span>🚀 <strong>New:</strong> Medically supervised Diabetes Remission program now live.</span>
+      <a href="https://programs.fitflix.in?utm_source=fitflix_main&utm_medium=hello_bar" class="hello-bar-link">Learn More →</a>
+    </div>
+    <button class="hello-bar-close" id="closeHelloBar" aria-label="Close banner">×</button>
+  </div>
 
   <div id="scroll-progress"></div>
   <div id="spotlight"></div>
@@ -2369,6 +2573,10 @@
       Fitflix
     </a>
     <div class="nav-actions">
+      <a href="https://programs.fitflix.in?utm_source=fitflix_main&utm_medium=nav_link" class="clinical-highlight" target="_self">
+        Clinical Programs
+        <span class="new-badge">New</span>
+      </a>
       <button class="nav-cta-outline">Book a Free Consultancy</button>
       <button class="nav-cta">Take your health score</button>
     </div>
@@ -2381,6 +2589,10 @@
     <a href="#" class="nav-mobile-link">How it works</a>
     <a href="#" class="nav-mobile-link">Diagnostics</a>
     <a href="#" class="nav-mobile-link">Locations</a>
+    <a href="https://programs.fitflix.in?utm_source=fitflix_main&utm_medium=nav_link" class="nav-mobile-link clinical-highlight-mobile" target="_self">
+      Clinical Programs
+      <span class="new-badge">New</span>
+    </a>
     <button class="nav-mobile-cta nav-mobile-cta-primary">Book a Free Consultancy</button>
     <button class="nav-mobile-cta nav-mobile-cta-ghost">Take your health score</button>
   </div>
@@ -4207,7 +4419,7 @@
 
   <script type="module" src="/src/speed-insights.js"></script>
 
-  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Fitflix%2C%20I%27d%20like%20to%20know%20more%20about%20your%20wellness%20programs"
+  <a href="https://wa.me/917026000465?text=Hi%20Fitflix%2C%20I%27d%20like%20to%20know%20more%20about%20your%20wellness%20programs"
     target="_blank" rel="noopener noreferrer" id="whatsapp-float" aria-label="Chat with Fitflix on WhatsApp" style="
       position: fixed;
       bottom: 90px;
@@ -4549,8 +4761,99 @@
         }
       });
     }
+
+    /* ── Hello Bar / Nav position adjust ── */
+    const helloBar = document.getElementById('hello-bar');
+    const mainNav = document.getElementById('mainNav');
+    const closeHello = document.getElementById('closeHelloBar');
+
+    if (helloBar && mainNav && closeHello) {
+      if (localStorage.getItem('hello-bar-closed') === 'true') {
+        document.body.classList.add('hello-bar-hidden');
+      } else {
+        // Set initial padding to prevent layout shifts
+        document.body.style.paddingTop = '40px';
+        mainNav.style.top = '40px';
+      }
+
+      closeHello.addEventListener('click', () => {
+        localStorage.setItem('hello-bar-closed', 'true');
+        document.body.classList.add('hello-bar-hidden');
+        document.body.style.paddingTop = '0';
+      });
+
+      // On scroll, adjust nav positioning
+      window.addEventListener('scroll', () => {
+        if (!document.body.classList.contains('hello-bar-hidden')) {
+          const y = window.scrollY;
+          if (y > 40) {
+            mainNav.style.top = '0';
+          } else {
+            mainNav.style.top = `${40 - y}px`;
+          }
+        }
+      }, { passive: true });
+    }
+
+    /* ── Clinical Popup (Scroll + Exit Intent) ── */
+    const popup = document.getElementById('diabetes-popup');
+    const closePopup = document.getElementById('closeDiabetesPopup');
+    const declinePopup = document.getElementById('declineDiabetesPopup');
+
+    if (popup && closePopup && declinePopup) {
+      function showPopup() {
+        if (sessionStorage.getItem('diabetes-popup-shown') !== 'true') {
+          sessionStorage.setItem('diabetes-popup-shown', 'true');
+          popup.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function hidePopup() {
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closePopup.addEventListener('click', hidePopup);
+      declinePopup.addEventListener('click', hidePopup);
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) hidePopup();
+      });
+
+      // 1. Scroll-depth trigger (50%)
+      window.addEventListener('scroll', () => {
+        const scrollH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        if (scrollH > 0) {
+          const percent = (window.scrollY / scrollH) * 100;
+          if (percent >= 50) {
+            showPopup();
+          }
+        }
+      }, { passive: true });
+
+      // 2. Exit Intent trigger
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY < 0) {
+          showPopup();
+        }
+      });
+    }
   </script>
   <script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script>
+
+  <!-- Diabetes Clinical Program Popup -->
+  <div id="diabetes-popup" class="clinical-popup-overlay">
+    <div class="clinical-popup-content">
+      <button class="clinical-popup-close" id="closeDiabetesPopup" aria-label="Close popup">×</button>
+      <div class="clinical-popup-badge">NEW CLINICAL PROGRAM</div>
+      <h3 class="clinical-popup-title">Struggling with Type 2 Diabetes?</h3>
+      <p class="clinical-popup-desc">Our new DNA-informed clinical program is now open for Cohort 02. See if you're eligible for remission.</p>
+      <div class="clinical-popup-actions">
+        <a href="https://programs.fitflix.in?utm_source=fitflix_main&utm_medium=popup" class="clinical-popup-btn-primary">Explore Diabetes Program</a>
+        <button class="clinical-popup-btn-secondary" id="declineDiabetesPopup">I'm just browsing</button>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
