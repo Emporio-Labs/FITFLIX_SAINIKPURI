@@ -1023,10 +1023,14 @@
       color: var(--dark);
     }
 
-    .test-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    .google-reviews-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .google-reviews-wrap .sk-ww-google-reviews {
+      width: 100%;
     }
 
     .test-card {
@@ -2190,28 +2194,8 @@
   <section class="testimonials-section">
     <div class="test-stars" data-reveal>★★★★★</div>
     <h2 class="test-h2" data-reveal data-delay="2">Our members have seen meaningful<br>health improvements within just three months</h2>
-    <div class="test-grid">
-      <div class="test-card" data-reveal data-delay="1">
-        <p class="test-quote">"If you are serious about your health, Fitflix is a no-brainer. I now have a clear game plan of best-practice for my body moving forward."</p>
-        <div class="test-author">
-          <div class="test-avatar av1"></div>
-          <div><div class="test-name">Paul W.</div><div class="test-age">55 years</div></div>
-        </div>
-      </div>
-      <div class="test-card" data-reveal data-delay="3">
-        <p class="test-quote">"If you want a long, happy, healthy life, join Fitflix. I now know exactly what needs fixing and have a team of experts guiding me every step of the way."</p>
-        <div class="test-author">
-          <div class="test-avatar av2"></div>
-          <div><div class="test-name">Sarita H.</div><div class="test-age">43 years</div></div>
-        </div>
-      </div>
-      <div class="test-card" data-reveal data-delay="5">
-        <p class="test-quote">"I am beyond impressed. The data provided, the way it was explained to me, and the support I received along the way was all of the highest standard."</p>
-        <div class="test-author">
-          <div class="test-avatar av3"></div>
-          <div><div class="test-name">Katy P.</div><div class="test-age">39 years</div></div>
-        </div>
-      </div>
+    <div class="google-reviews-wrap" data-reveal data-delay="2">
+      <div class="sk-ww-google-reviews" data-embed-id="25683407"></div>
     </div>
   </section>
 
@@ -3699,7 +3683,8 @@
       onScroll(); // run once on load
     })();
   </script>
-
+
+
 
   <div id="chatbot-notification" class="chatbot-notification hidden" onclick="toggleChat()">
     Hey there! Got any questions?
@@ -4050,6 +4035,7 @@
       });
     }
   </script>
+  <script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script>
 </body>
 
 </html>
