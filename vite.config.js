@@ -78,7 +78,14 @@ module.exports = defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
-          longevity: resolve(__dirname, 'fitflix_longevity_health_score.html')
+          longevity: resolve(__dirname, 'fitflix_longevity_health_score.html'),
+          privacy: resolve(__dirname, 'pages/privacy.html'),
+          terms: resolve(__dirname, 'pages/terms.html'),
+          step1: resolve(__dirname, 'pages/step1.html'),
+          step2: resolve(__dirname, 'pages/step2.html'),
+          step3: resolve(__dirname, 'pages/step3.html'),
+          step4: resolve(__dirname, 'pages/step4.html'),
+          step5: resolve(__dirname, 'pages/step5.html')
         }
       }
     }
