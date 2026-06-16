@@ -79,6 +79,7 @@ module.exports = defineConfig(({ mode }) => {
         input: {
           main: resolve(__dirname, 'index.html'),
           longevity: resolve(__dirname, 'fitflix_longevity_health_score.html'),
+<<<<<<< Updated upstream
           privacy: resolve(__dirname, 'pages/privacy.html'),
           terms: resolve(__dirname, 'pages/terms.html'),
           step1: resolve(__dirname, 'pages/step1.html'),
@@ -86,6 +87,11 @@ module.exports = defineConfig(({ mode }) => {
           step3: resolve(__dirname, 'pages/step3.html'),
           step4: resolve(__dirname, 'pages/step4.html'),
           step5: resolve(__dirname, 'pages/step5.html')
+=======
+          locSainikpuri: resolve(__dirname, 'locations/sainikpuri.html'),
+          locMarathahalli: resolve(__dirname, 'locations/marathahalli.html'),
+          locElectronicCity: resolve(__dirname, 'locations/electronic-city.html')
+>>>>>>> Stashed changes
         }
       }
     }

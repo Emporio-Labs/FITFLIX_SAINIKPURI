@@ -1652,6 +1652,222 @@
       margin: 0.5rem 0;
     }
 
+    /* ─── OUR SANCTUARIES (branch network) ─── */
+    .sanctuaries-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sanct-bg {
+      background: linear-gradient(160deg, #8a4030 0%, #6a2818 45%, #3d1206 100%);
+      padding: 5rem 8vw;
+      text-align: center;
+    }
+
+    .sanct-pill {
+      color: rgba(255, 255, 255, 0.7);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sanct-h2 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .sanct-h2 span {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .sanct-sub {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+
+    .sanct-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .sanct-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .sanct-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .sanct-card-media {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #5a2418, #2a0e06);
+    }
+
+    .sanct-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .sanct-card:hover .sanct-card-media img {
+      transform: scale(1.05);
+    }
+
+    /* on-brand graceful fallback when no photo is present */
+    .sanct-card-media.is-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.6;
+    }
+
+    .sanct-card-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(26, 14, 6, 0.55) 100%);
+      pointer-events: none;
+    }
+
+    .sanct-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 100px;
+      background: rgba(10, 8, 6, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(6px);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .sanct-card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 24px;
+    }
+
+    .sanct-card-name {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.55rem;
+      line-height: 1.15;
+      color: #fff;
+      margin: 0 0 0.2rem;
+    }
+
+    .sanct-card-city {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #f8d9a0;
+      margin: 0 0 0.9rem;
+    }
+
+    .sanct-card-desc {
+      font-size: 0.86rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-weight: 300;
+      line-height: 1.65;
+      margin: 0 0 1.1rem;
+    }
+
+    .sanct-highlights {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 1.5rem;
+      padding: 0;
+    }
+
+    .sanct-highlights li {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 100px;
+      padding: 0.35rem 0.8rem;
+      letter-spacing: 0.01em;
+    }
+
+    .sanct-card-cta {
+      margin-top: auto;
+      align-self: flex-start;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: #f8d9a0;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .sanct-card-cta:hover {
+      text-decoration: underline;
+    }
+
+    /* stretched-link: makes the whole card clickable while keeping the anchor semantic */
+    .sanct-card-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .sanct-card:focus-within {
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 0 0 2px rgba(248, 217, 160, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .sanct-bg {
+        padding: 4rem 6vw;
+      }
+
+      .sanct-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+      }
+    }
+
     /* ─── FLOATING CTA PILL ─── */
     .floating-pill {
       position: fixed !important;
@@ -2701,9 +2917,10 @@
   </nav>
 
   <div class="nav-mobile-menu" id="navMobileMenu">
-    <a href="#" class="nav-mobile-link">How it works</a>
-    <a href="#" class="nav-mobile-link">Diagnostics</a>
-    <a href="#" class="nav-mobile-link">Locations</a>
+    <a href="#how-it-works" class="nav-mobile-link">How it works</a>
+    <a href="#wellness-services" class="nav-mobile-link">Diagnostics</a>
+    <a href="#sanctuaries" class="nav-mobile-link">Our Sanctuaries</a>
+    <a href="#locations" class="nav-mobile-link">Locations</a>
     <a href="https://programs.fitflix.in?utm_source=fitflix_main&utm_medium=nav_link" class="nav-mobile-link clinical-highlight-mobile" target="_self">
       Clinical Programs
       <span class="new-badge">New</span>
@@ -2758,6 +2975,7 @@
       <div class="hero-links">
         <a href="#how-it-works">How it works</a>
         <a href="#wellness-services">View wellness services</a>
+        <a href="#sanctuaries">Our sanctuaries</a>
         <a href="#locations">Find us in Sainikpuri</a>
       </div>
     </div>
@@ -3118,6 +3336,86 @@
         </div>
         <div class="app-card-label">Real-time results</div>
         <div class="app-card-title">Your data,<br>clearly explained.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── OUR SANCTUARIES (branch network) ─── -->
+  <section class="sanctuaries-section" id="sanctuaries">
+    <div class="sanct-bg">
+      <span class="section-pill sanct-pill" data-reveal>Our Sanctuaries</span>
+      <h2 class="sanct-h2" data-reveal data-delay="2">More than a gym.<br><span>A network of sanctuaries.</span></h2>
+      <p class="sanct-sub" data-reveal data-delay="3">Three destinations across Hyderabad and Bangalore. One elite
+        standard of fitness, recovery and longevity — wherever you train.</p>
+
+      <div class="sanct-grid">
+        <!-- Sainikpuri -->
+        <article class="sanct-card" data-reveal data-delay="1">
+          <div class="sanct-card-media is-placeholder">
+            <span class="sanct-badge">Hyderabad</span>
+          </div>
+          <div class="sanct-card-body">
+            <h3 class="sanct-card-name">FitFlix Sainikpuri</h3>
+            <p class="sanct-card-city">Hyderabad · Flagship</p>
+            <p class="sanct-card-desc">India's first DNA-based fitness &amp; wellness club — diagnostics, recovery
+              therapies and strength training under one roof.</p>
+            <ul class="sanct-highlights">
+              <li>DNA Coaching</li>
+              <li>HBOT &amp; Cryo</li>
+              <li>Cold Plunge</li>
+              <li>Strength Lab</li>
+            </ul>
+            <a href="locations/sainikpuri.html" class="sanct-card-cta">Explore branch →</a>
+          </div>
+        </article>
+
+        <!-- Marathahalli -->
+        <article class="sanct-card" data-reveal data-delay="2">
+          <div class="sanct-card-media">
+            <!-- REVIEW: photo sourced from public listing; confirm usage rights -->
+            <img src="assets/branches/marathahalli/gym-1.webp"
+              alt="FitFlix Gym Marathahalli, Bangalore — training floor" width="512" height="383" loading="lazy"
+              decoding="async">
+            <span class="sanct-badge">Bangalore</span>
+          </div>
+          <div class="sanct-card-body">
+            <h3 class="sanct-card-name">FitFlix Marathahalli</h3>
+            <p class="sanct-card-city">Bangalore</p>
+            <p class="sanct-card-desc">A spacious, premium training floor in the heart of Marathahalli — top-rated for
+              its equipment, cleanliness and expert coaches.</p>
+            <ul class="sanct-highlights">
+              <li>Strength &amp; Free Weights</li>
+              <li>Cardio Zone</li>
+              <li>Personal Training</li>
+              <li>4.8★ Rated</li>
+            </ul>
+            <a href="locations/marathahalli.html" class="sanct-card-cta">Explore branch →</a>
+          </div>
+        </article>
+
+        <!-- Electronic City -->
+        <article class="sanct-card" data-reveal data-delay="3">
+          <div class="sanct-card-media">
+            <!-- REVIEW: photo sourced from public listing; confirm usage rights -->
+            <img src="assets/branches/electronic-city/gym-1.jpg"
+              alt="FitFlix Gym Electronic City, Bangalore — workout area" width="640" height="427" loading="lazy"
+              decoding="async">
+            <span class="sanct-badge">Bangalore</span>
+          </div>
+          <div class="sanct-card-body">
+            <h3 class="sanct-card-name">FitFlix Electronic City</h3>
+            <p class="sanct-card-city">Bangalore · E-City Phase 1</p>
+            <p class="sanct-card-desc">A full-spectrum fitness destination with gym, yoga, Zumba, MMA and HIIT —
+              scientifically designed equipment, open till late.</p>
+            <ul class="sanct-highlights">
+              <li>Gym &amp; HIIT</li>
+              <li>Yoga &amp; Zumba</li>
+              <li>MMA</li>
+              <li>AC · Parking · WiFi</li>
+            </ul>
+            <a href="locations/electronic-city.html" class="sanct-card-cta">Explore branch →</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
