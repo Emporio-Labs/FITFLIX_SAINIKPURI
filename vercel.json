@@ -4,6 +4,10 @@
     {
       "source": "/leads/public-capture",
       "destination": "/api/leads/public-capture"
+    },
+    {
+      "source": "/delete-account",
+      "destination": "/pages/delete-account.html"
     }
   ],
   "headers": [
