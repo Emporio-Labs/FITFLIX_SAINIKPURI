@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Deletion | Fitflix Sainikpuri</title>
+  <meta name="description"
+    content="Fitflix Account Deletion request portal — request permanent deletion of your Fitflix account and associated personal data.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="../assets/fitflix_logo.png">
+  <link rel="shortcut icon" href="../assets/fitflix_logo.png">
+  <link rel="apple-touch-icon" href="../assets/fitflix_logo.png">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --cream: #f0ece4;
+      --cream-light: #f5f1ea;
+      --dark: #1a1a18;
+      --green: #2d5a3d;
+      --muted: #8a8580;
+      --gold: #c8873a;
+      --text-on-dark: rgba(255, 255, 255, 0.88);
+      --text-on-dark-muted: rgba(255, 255, 255, 0.55);
+      --error-red: #ff4d4d;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: #0c0c0b;
+      color: var(--text-on-dark);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Organic noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Header Nav */
+    header {
+      background: rgba(10, 10, 8, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      height: 30px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .back-btn {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.55rem 1.25rem;
+      border-radius: 100px;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: rgba(200, 135, 58, 0.12);
+      box-shadow: 0 4px 12px rgba(200, 135, 58, 0.1);
+    }
+
+    /* Content Layout */
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    .page-header {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      color: #ffffff;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Info Section */
+    .info-section {
+      background: rgba(200, 135, 58, 0.04);
+      border-left: 3px solid var(--gold);
+      padding: 1.75rem;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 2.5rem;
+      border-top: 1px solid rgba(200, 135, 58, 0.08);
+      border-right: 1px solid rgba(200, 135, 58, 0.08);
+      border-bottom: 1px solid rgba(200, 135, 58, 0.08);
+    }
+
+    .info-section h3 {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .info-section ul {
+      margin-left: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .info-section li {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .info-section p {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .info-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Form Card Container */
+    .form-container {
+      background: rgba(25, 25, 24, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.01em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group textarea {
+      width: 100%;
+      background: rgba(10, 10, 8, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: #ffffff;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(200, 135, 58, 0.15);
+      background: rgba(10, 10, 8, 0.8);
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 0.75rem;
+      margin: 2rem 0;
+      align-items: flex-start;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-top: 0.3rem;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .checkbox-group label {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: #000000;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .submit-btn:hover {
+      background: #df9e4f;
+      box-shadow: 0 4px 15px rgba(200, 135, 58, 0.25);
+    }
+
+    .submit-btn:disabled {
+      background: var(--muted);
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    /* Banners & Messages */
+    .status-banner {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+    }
+
+    .status-banner.error {
+      background: rgba(220, 53, 69, 0.1);
+      border: 1px solid rgba(220, 53, 69, 0.25);
+      color: var(--error-red);
+      display: block;
+    }
+
+    .success-container {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      display: none;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(45, 90, 61, 0.15);
+      border: 2px solid var(--green);
+      color: #55c57a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .success-container h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .success-container p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a09;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-on-dark-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--text-on-dark-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/fitflix_logo.png" alt="Fitflix Logo" class="nav-logo-img">
+        <span>Fitflix</span>
+      </a>
+      <a href="../index.html" class="back-btn">Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content-wrapper">
+    <div class="page-header">
+      <span class="eyebrow">Data Safety</span>
+      <h1>Account Deletion</h1>
+      <p class="subtitle">Submit a request to permanently delete your Fitflix account and associated personal data.</p>
+    </div>
+
+    <!-- Info Section (Policy Disclosures) -->
+    <section class="info-section">
+      <h3>Important Information Regarding Your Request</h3>
+      <p>Please note that deleting your account is permanent. Once completed, your profile will be disabled, and you will lose access to all Fitflix applications and services.</p>
+      
+      <p><strong>What data will be permanently deleted:</strong></p>
+      <ul>
+        <li>Your profile details (full name, phone number, email address, profile avatar).</li>
+        <li>Your health assessment logs and compiled Fitflix Health Scores.</li>
+        <li>Your workout history, fitness tracking metrics, and schedules.</li>
+        <li>Your direct messaging logs with concierges, scientists, and trainers.</li>
+      </ul>
+
+      <p><strong>What data is legally retained:</strong></p>
+      <ul>
+        <li>Financial transaction logs, invoices, and membership payment records are securely stored as required by state and central statutory compliance, audit obligations, and tax guidelines.</li>
+      </ul>
+
+      <p><strong>Deletion Timeline:</strong></p>
+      <p>Account deletion requests are validated and fully executed within <strong>7 business days</strong>. We will notify you via your registered email address once the data removal process is completed.</p>
+    </section>
+
+    <!-- Request Form -->
+    <div class="form-container" id="form-container-box">
+      <!-- Error Message Banner -->
+      <div class="status-banner error" id="error-banner"></div>
+
+      <form id="delete-account-form" novalidate>
+        <!-- Anti-Spam Honeypot Field -->
+        <input type="text" name="website" id="website" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Enter your registered name" required autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your registered email address" required autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Mobile Number (Optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your registered mobile number" autocomplete="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Deletion (Optional)</label>
+          <textarea id="reason" name="reason" rows="3" placeholder="Please let us know how we could have improved your experience"></textarea>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="confirm" name="confirm" required>
+          <label for="confirm">
+            I confirm that I want to permanently delete my Fitflix account and all associated fitness logs, wellness histories, and profile configurations. I understand that this action is irreversible.
+          </label>
+        </div>
+
+        <button type="submit" id="submit-btn" class="submit-btn">Submit Request</button>
+      </form>
+    </div>
+
+    <!-- Success Container -->
+    <div class="success-container" id="success-box">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>Request Received</h2>
+      <p id="success-message">Your account deletion request has been submitted successfully. Our support team will process your request, and your account data will be permanently removed within 7 business days.</p>
+      <a href="../index.html" class="back-btn" style="display: inline-block;">Return to Homepage</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+    </div>
+    <p>&copy; 2026 Fitflix Wellness Club. All rights reserved.</p>
+  </footer>
+
+  <!-- Script for handling AJAX Submission -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('delete-account-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const errorBanner = document.getElementById('error-banner');
+      const formContainer = document.getElementById('form-container-box');
+      const successBox = document.getElementById('success-box');
+      const successMsg = document.getElementById('success-message');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Hide old error banners
+        errorBanner.style.display = 'none';
+        errorBanner.textContent = '';
+
+        // Extract form values
+        const websiteHoneypot = document.getElementById('website').value.trim();
+        const fullName = document.getElementById('fullName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const reason = document.getElementById('reason').value.trim();
+        const confirm = document.getElementById('confirm').checked;
+
+        // Frontend validations
+        if (!fullName) {
+          showError('Please enter your full name.');
+          return;
+        }
+
+        if (!email) {
+          showError('Please enter your email address.');
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showError('Please enter a valid email address.');
+          return;
+        }
+
+        if (!confirm) {
+          showError('You must check the confirmation box to proceed with account deletion.');
+          return;
+        }
+
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing...';
+
+        try {
+          // Send request
+          const response = await fetch('/api/delete-account', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              website: websiteHoneypot,
+              fullName,
+              email,
+              phone,
+              reason,
+              confirm
+            })
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.success) {
+            // Show success screen
+            if (data.message) {
+              successMsg.textContent = data.message;
+            }
+            formContainer.style.display = 'none';
+            successBox.style.display = 'block';
+          } else {
+            // Show backend error message
+            showError(data.error || 'Something went wrong. Please try again.');
+            resetButton();
+          }
+        } catch (error) {
+          showError('Unable to connect to the server. Please check your internet connection and try again.');
+          resetButton();
+        }
+      });
+
+      function showError(message) {
+        errorBanner.textContent = message;
+        errorBanner.style.display = 'block';
+        errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      function resetButton() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+      }
+    });
+  </script>
+</body>
+
+</html>
