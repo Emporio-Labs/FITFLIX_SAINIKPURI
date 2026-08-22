@@ -8,6 +8,10 @@
     {
       "source": "/delete-account",
       "destination": "/pages/delete-account.html"
+    },
+    {
+      "source": "/download",
+      "destination": "/pages/download.html"
     }
   ],
   "headers": [

@@ -29,6 +29,9 @@
   RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html
   RewriteRule ^/?(.*)\.html$ /$1 [R=301,L]
   
+  # Clean URL for the app download page (lives under /pages)
+  RewriteRule ^download/?$ /pages/download.html [L]
+
   # Internally rewrite clean URLs to actual .html files
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
