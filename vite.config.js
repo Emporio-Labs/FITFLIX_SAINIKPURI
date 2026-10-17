@@ -91,6 +91,7 @@ module.exports = defineConfig(({ mode }) => {
           deleteAccount: resolve(__dirname, 'pages/delete-account.html'),
           download: resolve(__dirname, 'pages/download.html'),
           locSainikpuri: resolve(__dirname, 'locations/sainikpuri.html'),
+          locKompally: resolve(__dirname, 'locations/kompally.html'),
           locMarathahalli: resolve(__dirname, 'locations/marathahalli.html'),
           locElectronicCity: resolve(__dirname, 'locations/electronic-city.html')
         }
