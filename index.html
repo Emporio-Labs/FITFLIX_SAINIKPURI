@@ -1488,14 +1488,16 @@
     }
 
     .app-card {
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      min-height: 490px;
+      min-height: 540px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 2rem;
+      justify-content: space-between;
+      padding: 2.25rem 2rem 2rem;
       position: relative;
+      box-sizing: border-box;
+      transition: transform .4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow .4s;
     }
 
     .app-card-phone {
@@ -1506,14 +1508,28 @@
       background: linear-gradient(160deg, #9a7050 0%, #6a4828 100%);
     }
 
-    .app-card-label {
-      font-size: 0.72rem;
-      color: rgba(255, 255, 255, 0.8);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
+    .app-card-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .app-card-info {
       position: relative;
       z-index: 2;
+      width: 100%;
+      text-align: left;
+    }
+
+    .app-card-label {
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.45rem;
     }
 
     .app-card-title {
@@ -1522,44 +1538,48 @@
       font-size: 1.4rem;
       color: #fff;
       line-height: 1.3;
-      position: relative;
-      z-index: 2;
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    @keyframes widgetFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
     }
 
     /* ─── Mock Composition Widget (Replacing Black Widget) ─── */
     .mock-comp-widget {
-      position: absolute;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(320px, calc(100% - 2.5rem));
+      position: relative;
+      width: 100%;
+      max-width: 315px;
       background: #f7f5ed;
       border-radius: 20px;
       padding: 0.95rem 1rem 0.95rem;
       box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24), 0 4px 14px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.45);
-      z-index: 1;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      animation: phoneBob 4s ease-in-out infinite;
+      animation: widgetFloat 4s ease-in-out infinite;
       box-sizing: border-box;
       text-align: left;
+      margin: 0 auto;
     }
 
     .mock-scan-widget {
-      position: absolute;
-      top: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(300px, calc(100% - 2.5rem));
+      position: relative;
+      width: 100%;
+      max-width: 315px;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28), 0 4px 14px rgba(0, 0, 0, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.45);
-      z-index: 1;
-      animation: phoneBob 4s ease-in-out infinite 0.6s;
+      animation: widgetFloat 4s ease-in-out infinite 0.6s;
       background: #f6f4ee;
       box-sizing: border-box;
+      margin: 0 auto;
     }
 
     .mock-scan-img {
@@ -2034,12 +2054,15 @@
     .sanctuaries-section {
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .sanct-bg {
       background: linear-gradient(160deg, #8a4030 0%, #6a2818 45%, #3d1206 100%);
       padding: 5rem 8vw;
       text-align: center;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .sanct-pill {
@@ -2073,11 +2096,13 @@
 
     .sanct-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
       max-width: 1180px;
       margin: 0 auto;
       text-align: left;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .sanct-card {
@@ -2090,6 +2115,8 @@
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-sizing: border-box;
+      width: 100%;
     }
 
     .sanct-card:hover {
@@ -2161,6 +2188,7 @@
       flex-direction: column;
       flex: 1;
       padding: 24px;
+      box-sizing: border-box;
     }
 
     .sanct-card-name {
@@ -2235,14 +2263,86 @@
       box-shadow: 0 0 0 2px rgba(248, 217, 160, 0.5);
     }
 
+    .sanct-to-loc-divider {
+      background: linear-gradient(180deg, #3d1206 0%, #8a4030 100%);
+      padding: 0 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .sanct-divider-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
     @media (max-width: 768px) {
       .sanct-bg {
-        padding: 4rem 6vw;
+        padding: 4rem 5vw;
       }
 
       .sanct-grid {
         grid-template-columns: 1fr;
-        max-width: 420px;
+        max-width: 440px;
+        width: 100%;
+        margin: 0 auto;
+        gap: 20px;
+      }
+
+      .sanct-h2 {
+        font-size: clamp(2rem, 6vw, 2.8rem);
+        margin-bottom: 1rem;
+      }
+
+      .sanct-sub {
+        margin-bottom: 2.5rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sanct-bg {
+        padding: 3rem 1.25rem;
+      }
+
+      .sanct-grid {
+        max-width: 100%;
+        gap: 16px;
+      }
+
+      .sanct-card {
+        border-radius: 14px;
+      }
+
+      .sanct-card-media {
+        height: 180px;
+      }
+
+      .sanct-card-body {
+        padding: 20px 16px;
+      }
+
+      .sanct-card-name {
+        font-size: 1.35rem;
+      }
+
+      .sanct-card-desc {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        margin-bottom: 0.9rem;
+      }
+
+      .sanct-highlights {
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .sanct-highlights li {
+        font-size: 0.68rem;
+        padding: 0.3rem 0.65rem;
       }
     }
 
@@ -2350,12 +2450,20 @@
         display: flex;
       }
 
-      section,
       .how-bg,
       .diag-bg,
-      .loc-bg {
+      .loc-bg,
+      .sanct-bg {
         padding-left: 5vw;
         padding-right: 5vw;
+      }
+
+      .sanctuaries-section,
+      .locations-section,
+      .diag-section,
+      .how-section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
       }
 
       .hero-content {
@@ -2381,7 +2489,7 @@
       }
 
       .app-card {
-        min-height: 300px;
+        min-height: auto;
       }
 
       .diag-bg {
@@ -2533,12 +2641,29 @@
       }
 
       .app-card {
-        min-height: 480px;
+        min-height: auto;
+        padding: 2rem 1.25rem 2.25rem;
+        border-radius: 20px;
+      }
+
+      .app-card-visual {
+        min-height: auto;
+        margin-bottom: 1.25rem;
       }
 
       .mock-comp-widget {
-        width: calc(100% - 1.5rem);
+        width: 100%;
+        max-width: 315px;
         padding: 0.85rem 0.85rem 0.8rem;
+      }
+
+      .mock-scan-widget {
+        width: 100%;
+        max-width: 315px;
+      }
+
+      .app-card-title {
+        font-size: 1.25rem;
       }
 
       .mock-phone {
@@ -3670,74 +3795,82 @@
 
     <div class="app-cards">
       <div class="app-card app-card-phone">
-        <div class="mock-comp-widget">
-          <div class="comp-widget-title">Body composition</div>
+        <div class="app-card-visual">
+          <div class="mock-comp-widget">
+            <div class="comp-widget-title">Body composition</div>
 
-          <!-- Card 1: Weight & Scan -->
-          <div class="comp-subcard">
-            <div class="comp-weight-row">
-              <span class="comp-weight-val">62.0 kg</span>
-              <span class="comp-badge-self">SELF-REPORTED</span>
-            </div>
-            <div class="comp-subcard-sub">You told us this at signup — not a body scan.</div>
-            <button type="button" class="comp-scan-btn">Sync your first scan</button>
-          </div>
-
-          <!-- Card 2: Full Progress -->
-          <div class="comp-subcard comp-progress-card">
-            <span class="comp-progress-label">See your full progress</span>
-            <span class="comp-progress-crumbs">Training · Food · Streak <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
-          </div>
-
-          <!-- Card 3: Today's Fuel -->
-          <div class="comp-subcard">
-            <div class="comp-fuel-header">
-              <span class="comp-fuel-tag">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
-                TODAY'S FUEL
-              </span>
-              <span class="comp-fuel-open">
-                OPEN <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-              </span>
-            </div>
-            <div class="comp-fuel-body">
-              <div class="comp-fuel-cals">
-                <div>
-                  <span class="comp-cals-num">2544</span>
-                  <span class="comp-cals-unit">kcal left</span>
-                </div>
-                <div class="comp-fuel-bar">
-                  <div class="comp-fuel-bar-fill"></div>
-                </div>
-                <div class="comp-cals-ratio">0 / 2544 kcal</div>
+            <!-- Card 1: Weight & Scan -->
+            <div class="comp-subcard">
+              <div class="comp-weight-row">
+                <span class="comp-weight-val">62.0 kg</span>
+                <span class="comp-badge-self">SELF-REPORTED</span>
               </div>
-              <div class="comp-macro-group">
-                <div class="comp-macro-pill">
-                  <div class="comp-macro-name p-macro">P</div>
-                  <div class="comp-macro-gram">0/74g</div>
+              <div class="comp-subcard-sub">You told us this at signup — not a body scan.</div>
+              <button type="button" class="comp-scan-btn">Sync your first scan</button>
+            </div>
+
+            <!-- Card 2: Full Progress -->
+            <div class="comp-subcard comp-progress-card">
+              <span class="comp-progress-label">See your full progress</span>
+              <span class="comp-progress-crumbs">Training · Food · Streak <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+            </div>
+
+            <!-- Card 3: Today's Fuel -->
+            <div class="comp-subcard">
+              <div class="comp-fuel-header">
+                <span class="comp-fuel-tag">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                  TODAY'S FUEL
+                </span>
+                <span class="comp-fuel-open">
+                  OPEN <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </span>
+              </div>
+              <div class="comp-fuel-body">
+                <div class="comp-fuel-cals">
+                  <div>
+                    <span class="comp-cals-num">2544</span>
+                    <span class="comp-cals-unit">kcal left</span>
+                  </div>
+                  <div class="comp-fuel-bar">
+                    <div class="comp-fuel-bar-fill"></div>
+                  </div>
+                  <div class="comp-cals-ratio">0 / 2544 kcal</div>
                 </div>
-                <div class="comp-macro-pill">
-                  <div class="comp-macro-name c-macro">C</div>
-                  <div class="comp-macro-gram">0/371g</div>
-                </div>
-                <div class="comp-macro-pill">
-                  <div class="comp-macro-name f-macro">F</div>
-                  <div class="comp-macro-gram">0/85g</div>
+                <div class="comp-macro-group">
+                  <div class="comp-macro-pill">
+                    <div class="comp-macro-name p-macro">P</div>
+                    <div class="comp-macro-gram">0/74g</div>
+                  </div>
+                  <div class="comp-macro-pill">
+                    <div class="comp-macro-name c-macro">C</div>
+                    <div class="comp-macro-gram">0/371g</div>
+                  </div>
+                  <div class="comp-macro-pill">
+                    <div class="comp-macro-name f-macro">F</div>
+                    <div class="comp-macro-gram">0/85g</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="app-card-label">Your health dashboard</div>
-        <div class="app-card-title">Track every<br>biomarker, in one app.</div>
+        <div class="app-card-info">
+          <div class="app-card-label">Your health dashboard</div>
+          <div class="app-card-title">Track every<br>biomarker, in one app.</div>
+        </div>
       </div>
 
       <div class="app-card app-card-data">
-        <div class="mock-scan-widget">
-          <img src="/assets/fitflix_body_scan.jpg" alt="ActiveX body scan" class="mock-scan-img" width="297" height="320" loading="lazy">
+        <div class="app-card-visual">
+          <div class="mock-scan-widget">
+            <img src="assets/fitflix_body_scan.jpg" alt="ActiveX body scan" class="mock-scan-img" width="297" height="320" loading="lazy">
+          </div>
         </div>
-        <div class="app-card-label">Real-time results</div>
-        <div class="app-card-title">Your data,<br>clearly explained.</div>
+        <div class="app-card-info">
+          <div class="app-card-label">Real-time results</div>
+          <div class="app-card-title">Your data,<br>clearly explained.</div>
+        </div>
       </div>
     </div>
 
@@ -3761,6 +3894,13 @@
       </div>
     </div>
   </section>
+
+  <div class="loc-v-connect">
+    <div class="loc-v-line"></div>
+    <div class="v-dot" style="background: var(--cream-light);">
+      <div></div>
+    </div>
+  </div>
 
   <!-- ─── OUR SANCTUARIES (branch network) ─── -->
   <section class="sanctuaries-section" id="sanctuaries">
@@ -3865,10 +4005,10 @@
     </div>
   </section>
 
-  <div class="loc-v-connect">
-    <div class="loc-v-line"></div>
-    <div class="v-dot" style="background: var(--cream-light);">
-      <div></div>
+  <div class="sanct-to-loc-divider">
+    <div class="sanct-divider-line"></div>
+    <div class="v-dot" style="background: #3d1206; border-color: rgba(255, 255, 255, 0.3);">
+      <div style="background: rgba(255, 255, 255, 0.75);"></div>
     </div>
   </div>
 
