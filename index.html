@@ -1589,6 +1589,60 @@
       border-radius: 19px;
     }
 
+    .mock-slider-widget {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-slider-track {
+      display: flex;
+      width: 100%;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .mock-slide {
+      min-width: 100%;
+      width: 100%;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .mock-slide .mock-scan-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 19px;
+    }
+
+    .mock-slider-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+      padding: 3px 8px;
+      background: rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 12px;
+    }
+
+    .mock-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .mock-dot.active {
+      background: #ffffff;
+      transform: scale(1.25);
+    }
+
     .comp-widget-title {
       font-size: 1.05rem;
       font-weight: 700;
@@ -3796,63 +3850,8 @@
     <div class="app-cards">
       <div class="app-card app-card-phone">
         <div class="app-card-visual">
-          <div class="mock-comp-widget">
-            <div class="comp-widget-title">Body composition</div>
-
-            <!-- Card 1: Weight & Scan -->
-            <div class="comp-subcard">
-              <div class="comp-weight-row">
-                <span class="comp-weight-val">62.0 kg</span>
-                <span class="comp-badge-self">SELF-REPORTED</span>
-              </div>
-              <div class="comp-subcard-sub">You told us this at signup — not a body scan.</div>
-              <button type="button" class="comp-scan-btn">Sync your first scan</button>
-            </div>
-
-            <!-- Card 2: Full Progress -->
-            <div class="comp-subcard comp-progress-card">
-              <span class="comp-progress-label">See your full progress</span>
-              <span class="comp-progress-crumbs">Training · Food · Streak <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
-            </div>
-
-            <!-- Card 3: Today's Fuel -->
-            <div class="comp-subcard">
-              <div class="comp-fuel-header">
-                <span class="comp-fuel-tag">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
-                  TODAY'S FUEL
-                </span>
-                <span class="comp-fuel-open">
-                  OPEN <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </span>
-              </div>
-              <div class="comp-fuel-body">
-                <div class="comp-fuel-cals">
-                  <div>
-                    <span class="comp-cals-num">2544</span>
-                    <span class="comp-cals-unit">kcal left</span>
-                  </div>
-                  <div class="comp-fuel-bar">
-                    <div class="comp-fuel-bar-fill"></div>
-                  </div>
-                  <div class="comp-cals-ratio">0 / 2544 kcal</div>
-                </div>
-                <div class="comp-macro-group">
-                  <div class="comp-macro-pill">
-                    <div class="comp-macro-name p-macro">P</div>
-                    <div class="comp-macro-gram">0/74g</div>
-                  </div>
-                  <div class="comp-macro-pill">
-                    <div class="comp-macro-name c-macro">C</div>
-                    <div class="comp-macro-gram">0/371g</div>
-                  </div>
-                  <div class="comp-macro-pill">
-                    <div class="comp-macro-name f-macro">F</div>
-                    <div class="comp-macro-gram">0/85g</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="mock-scan-widget">
+            <img src="assets/bio_markers.png" alt="Biomarkers dashboard" class="mock-scan-img" width="548" height="606" loading="lazy">
           </div>
         </div>
         <div class="app-card-info">
@@ -3863,8 +3862,19 @@
 
       <div class="app-card app-card-data">
         <div class="app-card-visual">
-          <div class="mock-scan-widget">
-            <img src="assets/fitflix_body_scan.jpg" alt="ActiveX body scan" class="mock-scan-img" width="297" height="320" loading="lazy">
+          <div class="mock-scan-widget mock-slider-widget" id="appDataSlider">
+            <div class="mock-slider-track">
+              <div class="mock-slide active">
+                <img src="assets/Training.png" alt="Training data" class="mock-scan-img" width="390" height="363" loading="lazy">
+              </div>
+              <div class="mock-slide">
+                <img src="assets/nutrition.png" alt="Nutrition data" class="mock-scan-img" width="446" height="392" loading="lazy">
+              </div>
+            </div>
+            <div class="mock-slider-dots">
+              <span class="mock-dot active" data-slide="0" aria-label="Slide 1"></span>
+              <span class="mock-dot" data-slide="1" aria-label="Slide 2"></span>
+            </div>
           </div>
         </div>
         <div class="app-card-info">
@@ -5876,6 +5886,77 @@
         }
       });
     }
+
+    /* ── Real-time Results Slider (Training / Nutrition) ── */
+    (function initAppDataSlider() {
+      const slider = document.getElementById('appDataSlider');
+      if (!slider) return;
+      const track = slider.querySelector('.mock-slider-track');
+      const dots = slider.querySelectorAll('.mock-dot');
+      if (!track || !dots.length) return;
+
+      let currentSlide = 0;
+      const totalSlides = 2;
+      let slideInterval = null;
+
+      function goToSlide(index) {
+        currentSlide = (index + totalSlides) % totalSlides;
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentSlide);
+        });
+      }
+
+      function startAutoSlide() {
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+          goToSlide(currentSlide + 1);
+        }, 3200);
+      }
+
+      function stopAutoSlide() {
+        if (slideInterval) {
+          clearInterval(slideInterval);
+          slideInterval = null;
+        }
+      }
+
+      startAutoSlide();
+
+      // Pause on mouse hover
+      slider.addEventListener('mouseenter', stopAutoSlide);
+      slider.addEventListener('mouseleave', startAutoSlide);
+
+      // Dot click navigation
+      dots.forEach((dot, idx) => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goToSlide(idx);
+          startAutoSlide();
+        });
+      });
+
+      // Touch swipe support for mobile
+      let touchStartX = 0;
+      slider.addEventListener('touchstart', (e) => {
+        if (e.changedTouches && e.changedTouches[0]) {
+          touchStartX = e.changedTouches[0].screenX;
+        }
+        stopAutoSlide();
+      }, { passive: true });
+
+      slider.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches[0]) {
+          const touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 35) {
+            goToSlide(currentSlide + 1);
+          } else if (touchEndX - touchStartX > 35) {
+            goToSlide(currentSlide - 1);
+          }
+        }
+        startAutoSlide();
+      }, { passive: true });
+    })();
   </script>
   <script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script>
 

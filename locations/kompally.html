@@ -96,6 +96,22 @@
     .b-hero-tag { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.78); max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.6; }
     .b-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
+    .b-coming-soon {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #f8d9a0;
+      padding: 0.75rem 2.2rem;
+      border: 1px solid rgba(248, 217, 160, 0.4);
+      background: rgba(248, 217, 160, 0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 100px;
+    }
+
     .btn-white-solid { background: #fff; color: var(--dark); border: none; padding: 1rem 2.5rem; border-radius: 100px; font-family: var(--sans); font-size: 0.88rem; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
     .btn-white-solid:hover { background: var(--cream); transform: translateY(-1px); }
     .btn-white-outline { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); border: 1.5px solid rgba(255,255,255,0.4); padding: 1rem 2.5rem; border-radius: 100px; font-family: var(--sans); font-size: 0.88rem; font-weight: 400; cursor: pointer; text-decoration: none; display: inline-block; backdrop-filter: blur(4px); transition: all 0.2s; }
@@ -213,7 +229,7 @@
       <p class="b-hero-tag">A premium wellness club atop Fairmount Downtown, Kompally — strength, cardio, Pilates and
         recovery, all under one roof.</p>
       <div class="b-hero-actions">
-        <a href="../index.html#consultation" class="btn-white-solid">Claim Your Founder Spot</a>
+        <span class="b-coming-soon">Coming Soon...</span>
       </div>
     </div>
   </header>
