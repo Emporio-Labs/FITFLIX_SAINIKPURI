@@ -1490,7 +1490,7 @@
     .app-card {
       border-radius: 20px;
       overflow: hidden;
-      min-height: 360px;
+      min-height: 490px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -1527,7 +1527,266 @@
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
     }
 
-    /* mock phone UI */
+    /* ─── Mock Composition Widget (Replacing Black Widget) ─── */
+    .mock-comp-widget {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(320px, calc(100% - 2.5rem));
+      background: #f7f5ed;
+      border-radius: 20px;
+      padding: 0.95rem 1rem 0.95rem;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24), 0 4px 14px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      z-index: 1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      animation: phoneBob 4s ease-in-out infinite;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .mock-scan-widget {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(300px, calc(100% - 2.5rem));
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28), 0 4px 14px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      z-index: 1;
+      animation: phoneBob 4s ease-in-out infinite 0.6s;
+      background: #f6f4ee;
+      box-sizing: border-box;
+    }
+
+    .mock-scan-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 19px;
+    }
+
+    .comp-widget-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #171814;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.65rem;
+    }
+
+    .comp-subcard {
+      background: #ffffff;
+      border-radius: 13px;
+      padding: 0.75rem 0.9rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      margin-bottom: 0.55rem;
+      box-sizing: border-box;
+    }
+
+    .comp-subcard:last-child {
+      margin-bottom: 0;
+    }
+
+    .comp-weight-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .comp-weight-val {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #161814;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .comp-badge-self {
+      background: #eeebe2;
+      color: #635d51;
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 6px;
+      border-radius: 5px;
+      line-height: 1;
+    }
+
+    .comp-subcard-sub {
+      font-size: 0.72rem;
+      color: #726d62;
+      margin: 0.35rem 0 0.65rem;
+      line-height: 1.3;
+    }
+
+    .comp-scan-btn {
+      display: block;
+      width: 100%;
+      border: 1px solid #c9c3b6;
+      border-radius: 9px;
+      padding: 0.45rem 0.5rem;
+      background: transparent;
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4b533b;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .comp-scan-btn:hover {
+      background: rgba(75, 83, 59, 0.06);
+      border-color: #4b533b;
+    }
+
+    .comp-progress-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.9rem;
+      transition: transform 0.2s;
+    }
+
+    .comp-progress-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #161814;
+    }
+
+    .comp-progress-crumbs {
+      font-size: 0.68rem;
+      color: #79756c;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .comp-fuel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.55rem;
+    }
+
+    .comp-fuel-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      color: #6f685c;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .comp-fuel-tag svg {
+      width: 11px;
+      height: 11px;
+      color: #70695c;
+      flex-shrink: 0;
+    }
+
+    .comp-fuel-open {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #282622;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .comp-fuel-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+
+    .comp-fuel-cals {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .comp-cals-num {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: #161814;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .comp-cals-unit {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: #6a655b;
+      margin-left: 3px;
+    }
+
+    .comp-fuel-bar {
+      height: 3.5px;
+      background: #ece7de;
+      border-radius: 2px;
+      margin-top: 0.4rem;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .comp-fuel-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #4b533b;
+      border-radius: 2px;
+    }
+
+    .comp-cals-ratio {
+      font-size: 0.62rem;
+      color: #847f75;
+      font-weight: 500;
+      margin-top: 0.3rem;
+    }
+
+    .comp-macro-group {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .comp-macro-pill {
+      background: #eeebe2;
+      border-radius: 7px;
+      padding: 3px 5px;
+      min-width: 36px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .comp-macro-name {
+      font-size: 0.58rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .comp-macro-name.p-macro { color: #4b5840; }
+    .comp-macro-name.c-macro { color: #766048; }
+    .comp-macro-name.f-macro { color: #7e5a3c; }
+
+    .comp-macro-gram {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #161814;
+      margin-top: 2px;
+      line-height: 1.1;
+    }
+
+    /* legacy mock phone UI fallback */
     .mock-phone {
       position: absolute;
       bottom: 5rem;
@@ -2274,7 +2533,12 @@
       }
 
       .app-card {
-        min-height: 260px;
+        min-height: 480px;
+      }
+
+      .mock-comp-widget {
+        width: calc(100% - 1.5rem);
+        padding: 0.85rem 0.85rem 0.8rem;
       }
 
       .mock-phone {
@@ -3406,20 +3670,62 @@
 
     <div class="app-cards">
       <div class="app-card app-card-phone">
-        <div class="mock-phone">
-          <div class="mock-notch"></div>
-          <div class="mock-screen-label">Biomarkers</div>
-          <div class="mock-screen-val">Health Insights</div>
-          <div class="mock-screen-label" style="margin-top:0.5rem;">◈ ACTIVITY</div>
-          <div class="mock-screen-val">2,568 steps</div>
-          <div class="mock-bar">
-            <div class="mock-bar-col" style="height:40%"></div>
-            <div class="mock-bar-col" style="height:60%"></div>
-            <div class="mock-bar-col" style="height:80%"></div>
-            <div class="mock-bar-col" style="height:55%"></div>
-            <div class="mock-bar-col" style="height:70%"></div>
-            <div class="mock-bar-col" style="height:45%"></div>
-            <div class="mock-bar-col" style="height:90%"></div>
+        <div class="mock-comp-widget">
+          <div class="comp-widget-title">Body composition</div>
+
+          <!-- Card 1: Weight & Scan -->
+          <div class="comp-subcard">
+            <div class="comp-weight-row">
+              <span class="comp-weight-val">62.0 kg</span>
+              <span class="comp-badge-self">SELF-REPORTED</span>
+            </div>
+            <div class="comp-subcard-sub">You told us this at signup — not a body scan.</div>
+            <button type="button" class="comp-scan-btn">Sync your first scan</button>
+          </div>
+
+          <!-- Card 2: Full Progress -->
+          <div class="comp-subcard comp-progress-card">
+            <span class="comp-progress-label">See your full progress</span>
+            <span class="comp-progress-crumbs">Training · Food · Streak <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          </div>
+
+          <!-- Card 3: Today's Fuel -->
+          <div class="comp-subcard">
+            <div class="comp-fuel-header">
+              <span class="comp-fuel-tag">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+                TODAY'S FUEL
+              </span>
+              <span class="comp-fuel-open">
+                OPEN <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </span>
+            </div>
+            <div class="comp-fuel-body">
+              <div class="comp-fuel-cals">
+                <div>
+                  <span class="comp-cals-num">2544</span>
+                  <span class="comp-cals-unit">kcal left</span>
+                </div>
+                <div class="comp-fuel-bar">
+                  <div class="comp-fuel-bar-fill"></div>
+                </div>
+                <div class="comp-cals-ratio">0 / 2544 kcal</div>
+              </div>
+              <div class="comp-macro-group">
+                <div class="comp-macro-pill">
+                  <div class="comp-macro-name p-macro">P</div>
+                  <div class="comp-macro-gram">0/74g</div>
+                </div>
+                <div class="comp-macro-pill">
+                  <div class="comp-macro-name c-macro">C</div>
+                  <div class="comp-macro-gram">0/371g</div>
+                </div>
+                <div class="comp-macro-pill">
+                  <div class="comp-macro-name f-macro">F</div>
+                  <div class="comp-macro-gram">0/85g</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="app-card-label">Your health dashboard</div>
@@ -3427,31 +3733,8 @@
       </div>
 
       <div class="app-card app-card-data">
-        <div class="mock-data">
-          <div class="mock-data-row">
-            <span class="mock-data-icon">⊕ BIOMARKERS</span>
-          </div>
-          <div class="mock-data-num">108</div>
-          <div class="mock-data-row">
-            <div>
-              <div class="mock-data-sub">9 Suboptimal</div>
-            </div>
-            <div>
-              <div class="mock-data-sub">12 Out of range</div>
-            </div>
-          </div>
-          <div class="mock-data-badges">
-            <span class="badge badge-green">Optimal</span>
-            <span class="badge badge-yellow">Suboptimal</span>
-            <span class="badge badge-red">Out of range</span>
-          </div>
-          <div class="mock-progress">
-            <div class="mock-progress-bar">
-              <div class="pb-g"></div>
-              <div class="pb-y"></div>
-              <div class="pb-r"></div>
-            </div>
-          </div>
+        <div class="mock-scan-widget">
+          <img src="/assets/fitflix_body_scan.jpg" alt="ActiveX body scan" class="mock-scan-img" width="297" height="320" loading="lazy">
         </div>
         <div class="app-card-label">Real-time results</div>
         <div class="app-card-title">Your data,<br>clearly explained.</div>
@@ -3612,22 +3895,22 @@
         </div>
         <div class="loc-features">
           <div class="loc-feature">
-            <div class="loc-icon">✓</div>
+            <div class="loc-icon">✦</div>
             <div class="loc-text">All wellness services brought together under one roof</div>
           </div>
           <div class="loc-divider"></div>
           <div class="loc-feature">
-            <div class="loc-icon">◉</div>
+            <div class="loc-icon">✦</div>
             <div class="loc-text">First ever longevity club in India incorporating state-of-the-art therapies</div>
           </div>
           <div class="loc-divider"></div>
           <div class="loc-feature">
-            <div class="loc-icon">◎</div>
+            <div class="loc-icon">✦</div>
             <div class="loc-text">Huge space completely dedicated to strength and conditioning</div>
           </div>
           <div class="loc-divider"></div>
           <div class="loc-feature">
-            <div class="loc-icon">⊡</div>
+            <div class="loc-icon">✦</div>
             <div class="loc-text">In-house labs and expert sports scientists to formulate your recovery</div>
           </div>
           <div class="loc-divider"></div>
