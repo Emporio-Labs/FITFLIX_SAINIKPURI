@@ -1485,6 +1485,7 @@
       justify-content: flex-start;
       margin-top: 1.25rem;
       gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .app-card {
@@ -3886,10 +3887,9 @@
 
     <!-- ─── APP LAUNCH / STORE BADGES ─── -->
     <div class="app-launch">
-      <span class="app-launch-pill">Launching August 2<sup>nd</sup></span>
-      <h3 class="app-launch-title">The FITFLIX app arrives soon.</h3>
-      <p class="app-launch-sub">Be first in line. Get it on the App Store or Google Play and you're ready the
-        moment we go live on August 2<sup>nd</sup>.</p>
+      <span class="app-launch-pill">Now Live · Launched August 2<sup>nd</sup></span>
+      <h3 class="app-launch-title">The FITFLIX app is now live.</h3>
+      <p class="app-launch-sub">Successfully launched on August 2<sup>nd</sup>. Download now on the App Store and Google Play to track workouts, biomarkers, and nutrition in one place.</p>
       <div class="store-badges">
         <a class="store-badge" href="https://apps.apple.com/in/app/fitflix-wellness/id6784623320"
           aria-label="Download the Fitflix app on the App Store" target="_blank" rel="noopener noreferrer">
@@ -4145,7 +4145,7 @@
         </div>
         <div class="footer-app-copy">
           <h3 class="footer-app-heading">Things are better<br><span>in the Fitflix app</span></h3>
-          <p class="app-coming-soon">Officially launching August 2<sup>nd</sup> — on iOS &amp; Android.</p>
+          <p class="app-coming-soon">Now available on iOS &amp; Android — Download on the App Store &amp; Google Play.</p>
           <div class="store-badges store-badges-footer">
             <a class="store-badge store-badge-light" href="https://apps.apple.com/in/app/fitflix-wellness/id6784623320"
               aria-label="Download the Fitflix app on the App Store" target="_blank" rel="noopener noreferrer">
@@ -4297,8 +4297,8 @@
     /* App band */
     .footer-app-band {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 4rem;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 3.5rem;
       padding: 4rem 5vw 3rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       align-items: start;
@@ -4319,10 +4319,10 @@
     /* phone mock inside footer card */
     .footer-app-img-placeholder {
       position: absolute;
-      right: -1rem;
-      top: 1rem;
-      bottom: 1rem;
-      width: 200px;
+      right: 0;
+      top: 1.25rem;
+      bottom: 1.25rem;
+      width: 210px;
     }
 
     .footer-app-phone-mock {
@@ -4500,6 +4500,7 @@
     .footer-app-copy {
       position: relative;
       z-index: 2;
+      max-width: calc(100% - 225px);
     }
 
     .footer-app-heading {
@@ -4770,6 +4771,13 @@
       filter: brightness(0) invert(1);
     }
 
+    @media (max-width: 1050px) {
+      .footer-app-band {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
     @media (max-width: 900px) {
       .footer-app-band {
         grid-template-columns: 1fr;
@@ -4779,6 +4787,10 @@
 
       .footer-app-card {
         min-height: 320px;
+      }
+
+      .footer-app-copy {
+        max-width: 100%;
       }
 
       .footer-nav-cols {
