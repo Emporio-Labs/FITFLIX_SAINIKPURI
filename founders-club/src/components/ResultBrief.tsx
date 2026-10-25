@@ -232,7 +232,7 @@ export default function ResultBrief({
             <p className="fineprint">
               {result.summaryMode === "ai"
                 ? "AI-assisted brief, based only on your questionnaire answers."
-                : "Structured brief, tailored to your selected answers. The AI service was unavailable."}{" "}
+                : "Structured brief, tailored to your selected answers."}{" "}
               This is not a diagnosis, disease-risk score, genetic
               interpretation or treatment recommendation.
             </p>

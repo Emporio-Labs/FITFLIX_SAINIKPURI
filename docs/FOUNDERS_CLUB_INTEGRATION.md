@@ -28,3 +28,5 @@ The backend must provide public settings, slot records (`id`, `startAt`, `endAt`
 All campaign media references are durable HTTPS CDN URLs; no `/manus-storage` paths remain. The DNA hero uses the exact preferred transparent image and the result guide uses the mapped public GLB. The campaign keeps the consent gate, private brief retrieval in session storage, and privacy links without putting private tokens in URLs. A campaign application or call request is not payment, membership confirmation, or a confirmed appointment.
 
 This work is branch-only on `feat/kompally-founders-club-2026-10-25`. It was not merged to `main`, deployed, or connected to the managed Preview origin.
+
+The site CSP permits the Meta SDK at `connect.facebook.net`; the existing advertising-consent gate still controls whether it loads. Native results use a structured personalised brief, not an invented AI-outage message. Public slots use `{ id, startAt, endAt }` and non-founder clients can request a pending team follow-up without a founder slot.
