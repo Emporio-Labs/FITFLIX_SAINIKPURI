@@ -3,6 +3,9 @@ const { resolve } = require('path');
 const chatHandler = require('./api/chat');
 const leadPublicCaptureHandler = require('./api/leads/public-capture');
 const deleteAccountHandler = require('./api/delete-account');
+const foundersProxyHandler = require('./api/presales/founders');
+const foundersGuideHandler = require('./api/founders-guide');
+const react = require('@vitejs/plugin-react');
 
 function readRawBody(req) {
   return new Promise((resolve, reject) => {
@@ -62,20 +65,35 @@ function localApiPlugin() {
   return {
     name: 'local-api-routes',
     configureServer(server) {
+      server.middlewares.use((req, _res, next) => {
+        const url = new URL(req.url || '/', 'http://localhost');
+        if (url.pathname === '/kompally/founders-club') req.url = '/locations/kompally-founders-club.html' + url.search;
+        if (url.pathname === '/kompally/founders-club/privacy') req.url = '/pages/kompally-founders-privacy.html' + url.search;
+        next();
+      });
       registerLocalRoute(server, '/api/chat', chatHandler);
       registerLocalRoute(server, '/api/leads/public-capture', leadPublicCaptureHandler);
       registerLocalRoute(server, '/leads/public-capture', leadPublicCaptureHandler);
       registerLocalRoute(server, '/api/delete-account', deleteAccountHandler);
+      registerLocalRoute(server, '/api/presales/founders', foundersProxyHandler);
+      registerLocalRoute(server, '/api/founders-guide', foundersGuideHandler);
     }
   };
 }
 
-module.exports = defineConfig(({ mode }) => {
+module.exports = defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   Object.assign(process.env, env);
+  const { default: tailwindcss } = await import('@tailwindcss/vite');
 
   return {
-    plugins: [localApiPlugin()],
+    plugins: [react(), tailwindcss(), localApiPlugin()],
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'founders-club/src'),
+        '@shared': resolve(__dirname, 'founders-club/shared')
+      }
+    },
     build: {
       rollupOptions: {
         input: {
@@ -93,7 +111,9 @@ module.exports = defineConfig(({ mode }) => {
           locSainikpuri: resolve(__dirname, 'locations/sainikpuri.html'),
           locKompally: resolve(__dirname, 'locations/kompally.html'),
           locMarathahalli: resolve(__dirname, 'locations/marathahalli.html'),
-          locElectronicCity: resolve(__dirname, 'locations/electronic-city.html')
+          locElectronicCity: resolve(__dirname, 'locations/electronic-city.html'),
+          foundersClub: resolve(__dirname, 'locations/kompally-founders-club.html'),
+          foundersPrivacy: resolve(__dirname, 'pages/kompally-founders-privacy.html')
         }
       }
     }

@@ -2,6 +2,14 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/kompally/founders-club",
+      "destination": "/locations/kompally-founders-club.html"
+    },
+    {
+      "source": "/kompally/founders-club/privacy",
+      "destination": "/pages/kompally-founders-privacy.html"
+    },
+    {
       "source": "/leads/public-capture",
       "destination": "/api/leads/public-capture"
     },
@@ -85,6 +93,19 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/presales/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     }
