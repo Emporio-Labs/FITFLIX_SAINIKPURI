@@ -1,0 +1,4 @@
+{
+  "compilerOptions": {"target":"ES2022","module":"ESNext","moduleResolution":"bundler","jsx":"react-jsx","strict":true,"esModuleInterop":true,"skipLibCheck":true,"lib":["ES2022","DOM","DOM.Iterable"],"baseUrl":".","paths":{"@/*":["founders-club/src/*"],"@shared/*":["founders-club/shared/*"]},"types":["node","vite/client"]},
+  "include":["founders-club/src/**/*","founders-club/shared/**/*"]
+}
